@@ -1,0 +1,24 @@
+mkpy package
+============
+
+Submodules
+----------
+
+.. toctree::
+
+   mkpy.codetagger
+   mkpy.epochutils
+   mkpy.events
+   mkpy.h5tools
+   mkpy.mkh5
+   mkpy.mkh5viewer
+   mkpy.mkio
+   mkpy.pygarv
+
+Module contents
+---------------
+
+.. automodule:: mkpy
+   :members:
+   :undoc-members:
+   :show-inheritance:

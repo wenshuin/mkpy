@@ -1,0 +1,761 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>User input files &mdash; mkpy 0.1.3 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+  <script type="text/javascript" src="_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+        <script type="text/javascript" src="_static/jquery.js"></script>
+        <script type="text/javascript" src="_static/underscore.js"></script>
+        <script type="text/javascript" src="_static/doctools.js"></script>
+        <script type="text/javascript" src="_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="EEG data files" href="Output Files.html" />
+    <link rel="prev" title="pygarv: EEG visualization dashboard" href="Pygarv.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="index.html" class="icon icon-home"> mkpy
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                0.1
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="Introduction.html">Introduction</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="Installation.html">Installation</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="Quick Start.html">Quick start</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="Pygarv.html">pygarv: EEG visualization dashboard</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">User input files</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#yaml-headers-yhdf">YAML headers: <code class="docutils literal notranslate"><span class="pre">.yhdf</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#yhdf-yaml-header-file"><code class="docutils literal notranslate"><span class="pre">.yhdf</span></code> YAML header file</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#yhdx-yaml-header-data-extrators"><code class="docutils literal notranslate"><span class="pre">.yhdx</span></code> YAML header data extrators</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#yaml-notes">YAML Notes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#event-code-table-files-xlsx-ytbl-txt">Event code table files: <cite>.xlsx</cite>, <cite>.ytbl</cite>, <cite>.txt</cite></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#event-code-string-matching-definitions">Event code string matching definitions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#event-table-and-epoch-table-column-data-types">Event table and epoch table column data types</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#file-types">File types</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#notes">Notes</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="Output Files.html">EEG data files</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="Learning.html">Background reading</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="Glossary.html">Glossary</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="Reference.html">Reference</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="RolesCredits.html">Roles and credits</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">mkpy</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="index.html">Docs</a> &raquo;</li>
+        
+      <li>User input files</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="_sources/User Files.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="user-input-files">
+<h1>User input files<a class="headerlink" href="#user-input-files" title="Permalink to this headline">¶</a></h1>
+<p>User input files provide information in addition to the <code class="docutils literal notranslate"><span class="pre">.crw</span></code> and
+<code class="docutils literal notranslate"><span class="pre">.log</span></code> data.</p>
+<p>There are three kinds:</p>
+<blockquote>
+<div><ol class="arabic simple">
+<li><p>YAML format header files supplement the <code class="docutils literal notranslate"><span class="pre">.crw</span></code> header and are
+imported along with <code class="docutils literal notranslate"><span class="pre">.crw</span></code> and <code class="docutils literal notranslate"><span class="pre">.log</span></code> files when new data is
+added to the <code class="docutils literal notranslate"><span class="pre">.h5</span></code> database</p></li>
+<li><p>YAML format <code class="docutils literal notranslate"><span class="pre">.yhdx</span></code> header extractor formats, retrieve header
+information to merge with event table information and tag event
+codes, e.g., subject, experiment, apparatus specific variables.</p></li>
+<li><p>Event table files are used to identify event codes (and patterns of
+event codes) and tag them with additional information about the
+event, e.g., stimulus-specific properties for stimulus events,
+respo</p></li>
+</ol>
+</div></blockquote>
+<div class="section" id="yaml-headers-yhdf">
+<h2>YAML headers: <code class="docutils literal notranslate"><span class="pre">.yhdf</span></code><a class="headerlink" href="#yaml-headers-yhdf" title="Permalink to this headline">¶</a></h2>
+<p>The YAML header is an open-ended mechanism for storing extra nuggets
+of information with the EEG data that are useful for record keeping or
+subsequent data analysis. For instance</p>
+<ul class="simple">
+<li><p>recording session information:</p></li>
+<li><p>subject variables, e.g., DOB, meds, neuropsych scores</p></li>
+<li><p>instrument settings, e.g., bioamp gain and filter, electrode locations</p></li>
+</ul>
+<div class="section" id="yhdf-yaml-header-file">
+<span id="yhdr"></span><h3><code class="docutils literal notranslate"><span class="pre">.yhdf</span></code> YAML header file<a class="headerlink" href="#yhdf-yaml-header-file" title="Permalink to this headline">¶</a></h3>
+<blockquote>
+<div><ol class="arabic simple">
+<li><p><strong>Must</strong> conform to YAML syntax.</p></li>
+<li><p><strong>Must</strong> contain at least one YAML document, <strong>may</strong> contain more.</p></li>
+<li><p>Each YAML document <strong>must</strong> contain the key <cite>name</cite> and a string label
+for a value, and <strong>may</strong> contain more.</p></li>
+</ol>
+</div></blockquote>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>For portability between Python, MATLAB, and R all types of
+missing data should coded with the JSON value “null”
+(string). However, for use in Python/Pandas only, “null” for
+strings and .NaN for numeric data is OK and may be more efficent.</p>
+</div>
+<p>Further specifications can adopted as needed for special purposes,
+e.g., importing <code class="docutils literal notranslate"><span class="pre">mkh5</span></code> data into other applications.</p>
+<p>Silly Example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1">## I am a minimal, legal YAML header file</span>
+<span class="o">---</span>
+<span class="n">name</span><span class="p">:</span> <span class="n">i_am_pointless</span>
+</pre></div>
+</div>
+<p>Slightly Less Silly Example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1">## I have some genuinely useful information</span>
+<span class="o">---</span>
+<span class="n">name</span><span class="p">:</span> <span class="n">runsheet</span>
+<span class="n">dob</span><span class="p">:</span> <span class="mi">11</span><span class="o">/</span><span class="mi">17</span><span class="o">/</span><span class="mi">92</span>
+<span class="n">adrc_id</span><span class="p">:</span> <span class="n">M001A1</span>
+<span class="n">mood_vas</span><span class="p">:</span>
+  <span class="n">pre</span><span class="p">:</span> <span class="mi">4</span>
+  <span class="n">post</span><span class="p">:</span> <span class="mi">3</span>
+</pre></div>
+</div>
+<p>Real Example:</p>
+</div>
+</div>
+<div class="section" id="yhdx-yaml-header-data-extrators">
+<span id="yhdx"></span><h2><code class="docutils literal notranslate"><span class="pre">.yhdx</span></code> YAML header data extrators<a class="headerlink" href="#yhdx-yaml-header-data-extrators" title="Permalink to this headline">¶</a></h2>
+<p>A <code class="docutils literal notranslate"><span class="pre">.yhdx</span></code> YAML header extraction file is used to extract information
+from the stored header so it can be included in an event table.</p>
+<p>The format of the <code class="docutils literal notranslate"><span class="pre">.yhdx</span></code> is identical to the YAML header except
+that in the extractor file the terminal values are replaced with
+variable names that will be the column names for the extracted value</p>
+<p>Wherever the extractor key: value path exactly matches the structure
+of the header document, the data will be extracted.</p>
+<p>The column name may but need not be the same as the key.</p>
+<p>For example, suppose a <code class="docutils literal notranslate"><span class="pre">.yhdr</span></code> YAML header file is used to inject
+additional information into the <code class="docutils literal notranslate"><span class="pre">mkh5</span></code> data file that looks like
+this:</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nn">---</span>
+<span class="nt">name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">runsheet</span>
+<span class="nt">dob</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">11/17/92</span>
+<span class="nt">adrc_id</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">M001A1</span>
+<span class="nt">mood_vas</span><span class="p">:</span>
+  <span class="nt">pre</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">4</span>
+  <span class="nt">post</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">3</span>
+</pre></div>
+</div>
+<p>For this header, a <code class="docutils literal notranslate"><span class="pre">.ydx</span></code> header extractor like so</p>
+<blockquote>
+<div><div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nn">---</span>
+<span class="nt">name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">runsheet</span>
+
+<span class="nt">adrc_id</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">adrc_id</span>
+<span class="nt">mood_vas</span><span class="p">:</span>
+  <span class="nt">pre</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">mood_pre</span>
+  <span class="nt">post</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">mood_post</span>
+</pre></div>
+</div>
+</div></blockquote>
+<p>pulls out this data in (wide) tabular format.</p>
+<blockquote>
+<div><table class="docutils align-default">
+<colgroup>
+<col style="width: 31%" />
+<col style="width: 31%" />
+<col style="width: 38%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>adrc_id</p></th>
+<th class="head"><p>mood_pre</p></th>
+<th class="head"><p>mood_post</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>M001A1</p></td>
+<td><p>4</p></td>
+<td><p>3</p></td>
+</tr>
+</tbody>
+</table>
+</div></blockquote>
+</div>
+<div class="section" id="yaml-notes">
+<h2>YAML Notes<a class="headerlink" href="#yaml-notes" title="Permalink to this headline">¶</a></h2>
+<p>The same information can be formatted in various way, with different
+tradeoffs.</p>
+<ul class="simple">
+<li><p><cite>key</cite>: <cite>value</cite> are handy when order doesn’t matter.</p></li>
+</ul>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nn">---</span>
+<span class="nt">name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">runsheet</span>
+<span class="nt">dob</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">11/17/92</span>
+<span class="nt">adrc_id</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">M001A1</span>
+<span class="nt">mood_vas</span><span class="p">:</span>
+  <span class="nt">pre</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">4</span>
+  <span class="nt">post</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">3</span>
+</pre></div>
+</div>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nn">---</span>
+<span class="nt">MiPf</span><span class="p">:</span>
+  <span class="nt">pos</span><span class="p">:</span>   <span class="l l-Scalar l-Scalar-Plain">MiPf</span>
+  <span class="nt">neg</span><span class="p">:</span>   <span class="l l-Scalar l-Scalar-Plain">A1</span>
+  <span class="nt">gain</span><span class="p">:</span>  <span class="l l-Scalar l-Scalar-Plain">10000</span>
+  <span class="nt">hphz</span><span class="p">:</span>  <span class="l l-Scalar l-Scalar-Plain">0.01</span>
+  <span class="nt">lphz</span><span class="p">:</span>  <span class="l l-Scalar l-Scalar-Plain">100.0</span>
+</pre></div>
+</div>
+<p><cite>sequences</cite> are handy when order matters</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">block_order</span><span class="p">:</span>
+  <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">A</span>
+  <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">B</span>
+  <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">B</span>
+  <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">A</span>
+</pre></div>
+</div>
+<p>They are not mutually exclusive:</p>
+<p>Example: three ways to encode the following mixed tabular data:</p>
+<blockquote>
+<div><table class="docutils align-default">
+<colgroup>
+<col style="width: 21%" />
+<col style="width: 17%" />
+<col style="width: 14%" />
+<col style="width: 17%" />
+<col style="width: 14%" />
+<col style="width: 17%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>index</p></th>
+<th class="head"><p>pos</p></th>
+<th class="head"><p>neg</p></th>
+<th class="head"><p>gain</p></th>
+<th class="head"><p>hphz</p></th>
+<th class="head"><p>lphz</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>MiPf</p></td>
+<td><p>MiPf</p></td>
+<td><p>A1</p></td>
+<td><p>20000</p></td>
+<td><p>0.01</p></td>
+<td><p>100.0</p></td>
+</tr>
+<tr class="row-odd"><td><p>HEOG</p></td>
+<td><p>lle</p></td>
+<td><p>lhz</p></td>
+<td><p>10000</p></td>
+<td><p>0.01</p></td>
+<td><p>100.0</p></td>
+</tr>
+</tbody>
+</table>
+</div></blockquote>
+<ul class="simple">
+<li><p>pure nested <cite>sequences</cite> (YAML “flow” syntax, c.f. JSON).</p></li>
+</ul>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="l l-Scalar l-Scalar-Plain">table:[ [index, pos,   neg,  gain,   hphz, lphz ],</span>
+        <span class="l l-Scalar l-Scalar-Plain">[MiPf,  MiPf,   A1,  20000,  0.01, 100.0],</span>
+        <span class="l l-Scalar l-Scalar-Plain">[HEOG,  lhz,   lhz,  10000,  0.01, 100.0] ]</span>
+
+<span class="l l-Scalar l-Scalar-Plain">Virtues</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">The structure of the table is obvious. Data is visually</span>
+<span class="l l-Scalar l-Scalar-Plain">compact, fairly easy to read, type, and proofread.</span>
+
+<span class="nt">Vices</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">There&#39;s no way to tell column headings from data except by</span>
+<span class="l l-Scalar l-Scalar-Plain">the order convention.  Departures break the processing pipeline or</span>
+<span class="l l-Scalar l-Scalar-Plain">corrupt the data.</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><p><cite>key</cite>: <cite>sequence</cite> maps (c.f. headed .csv)</p></li>
+</ul>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">columns</span><span class="p">:</span>
+    <span class="p p-Indicator">[</span><span class="nv">index</span><span class="p p-Indicator">,</span> <span class="nv">pos</span><span class="p p-Indicator">,</span>   <span class="nv">neg</span><span class="p p-Indicator">,</span>  <span class="nv">gain</span><span class="p p-Indicator">,</span>   <span class="nv">hphz</span><span class="p p-Indicator">,</span> <span class="nv">lphz</span> <span class="p p-Indicator">]</span>
+<span class="nt">rows</span><span class="p">:</span>
+  <span class="p p-Indicator">-</span> <span class="p p-Indicator">[</span><span class="nv">MiPf</span><span class="p p-Indicator">,</span>  <span class="nv">MiPf</span><span class="p p-Indicator">,</span>   <span class="nv">A1</span><span class="p p-Indicator">,</span>  <span class="nv">20000</span><span class="p p-Indicator">,</span>  <span class="nv">0.01</span><span class="p p-Indicator">,</span> <span class="nv">100.0</span><span class="p p-Indicator">]</span>
+  <span class="p p-Indicator">-</span> <span class="p p-Indicator">[</span><span class="nv">HEOG</span><span class="p p-Indicator">,</span>  <span class="nv">lhz</span><span class="p p-Indicator">,</span>   <span class="nv">lhz</span><span class="p p-Indicator">,</span>  <span class="nv">10000</span><span class="p p-Indicator">,</span>  <span class="nv">0.01</span><span class="p p-Indicator">,</span> <span class="nv">100.0</span><span class="p p-Indicator">]</span>
+
+<span class="nt">Virtues</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">The structure of the table is obvious, data is fairly</span>
+<span class="l l-Scalar l-Scalar-Plain">compact, easy to read, type, and proofread. Columns headings</span>
+<span class="l l-Scalar l-Scalar-Plain">are explicitly tagged and segregated from data.</span>
+
+<span class="nt">Vices</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">Data retrieval is by implicit index, *i*-th row of *j*-th column.</span>
+</pre></div>
+</div>
+<ul>
+<li><p>Nested <cite>key</cite>: <cite>value</cite> maps:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">MiPf</span><span class="p">:</span>
+  <span class="n">pos</span><span class="p">:</span>   <span class="n">MiPf</span>
+  <span class="n">neg</span><span class="p">:</span>   <span class="n">A1</span>
+  <span class="n">gain</span><span class="p">:</span>  <span class="mi">10000</span>
+  <span class="n">hphz</span><span class="p">:</span>  <span class="mf">0.01</span>
+  <span class="n">lphz</span><span class="p">:</span>  <span class="mf">100.0</span>
+
+<span class="n">HEOG</span><span class="p">:</span>
+  <span class="n">pos</span><span class="p">:</span>   <span class="n">lhz</span>
+  <span class="n">neg</span><span class="p">:</span>   <span class="n">rhz</span>
+  <span class="n">gain</span><span class="p">:</span>  <span class="mi">10000</span>
+  <span class="n">hphz</span><span class="p">:</span>  <span class="mf">0.01</span>
+  <span class="n">lphz</span><span class="p">:</span>  <span class="mf">100.0</span>
+</pre></div>
+</div>
+<p>Virtues: Each data point is explicitly labeled and can be extracted
+by a unique slash-path tag: <cite>MiPf/gain</cite>.</p>
+<p>Vices: The structure of the table is not obvious. Explicit
+<cite>key:value</cite> labelling increases storage overhead. Retrieval by tag is
+slow compared to retrieval by index.</p>
+</li>
+</ul>
+<div class="admonition hint">
+<p class="admonition-title">Hint</p>
+<p>For header data you plan to automatically extract with
+<code class="xref py py-meth docutils literal notranslate"><span class="pre">get_event_table('some_data',</span>
+<span class="pre">'some_yhdx')()</span></code> shallow <cite>key:value</cite> maps are likely the easiest
+to work with.</p>
+</div>
+</div>
+<div class="section" id="event-code-table-files-xlsx-ytbl-txt">
+<h2>Event code table files: <cite>.xlsx</cite>, <cite>.ytbl</cite>, <cite>.txt</cite><a class="headerlink" href="#event-code-table-files-xlsx-ytbl-txt" title="Permalink to this headline">¶</a></h2>
+<p>These user defined helper files contain information about how
+to decorate or tag certain event codes with additional experimental
+information.</p>
+<p>The format of the data is tabular. Each row specifies an Index and the
+pattern of the code to match.</p>
+<p>A regular-expression pattern matching mechanism is used to locate
+event codes and sequences of them in the log.</p>
+<p>Sequence patterns are matched within each data block and cannot span
+data blocks by design.</p>
+<p>Event codes are numbers and regular expressions match strings so
+behind the scenes the sequence of event codes in a datablock is mapped
+to a space-separated string representation.</p>
+<p>Example:</p>
+<blockquote>
+<div><p>log code sequence: <code class="docutils literal notranslate"><span class="pre">[1,</span> <span class="pre">1,</span> <span class="pre">1,</span> <span class="pre">11,</span> <span class="pre">1024,</span> <span class="pre">1]</span></code></p>
+<p>stringified: <code class="docutils literal notranslate"><span class="pre">'</span> <span class="pre">1</span> <span class="pre">1</span> <span class="pre">1</span> <span class="pre">11</span> <span class="pre">1024</span> <span class="pre">1'</span></code></p>
+</div></blockquote>
+<div class="section" id="event-code-string-matching-definitions">
+<h3>Event code string matching definitions<a class="headerlink" href="#event-code-string-matching-definitions" title="Permalink to this headline">¶</a></h3>
+<dl>
+<dt>numerals</dt><dd><p><code class="docutils literal notranslate"><span class="pre">0</span> <span class="pre">1</span> <span class="pre">2</span> <span class="pre">3</span> <span class="pre">4</span> <span class="pre">5</span> <span class="pre">6</span> <span class="pre">7</span> <span class="pre">8</span> <span class="pre">9</span></code></p>
+</dd>
+<dt>event code</dt><dd><p>one or more numerals with or without a preceding minus
+sign.</p>
+<p>Examples: <code class="docutils literal notranslate"><span class="pre">'1'</span></code>, <code class="docutils literal notranslate"><span class="pre">'27'</span></code>, <code class="docutils literal notranslate"><span class="pre">'12172'</span></code>, <code class="docutils literal notranslate"><span class="pre">'-13864'</span></code></p>
+</dd>
+<dt>code sequence</dt><dd><p>one or more event codes separated by a single whitespace patterns
+(wild card, quantifed pattern matches)</p>
+<p>Example: <code class="docutils literal notranslate"><span class="pre">'1</span> <span class="pre">27</span> <span class="pre">12172</span> <span class="pre">-13864'</span></code></p>
+</dd>
+<dt>code pattern</dt><dd><p>a regular expression that matches a code or code sequence</p>
+<p>Examples: <code class="docutils literal notranslate"><span class="pre">'1'</span></code>, <code class="docutils literal notranslate"><span class="pre">'(12)'</span></code>, <code class="docutils literal notranslate"><span class="pre">12\d+</span></code>, <code class="docutils literal notranslate"><span class="pre">(1[23]\d+)</span> <span class="pre">1</span> <span class="pre">(1024)</span></code></p>
+</dd>
+<dt>anchor pattern</dt><dd><p>a code pattern of the form <code class="docutils literal notranslate"><span class="pre">(#...)</span></code> where the <code class="docutils literal notranslate"><span class="pre">...</span></code> is a
+non-anchor code_pattern.</p>
+<p>Examples: <code class="docutils literal notranslate"><span class="pre">'(#1)'</span></code>, <code class="docutils literal notranslate"><span class="pre">(#12\d+)</span></code>, <code class="docutils literal notranslate"><span class="pre">(#1[23]\d+)</span></code>, <code class="docutils literal notranslate"><span class="pre">(#1024)</span></code></p>
+</dd>
+<dt>search pattern</dt><dd><p>a regular expression with <strong>exactly one</strong> anchor pattern flanked
+by <strong>one or more</strong> code patterns on either side, separated by a
+single whitespace</p>
+<blockquote>
+<div><p><code class="docutils literal notranslate"><span class="pre">code_pattern*</span> <span class="pre">anchor_pattern</span> <span class="pre">code_pattern*</span></code></p>
+</div></blockquote>
+</dd>
+</dl>
+</div>
+<div class="section" id="event-table-and-epoch-table-column-data-types">
+<h3>Event table and epoch table column data types<a class="headerlink" href="#event-table-and-epoch-table-column-data-types" title="Permalink to this headline">¶</a></h3>
+<ul>
+<li><p>The <code class="docutils literal notranslate"><span class="pre">Index</span></code> column values must be integers or string labels</p></li>
+<li><p>The <code class="docutils literal notranslate"><span class="pre">regexp</span></code> column must be a regular expression string pattern</p></li>
+<li><p>The remaining columns can numeric or string values with or without missing
+data <strong>provided the values in a column all have the same data type</strong></p>
+<blockquote>
+<div><p>floating point: 17.222, 0.287, 10e27,  10e-3, etc..</p>
+<p>integer: -1, 0, 1, 27  10001729</p>
+<p>unsigned integer: 0, 1, 312,</p>
+<p>boolean: True, False</p>
+<p>string-like: ‘hi’, ‘hi/short’, ‘abra/ca/dabra’</p>
+</div></blockquote>
+<p>This is not enforced, violate at your own risk.</p>
+</li>
+<li><p>missing data, None, and NaN values are supported in event tables and
+epoch table for all data types <strong>except boolen</strong>.</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>All numeric data columns containing NaNs, None, or missing data
+missing data are converted to floating point in the epochs tables
+stored in the mkh5 data file. There are alternatives, but they
+are worse.</p>
+</div>
+<p>NaN, None conversions as follows:</p>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 22%" />
+<col style="width: 27%" />
+<col style="width: 51%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Series type</p></th>
+<th class="head"><p>from</p></th>
+<th class="head"><p>to hdf5</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>float-like</p></td>
+<td><p>np.NaN, None</p></td>
+<td><p>np.nan</p></td>
+</tr>
+<tr class="row-odd"><td><p>int-like</p></td>
+<td><p>pd.NaN, None</p></td>
+<td><p>np.nan, int coerced to float_</p></td>
+</tr>
+<tr class="row-even"><td><p>uint-like</p></td>
+<td><p>pd.NaN, None</p></td>
+<td><p>np.nan, int coerced to float_</p></td>
+</tr>
+<tr class="row-odd"><td><p>string-like</p></td>
+<td><p>pd.NaN, None</p></td>
+<td><p>b’NaN’</p></td>
+</tr>
+<tr class="row-even"><td><p>boolean-like</p></td>
+<td><p>pd.NaN, None</p></td>
+<td><p>not allowed</p></td>
+</tr>
+</tbody>
+</table>
+</li>
+</ul>
+</div>
+<div class="section" id="file-types">
+<h3>File types<a class="headerlink" href="#file-types" title="Permalink to this headline">¶</a></h3>
+<blockquote>
+<div><p>A code tag map can be any of these file types:</p>
+<blockquote>
+<div><dl>
+<dt>Excel</dt><dd><p>an .xlsx file and (optional) named worksheet readable by
+<cite>pandas.DataFrame.read_excel()</cite></p>
+<p>CodeTagger(‘myexpt/code_tag_table.xlsx’)
+CodeTagger(‘myexpt/code_tag_table.xlsx!for_evoked’)
+CodeTagger(‘myexpt/code_tag_table.xlsx!for_mixed_effects’)</p>
+</dd>
+<dt>Tabbed text</dt><dd><p>a rows x columns tab-delimited text file readable by
+pandas.Data.read_csv(…, sep=”t”).</p>
+</dd>
+<dt>YAML</dt><dd><p>a yaml map readable by yaml.load(), mock-tabular format
+described below.</p>
+</dd>
+</dl>
+</div></blockquote>
+<p>File formats</p>
+<blockquote>
+<div><dl>
+<dt>Excel and Tabbed-text</dt><dd><ol class="arabic simple">
+<li><p>the data must be tabular in i rows and j columns (i,j &gt;= 1)</p></li>
+<li><p>column labels must be in the first row</p></li>
+<li><p>the first two column labels must be ‘Index’, ‘regexp’</p></li>
+<li><p>the columns may continue ad lib.</p></li>
+</ol>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 25%" />
+<col style="width: 30%" />
+<col style="width: 45%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Index</p></th>
+<th class="head"><p>regexp</p></th>
+<th class="head"><p>&lt;col_label_j&gt;*</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Index_11</p></td>
+<td><p>pattern_12</p></td>
+<td><p>&lt;datum_1j&gt;*</p></td>
+</tr>
+<tr class="row-odd"><td><p>…</p></td>
+<td><p>…</p></td>
+<td><p>…</p></td>
+</tr>
+<tr class="row-even"><td><p>Index_n1</p></td>
+<td><p>pattern_n2</p></td>
+<td><p>&lt;datum_ij&gt;*</p></td>
+</tr>
+</tbody>
+</table>
+</dd>
+<dt>YAML files</dt><dd><p>The YAML can be any combination of inline (JSON-ic) and
+YAML indentation that PyYAML yaml.load can handle.</p>
+<ol class="arabic simple">
+<li><p>must have one YAML document with two keys: <code class="docutils literal notranslate"><span class="pre">columns</span></code> and <code class="docutils literal notranslate"><span class="pre">rows</span></code>.</p></li>
+<li><p>the first two column items must be <cite>Index</cite> and <cite>regexp</cite>.</p></li>
+<li><p>the columns may continue ad lib.</p></li>
+<li><p>each row must be a YAML sequence with the same number of items as there are columns</p></li>
+</ol>
+</dd>
+</dl>
+<p>Example</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nn">---</span>
+<span class="s">&#39;columns&#39;</span><span class="p p-Indicator">:</span>
+  <span class="p p-Indicator">[</span><span class="nv">Index</span><span class="p p-Indicator">,</span> <span class="nv">regexp</span><span class="p p-Indicator">,</span> <span class="nv">probability</span><span class="p p-Indicator">,</span> <span class="nv">frequency</span><span class="p p-Indicator">,</span> <span class="nv">source</span><span class="p p-Indicator">]</span>
+<span class="s">&#39;rows&#39;</span><span class="p p-Indicator">:</span>
+  <span class="p p-Indicator">-</span> <span class="p p-Indicator">[</span><span class="nv">1</span><span class="p p-Indicator">,</span> <span class="s">&#39;(#1)&#39;</span><span class="p p-Indicator">,</span> <span class="nv">hi</span><span class="p p-Indicator">,</span>   <span class="nv">880</span><span class="p p-Indicator">,</span> <span class="nv">oboe</span><span class="p p-Indicator">]</span>
+  <span class="p p-Indicator">-</span> <span class="p p-Indicator">[</span><span class="nv">2</span><span class="p p-Indicator">,</span> <span class="s">&#39;(#2)&#39;</span><span class="p p-Indicator">,</span> <span class="nv">hi</span><span class="p p-Indicator">,</span>   <span class="nv">440</span><span class="p p-Indicator">,</span> <span class="nv">oboe</span><span class="p p-Indicator">]</span>
+  <span class="p p-Indicator">-</span> <span class="p p-Indicator">[</span><span class="nv">3</span><span class="p p-Indicator">,</span> <span class="s">&#39;(#3)&#39;</span><span class="p p-Indicator">,</span> <span class="nv">lo</span><span class="p p-Indicator">,</span>   <span class="nv">880</span><span class="p p-Indicator">,</span> <span class="nv">oboe</span><span class="p p-Indicator">]</span>
+  <span class="p p-Indicator">-</span> <span class="p p-Indicator">[</span><span class="nv">4</span><span class="p p-Indicator">,</span> <span class="s">&#39;(#4)&#39;</span><span class="p p-Indicator">,</span> <span class="nv">lo</span><span class="p p-Indicator">,</span>   <span class="nv">440</span><span class="p p-Indicator">,</span> <span class="nv">oboe</span><span class="p p-Indicator">]</span>
+  <span class="p p-Indicator">-</span> <span class="p p-Indicator">[</span><span class="nv">5</span><span class="p p-Indicator">,</span> <span class="s">&#39;(#5)&#39;</span><span class="p p-Indicator">,</span> <span class="nv">hi</span><span class="p p-Indicator">,</span>   <span class="nv">880</span><span class="p p-Indicator">,</span> <span class="nv">tuba</span><span class="p p-Indicator">]</span>
+  <span class="p p-Indicator">-</span> <span class="p p-Indicator">[</span><span class="nv">6</span><span class="p p-Indicator">,</span> <span class="s">&#39;(#6)&#39;</span><span class="p p-Indicator">,</span> <span class="nv">hi</span><span class="p p-Indicator">,</span>   <span class="nv">440</span><span class="p p-Indicator">,</span> <span class="nv">tuba</span><span class="p p-Indicator">]</span>
+  <span class="p p-Indicator">-</span> <span class="p p-Indicator">[</span><span class="nv">7</span><span class="p p-Indicator">,</span> <span class="s">&#39;(#7)&#39;</span><span class="p p-Indicator">,</span> <span class="nv">lo</span><span class="p p-Indicator">,</span>   <span class="nv">880</span><span class="p p-Indicator">,</span> <span class="nv">tuba</span><span class="p p-Indicator">]</span>
+  <span class="p p-Indicator">-</span> <span class="p p-Indicator">[</span><span class="nv">8</span><span class="p p-Indicator">,</span> <span class="s">&#39;(#8)&#39;</span><span class="p p-Indicator">,</span> <span class="nv">lo</span><span class="p p-Indicator">,</span>   <span class="nv">440</span><span class="p p-Indicator">,</span> <span class="nv">tuba</span><span class="p p-Indicator">]</span>
+</pre></div>
+</div>
+</div></blockquote>
+<p>Row value data types</p>
+<dl>
+<dt>Index<span class="classifier">( str, int )</span></dt><dd><p>data type is not checked, violate at your own risk. Each code
+pattern may but need not have a unique Index.</p>
+<dl class="simple">
+<dt>Example index sequences:</dt><dd><p>1,2,3, …
+id_1, id_2, id_3, …
+hi/880/oboe, hi/440/oboe, lo/880/oboe …</p>
+</dd>
+</dl>
+</dd>
+<dt>regexp<span class="classifier">regular expresion (<cite>flanker* (#anchor) flanker*</cite>)</span></dt><dd><p>This is the code sequence search pattern.  Log codes are
+separated by a single whitespace for matching. The <code class="docutils literal notranslate"><span class="pre">regexp</span></code>
+has exactly one anchor pattern capture group (# ) optionally
+flanked by zero or more code patterns.</p>
+<p>Flanking code patterns may capture groups (…) and
+non-capture groups (?:…)</p>
+<p>All matched capture event code patterns and their sample index
+(and other book-keeping info) are extracted and loaded into
+the returned code_tag_table for all capture groups.
+anchor code_pattern is always captured</p>
+</dd>
+<dt>Additional columns: scalar (string, float, int, bool)</dt><dd><p>this is not checked, violate at your own risk</p>
+</dd>
+</dl>
+<p>That’s it. All the real work is done by 1) specifying
+regular expressions that match useful patterns and sequences of
+codes and 2) specifying the optional column values that label the
+matched codes in useful ways, e.g., by specifying factors and
+levels of experimental design, or numeric values for regression
+modeling or …</p>
+</div></blockquote>
+</div>
+<div class="section" id="notes">
+<h3>Notes<a class="headerlink" href="#notes" title="Permalink to this headline">¶</a></h3>
+<blockquote>
+<div><ul class="simple">
+<li><p>Missing data are allowed as values but discouraged b.c. 1) they
+are handled differently by the pandas csv reader vs. yaml and
+Excel readers. 2) the resulting NaNs and None coerce np.int and
+np.str dtype columns into np.object dtype and incur a
+performance penalty and 3) np.object dtypes are not readily
+serialized to hdf5 … h5py gags and pytables pickles them. 4)
+It may lead to other unknown pathologies.</p></li>
+<li><p>For yaml files, if missing values are unavoidable, coding them
+with the yaml value .NAN is recommended for all cases … yes,
+even string data. The yaml value null maps to None and behaves
+differently in python/numpy/pandas. This is not enforced,
+violate at your own risk</p></li>
+<li><p>Floating point precision. Reading code tag maps from yaml text files
+and directly from Excel .xlsx files introduces the same rounding
+errors for floating point numbers, e.g. 0.357 -&gt;
+0.35699999999999998. Reading text files introduces a <em>different</em>
+rounding error, e.g.,0.35700000000000004.</p></li>
+<li><p>There is no provision for &lt;t:n-m&gt; time interval constraints on
+code patterns. Maybe someday.</p></li>
+</ul>
+</div></blockquote>
+</div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="Output Files.html" class="btn btn-neutral float-right" title="EEG data files" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="Pygarv.html" class="btn btn-neutral float-left" title="pygarv: EEG visualization dashboard" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2017-2018 Thomas P. Urbach, Andrey Portnoy, 2013 Nathaniel Smith
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>
