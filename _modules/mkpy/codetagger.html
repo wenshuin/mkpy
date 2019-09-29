@@ -414,7 +414,7 @@
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="c1"># use !named_sheet if there is one, else default to 0 == first</span>
         <span class="n">cmf_reob</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">match</span><span class="p">(</span>
-            <span class="s2">&quot;(?P&lt;xl_f&gt;.+\.xls[xm])[\!]*(?P&lt;sheet_name&gt;.*)$&quot;</span><span class="p">,</span> <span class="n">cmf</span>
+            <span class="sa">r</span><span class="s2">&quot;(?P&lt;xl_f&gt;.+\.xls[xm])[\!]*(?P&lt;sheet_name&gt;.*)$&quot;</span><span class="p">,</span> <span class="n">cmf</span>
         <span class="p">)</span>
         <span class="n">xl_f</span> <span class="o">=</span> <span class="n">cmf_reob</span><span class="p">[</span><span class="s2">&quot;xl_f&quot;</span><span class="p">]</span>
         <span class="n">sheet_name</span> <span class="o">=</span> <span class="n">cmf_reob</span><span class="p">[</span><span class="s2">&quot;sheet_name&quot;</span><span class="p">]</span>
@@ -442,7 +442,7 @@
 
         <span class="c1"># slurp the code tags</span>
         <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">cmf</span><span class="p">,</span> <span class="s2">&quot;r&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">d</span><span class="p">:</span>
-            <span class="n">mapper</span> <span class="o">=</span> <span class="n">yaml</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">d</span><span class="o">.</span><span class="n">read</span><span class="p">())</span>
+            <span class="n">mapper</span> <span class="o">=</span> <span class="n">yaml</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">d</span><span class="o">.</span><span class="n">read</span><span class="p">(),</span> <span class="n">Loader</span><span class="o">=</span><span class="n">yaml</span><span class="o">.</span><span class="n">SafeLoader</span><span class="p">)</span>
 
         <span class="c1"># modicum of format checking ...</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">mapper</span><span class="p">,</span> <span class="nb">dict</span><span class="p">):</span>
@@ -674,7 +674,7 @@
 
 <span class="sd">        ``anchor pattern`` : regexp str</span>
 <span class="sd">            any capturing code pattern that captures a subset of the codes</span>
-<span class="sd">            captured by r&#39;(#[-]{0,1}\d+)&#39;. </span>
+<span class="sd">            captured by r&#39;(#[-]{0,1}\d+)&#39;.</span>
 
 <span class="sd">        ``code sequence`` : str</span>
 <span class="sd">            a sequence of codes, each preceded by a single a single whitespace.</span>
@@ -869,7 +869,7 @@
 
   <div role="contentinfo">
     <p>
-        &copy; Copyright 2017-2018 Thomas P. Urbach, Andrey Portnoy, 2013 Nathaniel Smith
+        &copy; Copyright 2017-2019 Thomas P. Urbach, Andrey Portnoy, 2013 Nathaniel Smith
 
     </p>
   </div>

@@ -197,13 +197,13 @@
 <span class="sd">      [ {&#39;dblock_path_idx&#39;: 0,</span>
 <span class="sd">         &#39;dblock_path&#39;: &#39;calstest/dblock_0&#39;,</span>
 <span class="sd">         &#39;name&#39;: &#39;pygarv&#39;,</span>
-<span class="sd">	 &#39;tests&#39;: [ [{&#39;test&#39;: &#39;ppa&#39;},</span>
-<span class="sd">		     {&#39;tag&#39;: &#39;amplitude exursions&#39;},</span>
+<span class="sd">         &#39;tests&#39;: [ [{&#39;test&#39;: &#39;ppa&#39;},</span>
+<span class="sd">                     {&#39;tag&#39;: &#39;amplitude exursions&#39;},</span>
 <span class="sd">                     {&#39;stream&#39;: &#39;MiCe&#39;},</span>
 <span class="sd">                     {&#39;threshold&#39;: 0.0},</span>
 <span class="sd">                     {&#39;interval&#39;: 0.0} ],</span>
-<span class="sd">		   [ {&#39;test&#39;: &#39;ppadif&#39;},</span>
-<span class="sd">		     {&#39;tag&#39;: &#39;amplitude exursions&#39;},</span>
+<span class="sd">                    [{&#39;test&#39;: &#39;ppadif&#39;},</span>
+<span class="sd">                     {&#39;tag&#39;: &#39;amplitude exursions&#39;},</span>
 <span class="sd">                     {&#39;stream&#39;: &#39;MiCe&#39;},</span>
 <span class="sd">                     {&#39;threshold&#39;: 0.1},</span>
 <span class="sd">                     {&#39;interval&#39;: 0.1},</span>
@@ -218,7 +218,7 @@
 <span class="sd">tr_doc[&#39;fails&#39;] : list</span>
 
 <span class="sd">len(tr_doc[&#39;fails&#39;] == len(tr_doc[&#39;tests&#39;])</span>
-<span class="sd">where tr_doc[&#39;fails&#39;][idx] is </span>
+<span class="sd">where tr_doc[&#39;fails&#39;][idx] is</span>
 
 <span class="sd">a list of (start, stop) intervals in dblock_tick indexes where tr_doc[&#39;test&#39;] failed. </span>
 <span class="sd">tr_doc[&#39;pygarv&#39;]</span>
@@ -362,7 +362,8 @@
             <span class="n">yaml_stream</span> <span class="o">=</span> <span class="n">yf</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">lint_yarf</span><span class="p">(</span><span class="n">yaml_stream</span><span class="p">)</span>  <span class="c1"># raises Exception on bad YAML</span>
 
-        <span class="n">yarf_iter</span> <span class="o">=</span> <span class="n">yaml</span><span class="o">.</span><span class="n">load_all</span><span class="p">(</span><span class="n">yaml_stream</span><span class="p">)</span>  <span class="c1"># thank you PyYaml</span>
+        <span class="c1"># thank you PyYaml</span>
+        <span class="n">yarf_iter</span> <span class="o">=</span> <span class="n">yaml</span><span class="o">.</span><span class="n">load_all</span><span class="p">(</span><span class="n">yaml_stream</span><span class="p">,</span> <span class="n">Loader</span><span class="o">=</span><span class="n">yaml</span><span class="o">.</span><span class="n">SafeLoader</span><span class="p">)</span>
         <span class="n">yarf_docs</span> <span class="o">=</span> <span class="p">[]</span>
         <span class="k">for</span> <span class="n">yarf_doc</span> <span class="ow">in</span> <span class="n">yarf_iter</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">check_yarf_doc</span><span class="p">(</span><span class="n">yarf_doc</span><span class="p">)</span>
@@ -715,7 +716,7 @@
 
 
 <div class="viewcode-block" id="PyGarv"><a class="viewcode-back" href="../../source/mkpy.pygarv.html#mkpy.pygarv.PyGarv">[docs]</a><span class="k">class</span> <span class="nc">PyGarv</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;container to hold an inventory of functions for computing sample-wise </span>
+    <span class="sa">r</span><span class="sd">&quot;&quot;&quot;container to hold an inventory of functions for computing sample-wise </span>
 <span class="sd">    artifact masks.</span>
 
 
@@ -766,7 +767,6 @@
 <span class="sd">    where test_name is the test name and the list of key_i=dtype_i</span>
 <span class="sd">    optionally gives extra parameters named key_1, ... key_n </span>
 <span class="sd">    with data type dtype.</span>
-
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">mkh5_f</span><span class="p">,</span> <span class="n">yarf_f</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
@@ -1388,12 +1388,12 @@
         <span class="s2">&quot;ppa&quot;</span><span class="p">,</span> <span class="n">stream</span><span class="o">=</span><span class="nb">str</span><span class="p">,</span> <span class="n">threshold</span><span class="o">=</span><span class="nb">float</span><span class="p">,</span> <span class="n">prestim</span><span class="o">=</span><span class="nb">float</span><span class="p">,</span> <span class="n">poststim</span><span class="o">=</span><span class="nb">float</span>
     <span class="p">)</span>
     <span class="k">def</span> <span class="nf">ppa</span><span class="p">(</span><span class="n">hdr</span><span class="p">,</span> <span class="n">dblock</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;tag event if any stream regexp match has peak-to-peak amplitude excursion</span>
+        <span class="sa">r</span><span class="sd">&quot;&quot;&quot;tag event if any stream regexp match has peak-to-peak amplitude excursion</span>
 
 <span class="sd">        Parameters</span>
 <span class="sd">        ----------</span>
 <span class="sd">        stream : regex</span>
-<span class="sd">           stream label pattern to match, e.g. &#39;.+&#39; or &#39;MiPa&#39; or &#39;\w+&#39; </span>
+<span class="sd">           stream label pattern to match, e.g. &#39;.+&#39; or &#39;MiPa&#39; or &#39;\w+&#39;</span>
 <span class="sd">        threshold : float</span>
 <span class="sd">           amplitude excursion threshold</span>
 <span class="sd">        prestim : float (&gt;= 0)</span>
@@ -1456,12 +1456,12 @@
         <span class="n">poststim</span><span class="o">=</span><span class="nb">float</span><span class="p">,</span>
     <span class="p">)</span>
     <span class="k">def</span> <span class="nf">maxflat</span><span class="p">(</span><span class="n">hdr</span><span class="p">,</span> <span class="n">dblock</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;tag events on regex stream for flat runs</span>
+        <span class="sa">r</span><span class="sd">&quot;&quot;&quot;tag events on regex stream for flat runs</span>
 
 <span class="sd">        Parameters</span>
 <span class="sd">        ----------</span>
 <span class="sd">        stream : regex</span>
-<span class="sd">           stream label pattern to match, e.g. &#39;MiPa&#39; or &#39;\w{3}$&#39; </span>
+<span class="sd">           stream label pattern to match, e.g. &#39;MiPa&#39; or &#39;\w{3}$&#39;</span>
 <span class="sd">        threshold : float</span>
 <span class="sd">           minimum range allowable</span>
 <span class="sd">        nsamp : int</span>
@@ -2109,7 +2109,7 @@
 
   <div role="contentinfo">
     <p>
-        &copy; Copyright 2017-2018 Thomas P. Urbach, Andrey Portnoy, 2013 Nathaniel Smith
+        &copy; Copyright 2017-2019 Thomas P. Urbach, Andrey Portnoy, 2013 Nathaniel Smith
 
     </p>
   </div>
