@@ -180,9 +180,8 @@
 <span class="c1"># import dpath.exceptions</span>
 <span class="c1"># import dpath.options</span>
 
-<span class="kn">from</span> <span class="nn">.</span> <span class="k">import</span> <span class="n">PY3</span>
-<span class="kn">from</span> <span class="nn">.</span> <span class="k">import</span> <span class="n">exceptions</span> <span class="k">as</span> <span class="n">dpath_exceptions</span>
-<span class="kn">from</span> <span class="nn">.</span> <span class="k">import</span> <span class="n">options</span> <span class="k">as</span> <span class="n">dpath_options</span>
+<span class="kn">from</span> <span class="nn">mkpy.dpath</span> <span class="k">import</span> <span class="n">PY3</span>
+<span class="kn">import</span> <span class="nn">mkpy.dpath</span> <span class="k">as</span> <span class="nn">dpath</span>
 
 <span class="kn">import</span> <span class="nn">re</span>
 <span class="kn">import</span> <span class="nn">fnmatch</span>
@@ -248,7 +247,7 @@
         <span class="n">key</span> <span class="o">=</span> <span class="n">elem</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
         <span class="n">strkey</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">key</span><span class="p">)</span>
         <span class="k">if</span> <span class="n">regex</span> <span class="ow">and</span> <span class="p">(</span><span class="ow">not</span> <span class="n">regex</span><span class="o">.</span><span class="n">findall</span><span class="p">(</span><span class="n">strkey</span><span class="p">)):</span>
-            <span class="k">raise</span> <span class="n">dpath_exceptions</span><span class="o">.</span><span class="n">InvalidKeyName</span><span class="p">(</span>
+            <span class="k">raise</span> <span class="n">dpath</span><span class="o">.</span><span class="n">exceptions</span><span class="o">.</span><span class="n">InvalidKeyName</span><span class="p">(</span>
                 <span class="s2">&quot;</span><span class="si">{}</span><span class="s2"> at </span><span class="si">{}</span><span class="s2"> does not match the expression </span><span class="si">{}</span><span class="s2">&quot;</span>
                 <span class="s2">&quot;&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">strkey</span><span class="p">,</span> <span class="n">validated</span><span class="p">,</span> <span class="n">regex</span><span class="o">.</span><span class="n">pattern</span><span class="p">)</span>
             <span class="p">)</span>
@@ -281,10 +280,10 @@
 
         <span class="k">for</span> <span class="p">(</span><span class="n">k</span><span class="p">,</span> <span class="n">v</span><span class="p">)</span> <span class="ow">in</span> <span class="n">iteritems</span><span class="p">:</span>
             <span class="k">if</span> <span class="nb">issubclass</span><span class="p">(</span><span class="n">k</span><span class="o">.</span><span class="vm">__class__</span><span class="p">,</span> <span class="p">(</span><span class="n">string_class</span><span class="p">)):</span>
-                <span class="k">if</span> <span class="p">(</span><span class="ow">not</span> <span class="n">k</span><span class="p">)</span> <span class="ow">and</span> <span class="p">(</span><span class="ow">not</span> <span class="n">dpath_options</span><span class="o">.</span><span class="n">ALLOW_EMPTY_STRING_KEYS</span><span class="p">):</span>
-                    <span class="k">raise</span> <span class="n">dpath_exceptions</span><span class="o">.</span><span class="n">InvalidKeyName</span><span class="p">(</span>
+                <span class="k">if</span> <span class="p">(</span><span class="ow">not</span> <span class="n">k</span><span class="p">)</span> <span class="ow">and</span> <span class="p">(</span><span class="ow">not</span> <span class="n">dpath</span><span class="o">.</span><span class="n">options</span><span class="o">.</span><span class="n">ALLOW_EMPTY_STRING_KEYS</span><span class="p">):</span>
+                    <span class="k">raise</span> <span class="n">dpath</span><span class="o">.</span><span class="n">exceptions</span><span class="o">.</span><span class="n">InvalidKeyName</span><span class="p">(</span>
                         <span class="s2">&quot;Empty string keys not allowed without &quot;</span>
-                        <span class="s2">&quot;dpath_options.ALLOW_EMPTY_STRING_KEYS=True&quot;</span>
+                        <span class="s2">&quot;dpath.options.ALLOW_EMPTY_STRING_KEYS=True&quot;</span>
                     <span class="p">)</span>
                 <span class="k">elif</span> <span class="n">skip</span> <span class="ow">and</span> <span class="n">k</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot;+&quot;</span><span class="p">:</span>
                     <span class="k">continue</span>
@@ -324,7 +323,7 @@
     <span class="k">if</span> <span class="s2">&quot;**&quot;</span> <span class="ow">in</span> <span class="n">glob</span><span class="p">:</span>
         <span class="n">ss</span> <span class="o">=</span> <span class="n">glob</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="s2">&quot;**&quot;</span><span class="p">)</span>
         <span class="k">if</span> <span class="s2">&quot;**&quot;</span> <span class="ow">in</span> <span class="n">glob</span><span class="p">[</span><span class="n">ss</span> <span class="o">+</span> <span class="mi">1</span> <span class="p">:]:</span>
-            <span class="k">raise</span> <span class="n">dpath_exceptions</span><span class="o">.</span><span class="n">InvalidGlob</span><span class="p">(</span>
+            <span class="k">raise</span> <span class="n">dpath</span><span class="o">.</span><span class="n">exceptions</span><span class="o">.</span><span class="n">InvalidGlob</span><span class="p">(</span>
                 <span class="s2">&quot;Invalid glob. Only one &#39;**&#39; is permitted per glob.&quot;</span>
             <span class="p">)</span>
 
@@ -435,7 +434,7 @@
         <span class="k">if</span> <span class="p">(</span><span class="ow">not</span> <span class="n">tester</span><span class="p">(</span><span class="n">obj</span><span class="p">,</span> <span class="n">elem</span><span class="p">))</span> <span class="ow">and</span> <span class="p">(</span><span class="n">create_missing</span><span class="p">):</span>
             <span class="n">creator</span><span class="p">(</span><span class="n">obj</span><span class="p">,</span> <span class="n">elem</span><span class="p">)</span>
         <span class="k">elif</span> <span class="ow">not</span> <span class="n">tester</span><span class="p">(</span><span class="n">obj</span><span class="p">,</span> <span class="n">elem</span><span class="p">):</span>
-            <span class="k">raise</span> <span class="n">dpath_exceptions</span><span class="o">.</span><span class="n">PathNotFound</span><span class="p">(</span>
+            <span class="k">raise</span> <span class="n">dpath</span><span class="o">.</span><span class="n">exceptions</span><span class="o">.</span><span class="n">PathNotFound</span><span class="p">(</span>
                 <span class="s2">&quot;</span><span class="si">{}</span><span class="s2"> does not exist in </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">elem</span><span class="p">,</span> <span class="n">traversed</span><span class="p">)</span>
             <span class="p">)</span>
         <span class="n">traversed</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">elem_value</span><span class="p">)</span>
@@ -495,7 +494,7 @@
 
         <span class="k">if</span> <span class="ow">not</span> <span class="nb">issubclass</span><span class="p">(</span><span class="n">target</span><span class="o">.</span><span class="vm">__class__</span><span class="p">,</span> <span class="p">(</span><span class="n">MutableSequence</span><span class="p">,</span> <span class="n">MutableMapping</span><span class="p">)):</span>
             <span class="k">if</span> <span class="n">afilter</span> <span class="ow">and</span> <span class="p">(</span><span class="ow">not</span> <span class="n">afilter</span><span class="p">(</span><span class="n">target</span><span class="p">)):</span>
-                <span class="k">raise</span> <span class="n">dpath_exceptions</span><span class="o">.</span><span class="n">FilteredValue</span>
+                <span class="k">raise</span> <span class="n">dpath</span><span class="o">.</span><span class="n">exceptions</span><span class="o">.</span><span class="n">FilteredValue</span>
 
         <span class="n">index</span> <span class="o">+=</span> <span class="mi">1</span>
 
