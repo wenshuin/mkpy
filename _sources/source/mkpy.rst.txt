@@ -1,6 +1,13 @@
 mkpy package
 ============
 
+Subpackages
+-----------
+
+.. toctree::
+
+   mkpy.dpath
+
 Submodules
 ----------
 
