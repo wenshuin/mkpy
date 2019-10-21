@@ -1,20 +1,12 @@
 mkpy package
 ============
 
-Subpackages
------------
-
-.. toctree::
-
-   mkpy.dpath
-
 Submodules
 ----------
 
 .. toctree::
 
    mkpy.codetagger
-   mkpy.epochutils
    mkpy.events
    mkpy.h5tools
    mkpy.mkh5

@@ -1,7 +1,0 @@
-mkpy.epochutils module
-======================
-
-.. automodule:: mkpy.epochutils
-   :members:
-   :undoc-members:
-   :show-inheritance:
