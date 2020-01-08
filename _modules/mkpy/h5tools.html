@@ -238,26 +238,26 @@
     <span class="k">with</span> <span class="n">h5py</span><span class="o">.</span><span class="n">File</span><span class="p">(</span><span class="n">h5f</span><span class="p">,</span> <span class="s2">&quot;r&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">h5</span><span class="p">:</span>
 
         <span class="k">if</span> <span class="n">h5_path</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">h5</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
-            <span class="n">msg</span> <span class="o">=</span> <span class="n">f</span><span class="s1">&#39;Group &quot;</span><span class="si">{h5_path}</span><span class="s1">&quot; does not exist.&#39;</span>
+            <span class="n">msg</span> <span class="o">=</span> <span class="sa">f</span><span class="s1">&#39;Group &quot;</span><span class="si">{h5_path}</span><span class="s1">&quot; does not exist.&#39;</span>
             <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="n">msg</span><span class="p">)</span>
 
         <span class="n">dblocks_found</span> <span class="o">=</span> <span class="p">[</span><span class="n">d</span> <span class="k">for</span> <span class="n">d</span> <span class="ow">in</span> <span class="n">h5</span><span class="p">[</span><span class="n">h5_path</span><span class="p">]</span><span class="o">.</span><span class="n">keys</span><span class="p">()</span> <span class="k">if</span> <span class="s2">&quot;dblock&quot;</span> <span class="ow">in</span> <span class="n">d</span><span class="p">]</span>
 
         <span class="k">if</span> <span class="ow">not</span> <span class="n">dblocks_found</span><span class="p">:</span>
-            <span class="n">msg</span> <span class="o">=</span> <span class="n">f</span><span class="s2">&quot;No dblocks found under </span><span class="si">{h5f}</span><span class="s2">/</span><span class="si">{h5_path}</span><span class="s2">.&quot;</span>
+            <span class="n">msg</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;No dblocks found under </span><span class="si">{h5f}</span><span class="s2">/</span><span class="si">{h5_path}</span><span class="s2">.&quot;</span>
             <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="n">msg</span><span class="p">)</span>
 
     <span class="c1"># dblocks should be contiguously numbered 0, ..., n-1</span>
     <span class="n">n_dblocks</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">dblocks_found</span><span class="p">)</span>
-    <span class="n">dblocks_expected</span> <span class="o">=</span> <span class="p">[</span><span class="n">f</span><span class="s2">&quot;dblock_</span><span class="si">{i}</span><span class="s2">&quot;</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n_dblocks</span><span class="p">)]</span>
+    <span class="n">dblocks_expected</span> <span class="o">=</span> <span class="p">[</span><span class="sa">f</span><span class="s2">&quot;dblock_</span><span class="si">{i}</span><span class="s2">&quot;</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n_dblocks</span><span class="p">)]</span>
 
     <span class="k">if</span> <span class="nb">set</span><span class="p">(</span><span class="n">dblocks_found</span><span class="p">)</span> <span class="o">!=</span> <span class="nb">set</span><span class="p">(</span><span class="n">dblocks_expected</span><span class="p">):</span>
-        <span class="n">msg</span> <span class="o">=</span> <span class="n">f</span><span class="s2">&quot;Disordered dblocks in </span><span class="si">{h5f}</span><span class="s2">/</span><span class="si">{h5_path}</span><span class="s2">: &quot;</span>
+        <span class="n">msg</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;Disordered dblocks in </span><span class="si">{h5f}</span><span class="s2">/</span><span class="si">{h5_path}</span><span class="s2">: &quot;</span>
         <span class="n">msg</span> <span class="o">+=</span> <span class="s2">&quot;, &quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">dblocks_found</span><span class="p">)</span>
         <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="n">msg</span><span class="p">)</span>
 
     <span class="c1"># dblocks_expected is sorted and equal to found, so we use it</span>
-    <span class="n">dblock_paths</span> <span class="o">=</span> <span class="p">[</span><span class="n">f</span><span class="s2">&quot;</span><span class="si">{h5_path}</span><span class="s2">/</span><span class="si">{dblock}</span><span class="s2">&quot;</span> <span class="k">for</span> <span class="n">dblock</span> <span class="ow">in</span> <span class="n">dblocks_expected</span><span class="p">]</span>
+    <span class="n">dblock_paths</span> <span class="o">=</span> <span class="p">[</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{h5_path}</span><span class="s2">/</span><span class="si">{dblock}</span><span class="s2">&quot;</span> <span class="k">for</span> <span class="n">dblock</span> <span class="ow">in</span> <span class="n">dblocks_expected</span><span class="p">]</span>
 
     <span class="k">return</span> <span class="n">dblock_paths</span></div>
 </pre></div>

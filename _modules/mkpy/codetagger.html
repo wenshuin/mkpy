@@ -335,7 +335,7 @@
 <span class="sd">    &quot;&quot;&quot;</span>
 
 <div class="viewcode-block" id="CodeTagger.MissingAnchor"><a class="viewcode-back" href="../../source/mkpy.codetagger.html#mkpy.codetagger.CodeTagger.MissingAnchor">[docs]</a>    <span class="k">class</span> <span class="nc">MissingAnchor</span><span class="p">(</span><span class="ne">Exception</span><span class="p">):</span>
-        <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">cause</span><span class="p">):</span>
+        <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">cause</span><span class="p">):</span>
             <span class="n">msg</span> <span class="o">=</span> <span class="p">(</span>
                 <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Error: missing anchor mark</span><span class="se">\n</span><span class="s2">&quot;</span>
                 <span class="s2">&quot;Cause: </span><span class="si">{0}</span><span class="se">\n</span><span class="s2">&quot;</span>
@@ -345,7 +345,7 @@
             <span class="nb">print</span><span class="p">(</span><span class="n">msg</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="CodeTagger.MultipleAnchors"><a class="viewcode-back" href="../../source/mkpy.codetagger.html#mkpy.codetagger.CodeTagger.MultipleAnchors">[docs]</a>    <span class="k">class</span> <span class="nc">MultipleAnchors</span><span class="p">(</span><span class="ne">Exception</span><span class="p">):</span>
-        <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">cause</span><span class="p">):</span>
+        <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">cause</span><span class="p">):</span>
             <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Error: multiple anchor marks&quot;</span><span class="p">)</span>
             <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Cause: </span><span class="si">{0}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">cause</span><span class="p">))</span>
             <span class="nb">print</span><span class="p">(</span>
@@ -353,7 +353,7 @@
             <span class="p">)</span></div>
 
 <div class="viewcode-block" id="CodeTagger.BadCodePattern"><a class="viewcode-back" href="../../source/mkpy.codetagger.html#mkpy.codetagger.CodeTagger.BadCodePattern">[docs]</a>    <span class="k">class</span> <span class="nc">BadCodePattern</span><span class="p">(</span><span class="ne">Exception</span><span class="p">):</span>
-        <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">in_patt</span><span class="p">,</span> <span class="n">cause</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">in_patt</span><span class="p">,</span> <span class="n">cause</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
             <span class="nb">print</span><span class="p">(</span>
                 <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Error: Regular expression syntax error in code pattern: </span><span class="si">{0}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
                     <span class="n">in_patt</span>
@@ -362,7 +362,7 @@
             <span class="k">if</span> <span class="n">cause</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
                 <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Cause: </span><span class="si">{0}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">cause</span><span class="p">))</span></div>
 
-    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">cmf</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">cmf</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;initialize instance with a code tag map file. &quot;&quot;&quot;</span>
         <span class="c1"># TODO: handle different filetypes, don&#39;t let things fail silently</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">code_map</span> <span class="o">=</span> <span class="kc">None</span>
