@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Search &mdash; mkpy 0.1.7 documentation</title>
+  <title>Release Notes &mdash; mkpy 0.1.7 documentation</title>
   
 
   
@@ -25,7 +25,6 @@
         <script type="text/javascript" src="_static/underscore.js"></script>
         <script type="text/javascript" src="_static/doctools.js"></script>
         <script type="text/javascript" src="_static/language_data.js"></script>
-        <script type="text/javascript" src="_static/searchtools.js"></script>
     
     <script type="text/javascript" src="_static/js/theme.js"></script>
 
@@ -35,7 +34,9 @@
   <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
   <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
     <link rel="index" title="Index" href="genindex.html" />
-    <link rel="search" title="Search" href="#" /> 
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Roles and credits" href="RolesCredits.html" />
+    <link rel="prev" title="mkpy.pygarv module" href="source/mkpy.pygarv.html" /> 
 </head>
 
 <body class="wy-body-for-nav">
@@ -66,7 +67,7 @@
 
           
 <div role="search">
-  <form id="rtd-search-form" class="wy-form" action="#" method="get">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
     <input type="text" name="q" placeholder="Search docs" />
     <input type="hidden" name="check_keywords" value="yes" />
     <input type="hidden" name="area" value="default" />
@@ -110,8 +111,13 @@
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="Reference.html">Reference</a></li>
 </ul>
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="ReleaseNotes.html">Release Notes</a></li>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Release Notes</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#v0-1-6">v0.1.6</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#v0-1-5">v0.1.5</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#brief-history">Brief History</a></li>
+</ul>
+</li>
 </ul>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="RolesCredits.html">Roles and credits</a></li>
@@ -160,12 +166,14 @@
     
       <li><a href="index.html">Docs</a> &raquo;</li>
         
-      <li>Search</li>
+      <li>Release Notes</li>
     
     
       <li class="wy-breadcrumbs-aside">
         
             
+            <a href="_sources/ReleaseNotes.rst.txt" rel="nofollow"> View page source</a>
+          
         
       </li>
     
@@ -177,24 +185,54 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <noscript>
-  <div id="fallback" class="admonition warning">
-    <p class="last">
-      Please activate JavaScript to enable the search
-      functionality.
-    </p>
-  </div>
-  </noscript>
+  <div class="section" id="release-notes">
+<h1>Release Notes<a class="headerlink" href="#release-notes" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="v0-1-6">
+<h2>v0.1.6<a class="headerlink" href="#v0-1-6" title="Permalink to this headline">¶</a></h2>
+<p>Minor patch to include nose in mkpy requirements so the mkpy/dpath
+tests run with conda package installation.</p>
+</div>
+<div class="section" id="v0-1-5">
+<h2>v0.1.5<a class="headerlink" href="#v0-1-5" title="Permalink to this headline">¶</a></h2>
+<p>Release notes begin with version 0.1.5, the initial <cite>mkpy</cite>
+release on github and corresponding conda package on the kutaslab
+Anaconda Cloud channel.</p>
+</div>
+<div class="section" id="brief-history">
+<h2>Brief History<a class="headerlink" href="#brief-history" title="Permalink to this headline">¶</a></h2>
+<p>In 2017-2018 <code class="docutils literal notranslate"><span class="pre">mkpy</span></code> was developed and git version controlled up
+through version 0.1.4 on Kutas Lab servers only. The data files for
+the pytests were a mix of IRB protected human subjects EEG research
+data and other test data.</p>
+<p>In 2018, <code class="docutils literal notranslate"><span class="pre">mkpy_public</span></code>, a static snapshot of the source and docs
+were uploaded to github/kutaslab/mkpy_public without any test data.</p>
+<p>In Fall 2019, the test data files were segregated, with IRB protected
+data moved out of the mkpy repo subdirectories and the repo rebuilt
+without human subjects research data in any form. This allows mkpy
+source, docs, and test files to be hosted on a public github repo. The
+pytests were modified to skip tests on the privacy protected data
+without failing when the files are not found.  Consequently the full
+test suite runs on the Kutas Lab development server while mkpy
+installed via the conda or pypi packages or from the source on github
+can still run a working subset of tests to smoke test the
+installation.</p>
+</div>
+</div>
 
-  
-  <div id="search-results">
-  
-  </div>
 
            </div>
            
           </div>
           <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="RolesCredits.html" class="btn btn-neutral float-right" title="Roles and credits" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="source/mkpy.pygarv.html" class="btn btn-neutral float-left" title="mkpy.pygarv module" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
   
 
   <hr/>
@@ -227,14 +265,7 @@
   
   
     
-  
-  <script type="text/javascript">
-    jQuery(function() { Search.loadIndex("searchindex.js"); });
-  </script>
-  
-  <script type="text/javascript" id="searchindexloader"></script>
    
-
 
 </body>
 </html>

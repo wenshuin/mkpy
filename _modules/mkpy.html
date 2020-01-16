@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>mkpy &mdash; mkpy 0.1.6 documentation</title>
+  <title>mkpy &mdash; mkpy 0.1.7 documentation</title>
   
 
   
@@ -110,6 +110,9 @@
 <li class="toctree-l1"><a class="reference internal" href="../Reference.html">Reference</a></li>
 </ul>
 <ul>
+<li class="toctree-l1"><a class="reference internal" href="../ReleaseNotes.html">Release Notes</a></li>
+</ul>
+<ul>
 <li class="toctree-l1"><a class="reference internal" href="../RolesCredits.html">Roles and credits</a></li>
 </ul>
 
@@ -190,10 +193,11 @@
 <span class="kn">import</span> <span class="nn">re</span>
 <span class="kn">from</span> <span class="nn">.</span> <span class="kn">import</span> <span class="n">dpath</span>
 
-<span class="n">__version__</span> <span class="o">=</span> <span class="s2">&quot;0.1.6&quot;</span>
+<span class="n">__version__</span> <span class="o">=</span> <span class="s2">&quot;0.1.7&quot;</span>
 
 
 <div class="viewcode-block" id="get_ver"><a class="viewcode-back" href="../source/mkpy.html#mkpy.get_ver">[docs]</a><span class="k">def</span> <span class="nf">get_ver</span><span class="p">():</span>
+    <span class="c1"># check semantic version format in __init__.py and meta.yaml matches</span>
     <span class="n">pf_ver</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;(?P&lt;ver_str&gt;\d+\.\d+\.\d+\S*)&quot;</span><span class="p">,</span> <span class="n">__version__</span><span class="p">)</span>
 
     <span class="k">if</span> <span class="n">pf_ver</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
@@ -206,8 +210,10 @@
 
 <span class="s2">        &quot;&quot;&quot;</span>
         <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="n">msg</span><span class="p">)</span>
-    <span class="k">else</span><span class="p">:</span>
-        <span class="k">return</span> <span class="n">pf_ver</span><span class="p">[</span><span class="s2">&quot;ver_str&quot;</span><span class="p">]</span></div>
+
+    <span class="n">ver_str</span> <span class="o">=</span> <span class="n">pf_ver</span><span class="p">[</span><span class="s2">&quot;ver_str&quot;</span><span class="p">]</span>
+
+    <span class="k">return</span> <span class="n">ver_str</span></div>
 
 
 <span class="c1"># log names are timestamps</span>
