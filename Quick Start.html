@@ -1016,7 +1016,7 @@ into signal processing and statistical analysis pipelines.</p>
 <h3>Connect<a class="headerlink" href="#connect" title="Permalink to this headline">¶</a></h3>
 <blockquote>
 <div><dl class="simple">
-<dt><code class="xref py py-meth docutils literal notranslate"><span class="pre">mkh5()</span></code></dt><dd><p>establish a read/write connection to the <code class="docutils literal notranslate"><span class="pre">.h5</span></code> database file for
+<dt><a class="reference internal" href="source/mkpy.mkh5.html#mkpy.mkh5.mkh5" title="mkpy.mkh5.mkh5"><code class="xref py py-meth docutils literal notranslate"><span class="pre">mkh5()</span></code></a></dt><dd><p>establish a read/write connection to the <code class="docutils literal notranslate"><span class="pre">.h5</span></code> database file for
 subsequent operations</p>
 </dd>
 </dl>
@@ -1026,10 +1026,10 @@ subsequent operations</p>
 <h3>EEG data import<a class="headerlink" href="#eeg-data-import" title="Permalink to this headline">¶</a></h3>
 <blockquote>
 <div><dl class="simple">
-<dt><code class="xref py py-meth docutils literal notranslate"><span class="pre">create_mkdata()</span></code></dt><dd><p>import a new <code class="docutils literal notranslate"><span class="pre">.crw</span></code>, <code class="docutils literal notranslate"><span class="pre">.log</span></code> and additional user-specified
+<dt><a class="reference internal" href="source/mkpy.mkh5.html#mkpy.mkh5.mkh5.create_mkdata" title="mkpy.mkh5.mkh5.create_mkdata"><code class="xref py py-meth docutils literal notranslate"><span class="pre">create_mkdata()</span></code></a></dt><dd><p>import a new <code class="docutils literal notranslate"><span class="pre">.crw</span></code>, <code class="docutils literal notranslate"><span class="pre">.log</span></code> and additional user-specified
 header information into the database</p>
 </dd>
-<dt><code class="xref py py-meth docutils literal notranslate"><span class="pre">append_mkdata()</span></code></dt><dd><p>append extra data from a different <code class="docutils literal notranslate"><span class="pre">.crw</span></code>, <code class="docutils literal notranslate"><span class="pre">.log</span></code> at that
+<dt><a class="reference internal" href="source/mkpy.mkh5.html#mkpy.mkh5.mkh5.append_mkdata" title="mkpy.mkh5.mkh5.append_mkdata"><code class="xref py py-meth docutils literal notranslate"><span class="pre">append_mkdata()</span></code></a></dt><dd><p>append extra data from a different <code class="docutils literal notranslate"><span class="pre">.crw</span></code>, <code class="docutils literal notranslate"><span class="pre">.log</span></code> at that
 same location</p>
 </dd>
 </dl>
@@ -1039,7 +1039,7 @@ same location</p>
 <h3>Data inspection and visualization<a class="headerlink" href="#data-inspection-and-visualization" title="Permalink to this headline">¶</a></h3>
 <blockquote>
 <div><dl class="simple">
-<dt><code class="xref py py-meth docutils literal notranslate"><span class="pre">pygarv()</span></code></dt><dd><p><a class="reference internal" href="Pygarv.html#pygarv-all-views"><span class="std std-ref">EEG data and artifact dashboard</span></a></p>
+<dt><a class="reference internal" href="source/mkpy.pygarv.html#module-mkpy.pygarv" title="mkpy.pygarv"><code class="xref py py-meth docutils literal notranslate"><span class="pre">pygarv()</span></code></a></dt><dd><p><a class="reference internal" href="Pygarv.html#pygarv-all-views"><span class="std std-ref">EEG data and artifact dashboard</span></a></p>
 </dd>
 </dl>
 <div class="figure align-default" id="id2" style="width: 80%">
@@ -1047,7 +1047,7 @@ same location</p>
 <p class="caption"><span class="caption-text">pygarv dashboard</span><a class="headerlink" href="#id2" title="Permalink to this image">¶</a></p>
 </div>
 <dl class="simple">
-<dt><code class="xref py py-meth docutils literal notranslate"><span class="pre">plotcals()</span></code></dt><dd><p>butterfly plot the single trial cal pulses that will be used to scale
+<dt><a class="reference internal" href="source/mkpy.mkh5.html#mkpy.mkh5.mkh5.plotcals" title="mkpy.mkh5.mkh5.plotcals"><code class="xref py py-meth docutils literal notranslate"><span class="pre">plotcals()</span></code></a></dt><dd><p>butterfly plot the single trial cal pulses that will be used to scale
 <code class="docutils literal notranslate"><span class="pre">.crw</span></code> A/D values to microvolts given the parameters</p>
 </dd>
 </dl>
@@ -1056,13 +1056,13 @@ same location</p>
 <p class="caption"><span class="caption-text">plot_cals</span><a class="headerlink" href="#id3" title="Permalink to this image">¶</a></p>
 </div>
 <dl class="simple">
-<dt><code class="xref py py-meth docutils literal notranslate"><span class="pre">headinfo()</span></code></dt><dd><p>report contents of datablock headers in the <code class="docutils literal notranslate"><span class="pre">.h5</span></code> database,
+<dt><a class="reference internal" href="source/mkpy.mkh5.html#mkpy.mkh5.mkh5.headinfo" title="mkpy.mkh5.mkh5.headinfo"><code class="xref py py-meth docutils literal notranslate"><span class="pre">headinfo()</span></code></a></dt><dd><p>report contents of datablock headers in the <code class="docutils literal notranslate"><span class="pre">.h5</span></code> database,
 optionally filtered by regular expression pattern match</p>
 </dd>
-<dt><code class="xref py py-meth docutils literal notranslate"><span class="pre">info()</span></code></dt><dd><p>report contents of datablock headers and snippets of data for all
+<dt><a class="reference internal" href="source/mkpy.mkh5.html#mkpy.mkh5.mkh5.info" title="mkpy.mkh5.mkh5.info"><code class="xref py py-meth docutils literal notranslate"><span class="pre">info()</span></code></a></dt><dd><p>report contents of datablock headers and snippets of data for all
 of the datablocks, c.f., HDF5 utility <cite>h5ls -rds</cite></p>
 </dd>
-<dt><code class="xref py py-meth docutils literal notranslate"><span class="pre">calibrate_mkdata()</span></code></dt><dd><p>scale <code class="docutils literal notranslate"><span class="pre">.crw</span></code> A/D digtized EEG to microvolts</p>
+<dt><a class="reference internal" href="source/mkpy.mkh5.html#mkpy.mkh5.mkh5.calibrate_mkdata" title="mkpy.mkh5.mkh5.calibrate_mkdata"><code class="xref py py-meth docutils literal notranslate"><span class="pre">calibrate_mkdata()</span></code></a></dt><dd><p>scale <code class="docutils literal notranslate"><span class="pre">.crw</span></code> A/D digtized EEG to microvolts</p>
 </dd>
 </dl>
 </div></blockquote>
@@ -1073,13 +1073,13 @@ of the datablocks, c.f., HDF5 utility <cite>h5ls -rds</cite></p>
 <div><p><a class="reference internal" href="User Files.html#yhdr"><span class="std std-ref">.yhdf YAML header file</span></a>
 Extend the data block headers with arbitrary experimental information when the
 <code class="docutils literal notranslate"><span class="pre">mkh5</span></code> EEG data are imported.</p>
-<p><code class="xref py py-meth docutils literal notranslate"><span class="pre">get_event_table()</span></code>
+<p><a class="reference internal" href="source/mkpy.mkh5.html#mkpy.mkh5.mkh5.get_event_table" title="mkpy.mkh5.mkh5.get_event_table"><code class="xref py py-meth docutils literal notranslate"><span class="pre">get_event_table()</span></code></a>
 look up and tag single-trial event codes and event code sequences with
 imported experimental variables in a data table format</p>
 <p><a class="reference internal" href="User Files.html#yhdx"><span class="std std-ref">.yhdx YAML header data extrators</span></a>
 broadcast information from the header to a column in the event data table</p>
 <dl class="simple">
-<dt><code class="xref py py-meth docutils literal notranslate"><span class="pre">set_epochs()</span></code></dt><dd><p>write the single-trial tagged EEG epoch lookup table to the <code class="docutils literal notranslate"><span class="pre">mkh5</span></code> file</p>
+<dt><a class="reference internal" href="source/mkpy.mkh5.html#mkpy.mkh5.mkh5.set_epochs" title="mkpy.mkh5.mkh5.set_epochs"><code class="xref py py-meth docutils literal notranslate"><span class="pre">set_epochs()</span></code></a></dt><dd><p>write the single-trial tagged EEG epoch lookup table to the <code class="docutils literal notranslate"><span class="pre">mkh5</span></code> file</p>
 </dd>
 </dl>
 </div></blockquote>
@@ -1088,7 +1088,7 @@ broadcast information from the header to a column in the event data table</p>
 <h3>Exporting EEG and event data for analysis<a class="headerlink" href="#exporting-eeg-and-event-data-for-analysis" title="Permalink to this headline">¶</a></h3>
 <blockquote>
 <div><dl class="simple">
-<dt><code class="xref py py-meth docutils literal notranslate"><span class="pre">export_event_table()</span></code></dt><dd><p>write out tabular event data in tab-separated text (<code class="docutils literal notranslate"><span class="pre">.txt</span></code>) or
+<dt><a class="reference internal" href="source/mkpy.mkh5.html#mkpy.mkh5.mkh5.export_event_table" title="mkpy.mkh5.mkh5.export_event_table"><code class="xref py py-meth docutils literal notranslate"><span class="pre">export_event_table()</span></code></a></dt><dd><p>write out tabular event data in tab-separated text (<code class="docutils literal notranslate"><span class="pre">.txt</span></code>) or
 feather binary data interchange format (<code class="docutils literal notranslate"><span class="pre">.fthr</span></code>).</p>
 </dd>
 </dl>
@@ -1096,7 +1096,7 @@ feather binary data interchange format (<code class="docutils literal notranslat
 write out tabular epochs data in tab-separated text (<code class="docutils literal notranslate"><span class="pre">.txt</span></code>) or
 feather binary data interchange format (<code class="docutils literal notranslate"><span class="pre">.fthr</span></code>).</p>
 <dl class="simple">
-<dt><code class="xref py py-meth docutils literal notranslate"><span class="pre">export_epochs()</span></code></dt><dd><p>write out single trial EEG data epochs defined by the epochs data
+<dt><a class="reference internal" href="source/mkpy.mkh5.html#mkpy.mkh5.mkh5.export_epochs" title="mkpy.mkh5.mkh5.export_epochs"><code class="xref py py-meth docutils literal notranslate"><span class="pre">export_epochs()</span></code></a></dt><dd><p>write out single trial EEG data epochs defined by the epochs data
 table in the HDF5 (<code class="docutils literal notranslate"><span class="pre">.h5</span></code>) or feather (<code class="docutils literal notranslate"><span class="pre">.fthr</span></code>) binary
 data interchange formats or as tab-separated text (<code class="docutils literal notranslate"><span class="pre">.txt</span></code>)</p>
 </dd>

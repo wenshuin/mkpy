@@ -196,8 +196,61 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <div class="section" id="mkpy-mkio-module">
-<h1>mkpy.mkio module<a class="headerlink" href="#mkpy-mkio-module" title="Permalink to this headline">¶</a></h1>
+  <div class="section" id="module-mkpy.mkio">
+<span id="mkpy-mkio-module"></span><h1>mkpy.mkio module<a class="headerlink" href="#module-mkpy.mkio" title="Permalink to this headline">¶</a></h1>
+<p>Module mkio.py minor tweak of NJS dig format reader and (avg) writer</p>
+<p>Code has four main sections/functions</p>
+<blockquote>
+<div><ol class="arabic simple">
+<li><p>Setup</p></li>
+<li><p>Helper functions</p></li>
+<li><p>Readers</p></li>
+<li><p>Writers</p></li>
+</ol>
+</div></blockquote>
+<dl class="function">
+<dt id="mkpy.mkio.load">
+<code class="sig-prename descclassname">mkpy.mkio.</code><code class="sig-name descname">load</code><span class="sig-paren">(</span><em class="sig-param">f_raw</em>, <em class="sig-param">f_log</em>, <em class="sig-param">dtype=&lt;class 'numpy.float64'&gt;</em>, <em class="sig-param">delete_channels=[]</em>, <em class="sig-param">calibrate=True</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/mkpy/mkio.html#load"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mkpy.mkio.load" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="mkpy.mkio.read_log">
+<code class="sig-prename descclassname">mkpy.mkio.</code><code class="sig-name descname">read_log</code><span class="sig-paren">(</span><em class="sig-param">fo</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/mkpy/mkio.html#read_log"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mkpy.mkio.read_log" title="Permalink to this definition">¶</a></dt>
+<dd><p>generator reads kutaslab binary log, returns (code, tick, condition, flag)</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>fo</strong> (<em>file object</em>)</p></li>
+<li><p><strong>flags values</strong> – # avg -x sets 0 = OK, 20 = artifact, 40 = polinv, 60 = polinv + artifact
+# cdbl -op also sets flags according to the bdf
+# 100 = data error (rare)</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="mkpy.mkio.read_raw">
+<code class="sig-prename descclassname">mkpy.mkio.</code><code class="sig-name descname">read_raw</code><span class="sig-paren">(</span><em class="sig-param">stream</em>, <em class="sig-param">dtype</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/mkpy/mkio.html#read_raw"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mkpy.mkio.read_raw" title="Permalink to this definition">¶</a></dt>
+<dd><p>parses bytestream of from kutaslab eeg file into usable data</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>np.array(record_counts, dtype=np.int16),
+final_data, info)</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>(channel_names, np.array(all_codes, dtype=np.int16),</p>
+</dd>
+</dl>
+<p>all_codes – a vector of event codes and record indices from the mark track
+final_data – a np.array: samples (rows) x eeg channels (columns)</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="mkpy.mkio.write_erp_as_avg">
+<code class="sig-prename descclassname">mkpy.mkio.</code><code class="sig-name descname">write_erp_as_avg</code><span class="sig-paren">(</span><em class="sig-param">erp</em>, <em class="sig-param">stream</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/mkpy/mkio.html#write_erp_as_avg"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mkpy.mkio.write_erp_as_avg" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
 </div>
 
 
