@@ -2180,9 +2180,6 @@
 
         <span class="n">known_formats</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;h5&quot;</span><span class="p">,</span> <span class="s2">&quot;pdh5&quot;</span><span class="p">,</span> <span class="s2">&quot;feather&quot;</span><span class="p">,</span> <span class="s2">&quot;txt&quot;</span><span class="p">]</span>
         <span class="k">if</span> <span class="n">file_format</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">known_formats</span><span class="p">:</span>
-            <span class="n">msg</span> <span class="o">=</span> <span class="s2">&quot;uknown file_format=&#39;</span><span class="si">{0}</span><span class="s2">&#39;: must be &#39;h5&#39;, &#39;feather&#39;, or &#39;txt&#39;&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
-                <span class="n">file_format</span>
-            <span class="p">)</span>
             <span class="n">msg</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;unknown file_format=&#39;</span><span class="si">{file_format}</span><span class="s2">&#39;: must be one of {&#39; &#39;.join(known_formats)}&quot;</span>
             <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="n">msg</span><span class="p">)</span>
 
