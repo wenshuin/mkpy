@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>mkpy.mkh5 &mdash; mkpy 0.1.7 documentation</title>
+  <title>mkpy.mkh5 &mdash; mkpy 0.1.8.dev0 documentation</title>
   
 
   
@@ -2134,8 +2134,9 @@
 <div class="viewcode-block" id="mkh5.export_epochs"><a class="viewcode-back" href="../../source/mkpy.mkh5.html#mkpy.mkh5.mkh5.export_epochs">[docs]</a>    <span class="k">def</span> <span class="nf">export_epochs</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span> <span class="n">epochs_name</span><span class="p">,</span> <span class="n">epochs_f</span><span class="p">,</span> <span class="n">file_format</span><span class="o">=</span><span class="s2">&quot;h5&quot;</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="kc">None</span>
     <span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;write previously set epochs to data in specified file format</span>
-<span class="sd">        </span>
+        <span class="sd">&quot;&quot;&quot;write previously set epochs to data in the specified file format</span>
+
+<span class="sd">        Recommended epoch export formats for sross-platform data interchange</span>
 
 <span class="sd">        Parameters</span>
 <span class="sd">        ----------</span>
@@ -2143,25 +2144,46 @@
 <span class="sd">             must name one of the datasets in this h5[&#39;epochs&#39;]</span>
 <span class="sd">        epochs_f : string</span>
 <span class="sd">             file path and name of the data file</span>
-<span class="sd">        file_format : string, {&#39;h5&#39;, &#39;feather&#39;, &#39;txt&#39;}</span>
+<span class="sd">        file_format : string, {&#39;h5&#39;, &#39;pdh5&#39;, &#39;feather&#39;, &#39;txt&#39;}</span>
 
 <span class="sd">        Note</span>
 <span class="sd">        ----</span>
 
-<span class="sd">        * h5 format: the epochs are saved in the h5 file root a</span>
+<span class="sd">        * File formats other than h5 and pdh5 overwrite any</span>
+<span class="sd">          file with the same name without warning.</span>
+
+<span class="sd">        * h5 format: the epochs are saved in the h5 file root as a</span>
 <span class="sd">          dataset named epochs_name. Fails if such a dataset already</span>
 <span class="sd">          exists.</span>
 
-<span class="sd">        * Output formats other than h5 overwrites any file with the</span>
-<span class="sd">          same name without warning.</span>
+<span class="sd">        * h5 format: 2-D rows x columns epochs data are stored as a</span>
+<span class="sd">          single 1-D column vector (rows) of an HDF5 compound data</span>
+<span class="sd">          type (columns). This HDF5 dataset is easily read and</span>
+<span class="sd">          unpacked with any HDF5 reader that supports HDF5 compound</span>
+<span class="sd">          data types.</span>
 
-<span class="sd">        * txt format is tab-separated. </span>
+<span class="sd">        * pdh5, feather, text formats: 2-D rows x columns epochs data</span>
+<span class="sd">          are stored via the pandas to_hdf, to_feather, and to_csv</span>
+<span class="sd">          writers. These epochs data are easily read into a</span>
+<span class="sd">          pandas.DataFrame with pandas.read_hdf(epochs_f,</span>
+<span class="sd">          key=epochs_name) and also readable, less easily, by other</span>
+<span class="sd">          HDF5 readers.</span>
+
+
+<span class="sd">        * txt format is tab-separated.</span>
+
 <span class="sd">        &quot;&quot;&quot;</span>
 
-        <span class="k">if</span> <span class="n">file_format</span> <span class="ow">not</span> <span class="ow">in</span> <span class="p">[</span><span class="s2">&quot;h5&quot;</span><span class="p">,</span> <span class="s2">&quot;feather&quot;</span><span class="p">,</span> <span class="s2">&quot;txt&quot;</span><span class="p">]:</span>
+        <span class="c1"># in case of Path</span>
+        <span class="n">epochs_name</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">epochs_name</span><span class="p">)</span>
+        <span class="n">epochs_f</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">epochs_f</span><span class="p">)</span>
+
+        <span class="n">known_formats</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;h5&quot;</span><span class="p">,</span> <span class="s2">&quot;pdh5&quot;</span><span class="p">,</span> <span class="s2">&quot;feather&quot;</span><span class="p">,</span> <span class="s2">&quot;txt&quot;</span><span class="p">]</span>
+        <span class="k">if</span> <span class="n">file_format</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">known_formats</span><span class="p">:</span>
             <span class="n">msg</span> <span class="o">=</span> <span class="s2">&quot;uknown file_format=&#39;</span><span class="si">{0}</span><span class="s2">&#39;: must be &#39;h5&#39;, &#39;feather&#39;, or &#39;txt&#39;&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
                 <span class="n">file_format</span>
             <span class="p">)</span>
+            <span class="n">msg</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;unknown file_format=&#39;</span><span class="si">{file_format}</span><span class="s2">&#39;: must be one of {&#39; &#39;.join(known_formats)}&quot;</span>
             <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="n">msg</span><span class="p">)</span>
 
         <span class="k">if</span> <span class="n">file_format</span> <span class="o">==</span> <span class="s2">&quot;h5&quot;</span><span class="p">:</span>
@@ -2179,7 +2201,11 @@
             <span class="p">)</span>
 
             <span class="c1"># dump with pandas</span>
-            <span class="k">if</span> <span class="n">file_format</span> <span class="o">==</span> <span class="s2">&quot;feather&quot;</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">file_format</span> <span class="o">==</span> <span class="s2">&quot;pdh5&quot;</span><span class="p">:</span>
+                <span class="n">epochs</span><span class="o">.</span><span class="n">to_hdf</span><span class="p">(</span>
+                    <span class="n">epochs_f</span><span class="p">,</span> <span class="n">key</span><span class="o">=</span><span class="n">epochs_name</span><span class="p">,</span> <span class="nb">format</span><span class="o">=</span><span class="s2">&quot;fixed&quot;</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="s2">&quot;w&quot;</span>
+                <span class="p">)</span>
+            <span class="k">elif</span> <span class="n">file_format</span> <span class="o">==</span> <span class="s2">&quot;feather&quot;</span><span class="p">:</span>
                 <span class="n">epochs</span><span class="o">.</span><span class="n">to_feather</span><span class="p">(</span><span class="n">epochs_f</span><span class="p">)</span>
             <span class="k">elif</span> <span class="n">file_format</span> <span class="o">==</span> <span class="s2">&quot;txt&quot;</span><span class="p">:</span>
                 <span class="c1"># don&#39;t write row count index</span>

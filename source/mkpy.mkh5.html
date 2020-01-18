@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>mkpy.mkh5 module &mdash; mkpy 0.1.7 documentation</title>
+  <title>mkpy.mkh5 module &mdash; mkpy 0.1.8.dev0 documentation</title>
   
 
   
@@ -701,27 +701,41 @@ in here.</p>
 <dl class="method">
 <dt id="mkpy.mkh5.mkh5.export_epochs">
 <code class="sig-name descname">export_epochs</code><span class="sig-paren">(</span><em class="sig-param">epochs_name</em>, <em class="sig-param">epochs_f</em>, <em class="sig-param">file_format='h5'</em>, <em class="sig-param">columns=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/mkpy/mkh5.html#mkh5.export_epochs"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mkpy.mkh5.mkh5.export_epochs" title="Permalink to this definition">¶</a></dt>
-<dd><p>write previously set epochs to data in specified file format</p>
+<dd><p>write previously set epochs to data in the specified file format</p>
+<p>Recommended epoch export formats for sross-platform data interchange</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>epochs_name</strong> (<em>string</em>) – must name one of the datasets in this h5[‘epochs’]</p></li>
 <li><p><strong>epochs_f</strong> (<em>string</em>) – file path and name of the data file</p></li>
-<li><p><strong>file_format</strong> (<em>string, {‘h5’, ‘feather’, ‘txt’}</em>)</p></li>
+<li><p><strong>file_format</strong> (<em>string, {‘h5’, ‘pdh5’, ‘feather’, ‘txt’}</em>)</p></li>
 </ul>
 </dd>
 </dl>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <ul class="simple">
-<li><p>h5 format: the epochs are saved in the h5 file root a
+<li><p>File formats other than h5 and pdh5 overwrite any
+file with the same name without warning.</p></li>
+<li><p>h5 format: the epochs are saved in the h5 file root as a
 dataset named epochs_name. Fails if such a dataset already
 exists.</p></li>
-<li><p>Output formats other than h5 overwrites any file with the
-same name without warning.</p></li>
-<li><p>txt format is tab-separated.</p></li>
+<li><p>h5 format: 2-D rows x columns epochs data are stored as a
+single 1-D column vector (rows) of an HDF5 compound data
+type (columns). This HDF5 dataset is easily read and
+unpacked with any HDF5 reader that supports HDF5 compound
+data types.</p></li>
+<li><p>pdh5, feather, text formats: 2-D rows x columns epochs data
+are stored via the pandas to_hdf, to_feather, and to_csv
+writers. These epochs data are easily read into a
+pandas.DataFrame with pandas.read_hdf(epochs_f,
+key=epochs_name) and also readable, less easily, by other
+HDF5 readers.</p></li>
 </ul>
 </div>
+<ul class="simple">
+<li><p>txt format is tab-separated.</p></li>
+</ul>
 </dd></dl>
 
 <dl class="method">
