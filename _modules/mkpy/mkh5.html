@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>mkpy.mkh5 &mdash; mkpy 0.1.10 documentation</title>
+  <title>mkpy.mkh5 &mdash; mkpy 0.2.0 documentation</title>
   
 
   
@@ -58,7 +58,7 @@
             
             
               <div class="version">
-                0.1
+                0.2
               </div>
             
           
@@ -1227,6 +1227,15 @@
 
         <span class="c1"># instantiate the codemapper w/ its map and code finder</span>
         <span class="n">ctagger</span> <span class="o">=</span> <span class="n">CodeTagger</span><span class="p">(</span><span class="n">code_map_f</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="s2">&quot;ccode&quot;</span> <span class="ow">in</span> <span class="n">ctagger</span><span class="o">.</span><span class="n">code_map</span><span class="o">.</span><span class="n">columns</span><span class="p">:</span>
+            <span class="n">msg</span> <span class="o">=</span> <span class="p">(</span>
+                <span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">As of mkpy 0.2.0 to match events with a codemap regexp pattern, the</span><span class="se">\n</span><span class="s2">&quot;</span>
+                <span class="sa">f</span><span class="s2">&quot;ccode column in {Path(code_map_f).name} must also match the log_ccode</span><span class="se">\n</span><span class="s2">&quot;</span>
+                <span class="sa">f</span><span class="s2">&quot;in the datablock. If this behavior is not desired, delete or rename</span><span class="se">\n</span><span class="s2">&quot;</span>
+                <span class="sa">f</span><span class="s2">&quot;the ccode column in the codemap.&quot;</span>
+            <span class="p">)</span>
+            <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span><span class="n">msg</span><span class="p">)</span>
 
         <span class="c1"># set up to extract info from the header</span>
         <span class="n">hio</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">HeaderIO</span><span class="p">()</span>
