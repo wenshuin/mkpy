@@ -92,6 +92,8 @@
 </ul>
 <ul class="current">
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Quick start</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#install-mkpy">Install <code class="docutils literal notranslate"><span class="pre">mkpy</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#launch-mkpy">Launch <code class="docutils literal notranslate"><span class="pre">mkpy</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="#single-subject-single-session-workflow">Single subject, single session workflow</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#multi-subject-multi-session-workflow">Multi-subject, multi-session, workflow</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#mkh5-continuous-data"><cite>mkh5</cite> continuous data</a></li>
@@ -104,7 +106,6 @@
 <li class="toctree-l3"><a class="reference internal" href="#exporting-eeg-and-event-data-for-analysis">Exporting EEG and event data for analysis</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="#running-mkpy-on-the-gpu-server">Running <code class="docutils literal notranslate"><span class="pre">mkpy</span></code> on the GPU server</a></li>
 </ul>
 </li>
 </ul>
@@ -197,6 +198,53 @@
             
   <div class="section" id="quick-start">
 <span id="id1"></span><h1>Quick start<a class="headerlink" href="#quick-start" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="install-mkpy">
+<h2>Install <code class="docutils literal notranslate"><span class="pre">mkpy</span></code><a class="headerlink" href="#install-mkpy" title="Permalink to this headline">¶</a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">conda</span> <span class="pre">env</span> <span class="pre">(recommended)</span></code> If you work on a 64-bit linux or fairly recent MacOS and
+are already using conda environments, install the latest versions
+X.Y.Z. from Anaconda Cloud like so</p>
+<ul>
+<li><p>Minimal:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">conda</span> <span class="n">create</span> <span class="o">--</span><span class="n">name</span> <span class="n">mkpy_env</span> <span class="n">install</span> <span class="n">mkpy</span><span class="o">=</span><span class="n">X</span><span class="o">.</span><span class="n">Y</span><span class="o">.</span><span class="n">Z</span> <span class="o">-</span><span class="n">c</span> <span class="n">kutaslab</span> <span class="o">-</span><span class="n">c</span> <span class="n">defaults</span> <span class="o">-</span><span class="n">c</span> <span class="n">conda</span><span class="o">-</span><span class="n">forge</span>
+</pre></div>
+</div>
+</li>
+<li><p>A scientific computing stack including <code class="docutils literal notranslate"><span class="pre">mkpy</span></code>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">conda</span> <span class="n">create</span> <span class="o">--</span><span class="n">name</span> <span class="n">mkconda_X</span><span class="o">.</span><span class="n">Y</span><span class="o">.</span><span class="n">Z</span> <span class="n">install</span> <span class="n">mkpy</span> <span class="o">-</span><span class="n">c</span> <span class="n">kutaslab</span> <span class="o">-</span><span class="n">c</span> <span class="n">defaults</span> <span class="o">-</span><span class="n">c</span> <span class="n">conda</span><span class="o">-</span><span class="n">forge</span>
+</pre></div>
+</div>
+</li>
+</ul>
+<p><code class="docutils literal notranslate"><span class="pre">github</span></code> Install from source:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">git</span> <span class="n">clone</span> <span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">kutaslab</span><span class="o">/</span><span class="n">mkpy</span> <span class="n">mkpy</span>
+<span class="n">cd</span> <span class="n">mkpy</span>
+<span class="n">pip</span> <span class="n">install</span> <span class="o">.</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="launch-mkpy">
+<h2>Launch <code class="docutils literal notranslate"><span class="pre">mkpy</span></code><a class="headerlink" href="#launch-mkpy" title="Permalink to this headline">¶</a></h2>
+<ol class="arabic">
+<li><p>Log into your server.</p></li>
+<li><p>Open a terminal window and navigate to the directory where you want
+to work.</p></li>
+<li><p>Activate the conda environment to work in, e.g., <code class="docutils literal notranslate"><span class="pre">mkconda-0.0.7_expt_4</span></code></p></li>
+<li><p>At the shell prompt launch <code class="docutils literal notranslate"><span class="pre">jupyter</span> <span class="pre">notebook</span></code>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>[turbach@mkgpu1 ~]$ jupyter notebook
+</pre></div>
+</div>
+</li>
+<li><p>Find the jupyter window in your web browser and start a new notebook
+or open an existing one running the <code class="docutils literal notranslate"><span class="pre">Python</span> <span class="pre">3</span></code> kernel.</p>
+<p>In the first code cell enter:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">mkpy</span> <span class="kn">import</span> <span class="n">mkh5</span>
+<span class="n">myh5</span> <span class="o">=</span> <span class="n">mkh5</span><span class="o">.</span><span class="n">mkh5</span><span class="p">(</span><span class="s2">&quot;some_file.h5&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</li>
+<li><p>Have at it.</p></li>
+</ol>
+</div>
 <div class="section" id="single-subject-single-session-workflow">
 <h2>Single subject, single session workflow<a class="headerlink" href="#single-subject-single-session-workflow" title="Permalink to this headline">¶</a></h2>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">mkpy</span> <span class="kn">import</span> <span class="n">mkh5</span> <span class="k">as</span> <span class="n">mkh5</span>
@@ -1070,15 +1118,18 @@ of the datablocks, c.f., HDF5 utility <cite>h5ls -rds</cite></p>
 <div class="section" id="merging-experimental-data-with-eeg">
 <h3>Merging experimental data with EEG<a class="headerlink" href="#merging-experimental-data-with-eeg" title="Permalink to this headline">¶</a></h3>
 <blockquote>
-<div><p><a class="reference internal" href="User Files.html#yhdr"><span class="std std-ref">.yhdf YAML header file</span></a>
-Extend the data block headers with arbitrary experimental information when the
+<div><dl class="simple">
+<dt><a class="reference internal" href="User Files.html#yhdr"><span class="std std-ref">YAML header files: .yhdf</span></a></dt><dd><p>Extend the data block headers with arbitrary experimental information when the
 <code class="docutils literal notranslate"><span class="pre">mkh5</span></code> EEG data are imported.</p>
-<p><a class="reference internal" href="source/mkpy.mkh5.html#mkpy.mkh5.mkh5.get_event_table" title="mkpy.mkh5.mkh5.get_event_table"><code class="xref py py-meth docutils literal notranslate"><span class="pre">get_event_table()</span></code></a>
-look up and tag single-trial event codes and event code sequences with
-imported experimental variables in a data table format</p>
-<p><a class="reference internal" href="User Files.html#yhdx"><span class="std std-ref">.yhdx YAML header data extrators</span></a>
-broadcast information from the header to a column in the event data table</p>
-<dl class="simple">
+</dd>
+<dt><a class="reference internal" href="User Files.html#codemap"><span class="std std-ref">Event codemap files: .xlsx, .ytbl, .txt</span></a></dt><dd><p>specifies what numeric event codes in the data get tagged with
+what experimental information</p>
+</dd>
+<dt><a class="reference internal" href="User Files.html#yhdx"><span class="std std-ref">YAML header data extractors: .yhdx</span></a></dt><dd><p>broadcast information from the header to a column in the event data table</p>
+</dd>
+<dt><a class="reference internal" href="source/mkpy.mkh5.html#mkpy.mkh5.mkh5.get_event_table" title="mkpy.mkh5.mkh5.get_event_table"><code class="xref py py-meth docutils literal notranslate"><span class="pre">get_event_table()</span></code></a></dt><dd><p>look up and tag single-trial event codes and event code sequences with
+imported experimental variables in a data table format. The</p>
+</dd>
 <dt><a class="reference internal" href="source/mkpy.mkh5.html#mkpy.mkh5.mkh5.set_epochs" title="mkpy.mkh5.mkh5.set_epochs"><code class="xref py py-meth docutils literal notranslate"><span class="pre">set_epochs()</span></code></a></dt><dd><p>write the single-trial tagged EEG epoch lookup table to the <code class="docutils literal notranslate"><span class="pre">mkh5</span></code> file</p>
 </dd>
 </dl>
@@ -1091,40 +1142,17 @@ broadcast information from the header to a column in the event data table</p>
 <dt><a class="reference internal" href="source/mkpy.mkh5.html#mkpy.mkh5.mkh5.export_event_table" title="mkpy.mkh5.mkh5.export_event_table"><code class="xref py py-meth docutils literal notranslate"><span class="pre">export_event_table()</span></code></a></dt><dd><p>write out tabular event data in tab-separated text (<code class="docutils literal notranslate"><span class="pre">.txt</span></code>) or
 feather binary data interchange format (<code class="docutils literal notranslate"><span class="pre">.fthr</span></code>).</p>
 </dd>
-</dl>
-<p><code class="xref py py-meth docutils literal notranslate"><span class="pre">export_epochs_table()</span></code>
-write out tabular epochs data in tab-separated text (<code class="docutils literal notranslate"><span class="pre">.txt</span></code>) or
+<dt><code class="xref py py-meth docutils literal notranslate"><span class="pre">export_epochs_table()</span></code></dt><dd><p>write out tabular epochs data in tab-separated text (<code class="docutils literal notranslate"><span class="pre">.txt</span></code>) or
 feather binary data interchange format (<code class="docutils literal notranslate"><span class="pre">.fthr</span></code>).</p>
-<dl class="simple">
-<dt><a class="reference internal" href="source/mkpy.mkh5.html#mkpy.mkh5.mkh5.export_epochs" title="mkpy.mkh5.mkh5.export_epochs"><code class="xref py py-meth docutils literal notranslate"><span class="pre">export_epochs()</span></code></a></dt><dd><p>write out single trial EEG data epochs defined by the epochs data
-table in the HDF5 (<code class="docutils literal notranslate"><span class="pre">.h5</span></code>) or feather (<code class="docutils literal notranslate"><span class="pre">.fthr</span></code>) binary
-data interchange formats or as tab-separated text (<code class="docutils literal notranslate"><span class="pre">.txt</span></code>)</p>
+</dd>
+<dt><a class="reference internal" href="source/mkpy.mkh5.html#mkpy.mkh5.mkh5.export_epochs" title="mkpy.mkh5.mkh5.export_epochs"><code class="xref py py-meth docutils literal notranslate"><span class="pre">export_epochs()</span></code></a> write out single trial EEG</dt><dd><p>data epochs defined by the epochs data table as 1-D vectors of
+compound data types in HDF5 (<code class="docutils literal notranslate"><span class="pre">.h5</span></code>) or with <code class="docutils literal notranslate"><span class="pre">pandas.DataFrame</span></code>
+writers to HDF5 (<code class="docutils literal notranslate"><span class="pre">.pdh5</span></code>), feather (<code class="docutils literal notranslate"><span class="pre">.fthr</span></code>) binary data
+interchange formats or as tab-separated text (<code class="docutils literal notranslate"><span class="pre">.txt</span></code>)</p>
 </dd>
 </dl>
 </div></blockquote>
 </div>
-</div>
-<div class="section" id="running-mkpy-on-the-gpu-server">
-<h2>Running <code class="docutils literal notranslate"><span class="pre">mkpy</span></code> on the GPU server<a class="headerlink" href="#running-mkpy-on-the-gpu-server" title="Permalink to this headline">¶</a></h2>
-<ol class="arabic">
-<li><p>Log into <code class="docutils literal notranslate"><span class="pre">mkgpu.ucsd.edu</span></code> with your AD credentials</p></li>
-<li><p>Open a terminal window and navigate to the directory where you want
-to work.</p></li>
-<li><p>At the shell prompt launch <code class="docutils literal notranslate"><span class="pre">jupyter</span> <span class="pre">notebook</span></code>:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>[turbach@mkgpu1 ~]$ jupyter notebook
-</pre></div>
-</div>
-</li>
-<li><p>Find the jupyter window in your web browser and start a new notebook
-or open an existing one running the <code class="docutils literal notranslate"><span class="pre">Python</span> <span class="pre">3</span></code> kernel.</p>
-<p>In the first code cell enter:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">mkpy</span> <span class="kn">import</span> <span class="n">mkh5</span>
-<span class="n">myh5</span> <span class="o">=</span> <span class="n">mkh5</span><span class="o">.</span><span class="n">mkh5</span><span class="p">(</span><span class="s2">&quot;some_file.h5&quot;</span><span class="p">)</span>
-</pre></div>
-</div>
-</li>
-<li><p>Have at it.</p></li>
-</ol>
 </div>
 </div>
 

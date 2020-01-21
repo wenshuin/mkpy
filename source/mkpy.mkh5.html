@@ -702,7 +702,7 @@ in here.</p>
 <dt id="mkpy.mkh5.mkh5.export_epochs">
 <code class="sig-name descname">export_epochs</code><span class="sig-paren">(</span><em class="sig-param">epochs_name</em>, <em class="sig-param">epochs_f</em>, <em class="sig-param">file_format='h5'</em>, <em class="sig-param">columns=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/mkpy/mkh5.html#mkh5.export_epochs"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mkpy.mkh5.mkh5.export_epochs" title="Permalink to this definition">¶</a></dt>
 <dd><p>write previously set epochs to data in the specified file format</p>
-<p>Recommended epoch export formats for sross-platform data interchange</p>
+<p>Recommended epoch export formats for cross-platform data interchange</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
@@ -712,30 +712,36 @@ in here.</p>
 </ul>
 </dd>
 </dl>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>File formats other than h5 overwrite any file with the same
+name without warning.</p>
+</div>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <ul class="simple">
-<li><p>File formats other than h5 and pdh5 overwrite any
-file with the same name without warning.</p></li>
-<li><p>h5 format: the epochs are saved in the h5 file root as a
-dataset named epochs_name. Fails if such a dataset already
+<li><p>h5 format:</p>
+<ul>
+<li><p>the epochs are saved in the HDF5 file root as a dataset
+named <cite>epochs_name</cite>. Fails if such a dataset already
 exists.</p></li>
-<li><p>h5 format: 2-D rows x columns epochs data are stored as a
-single 1-D column vector (rows) of an HDF5 compound data
-type (columns). This HDF5 dataset is easily read and
-unpacked with any HDF5 reader that supports HDF5 compound
-data types.</p></li>
-<li><p>pdh5, feather, text formats: 2-D rows x columns epochs data
-are stored via the pandas to_hdf, to_feather, and to_csv
-writers. These epochs data are easily read into a
-pandas.DataFrame with pandas.read_hdf(epochs_f,
-key=epochs_name) and also readable, less easily, by other
-HDF5 readers.</p></li>
+<li><p>2-D rows x columns epochs data are stored as a single 1-D
+column vector (rows) of an HDF5 compound data type
+(columns). This HDF5 dataset is easily read and unpacked
+with any HDF5 reader that supports HDF5 compound data
+types.</p></li>
+</ul>
+</li>
+<li><p>pdh5 format: 2-D rows x columns epochs data are written to
+disk with <cite>pandas.to_hdf</cite> writer (via pytables). These
+epochs data are easily read into a <cite>pandas.DataFrame</cite> with
+<cite>pandas.read_hdf(epochs_f, key=epochs_name)</cite> and are also
+readable, less easily, by other HDF5 readers.</p></li>
+<li><p>feather, txt formats: 2-D rows x columns epochs data are
+written to disk with <cite>pandas.to_feather</cite> (via pyarrow) and
+as tab-separated text with <cite>pandas.to_csv(…, sep=’  ‘)</cite>.</p></li>
 </ul>
 </div>
-<ul class="simple">
-<li><p>txt format is tab-separated.</p></li>
-</ul>
 </dd></dl>
 
 <dl class="method">
@@ -844,27 +850,41 @@ name of the event table column to put the header data</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns</dt>
-<dd class="field-even"><p><strong>event_table</strong> – See Notes.</p>
+<dd class="field-even"><p><strong>event_table</strong> – See Note.</p>
 </dd>
 <dt class="field-odd">Return type</dt>
 <dd class="field-odd"><p>pandas.DataFrame</p>
 </dd>
 </dl>
-<p class="rubric">Notes</p>
-<p>This sweeps the code tag map across the data to generate a lookup
-table for specific event (sequence patterns) where the rows specify</p>
-<blockquote>
-<div><ol class="arabic simple">
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<ol class="arabic">
+<li><p>This sweeps the code tag map across the data to generate a lookup
+table for specific event (sequence patterns) where the rows specify:</p>
+<ul class="simple">
 <li><p>slashpath to the mkh5 dblock data set and sample index
 for pattern-matching events.</p></li>
 <li><p>all the additional information for that pattern given in
 the code tag map</p></li>
-</ol>
-</div></blockquote>
+</ul>
 <p>The event table generated from mkh5 data and the code_map
 specification is in lieu of .blf (for EEG epoching and
-time-locking), .rts (for event-to-event timing), and .hdr (for
-experimental design specification).</p>
+time-locking), .rts (for event-to-event timing), and .hdr
+(for experimental design specification).</p>
+</li>
+</ol>
+</div>
+<ol class="arabic simple" start="2">
+<li><p><code class="docutils literal notranslate"><span class="pre">ccode</span></code> Special column. If the code tag map has a column
+named <code class="docutils literal notranslate"><span class="pre">ccode</span></code> the code finder finds events that match the
+code sequence given by the regex pattern <strong>AND</strong> the
+log_ccode == ccode. This emulates Kutas Lab <cite>cdbl</cite> event
+lookup and to support, e.g., the condition code == 0 for
+cals convention and blocked designs where the <cite>ccode</cite>
+varies block to block. If the code map does not specify
+a <code class="docutils literal notranslate"><span class="pre">ccode</span></code>, column the <cite>log_ccode</cite> column is ignored for
+pattern matching.</p></li>
+</ol>
 </dd></dl>
 
 <dl class="method">
