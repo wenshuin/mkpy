@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>mkpy.mkh5 &mdash; mkpy 0.1.9 documentation</title>
+  <title>mkpy.mkh5 &mdash; mkpy 0.1.10 documentation</title>
   
 
   
@@ -1177,13 +1177,25 @@
     <span class="c1"># Public event code tag mapping and epoching utilities</span>
     <span class="c1"># ------------------------------------------------------------</span>
 <div class="viewcode-block" id="mkh5.get_event_table"><a class="viewcode-back" href="../../source/mkpy.mkh5.html#mkpy.mkh5.mkh5.get_event_table">[docs]</a>    <span class="k">def</span> <span class="nf">get_event_table</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">code_map_f</span><span class="p">,</span> <span class="n">header_map_f</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot; Reads the code tag and header extractor and returns an event lookup table</span>
+        <span class="sd">&quot;&quot;&quot;Reads the code tag and header extractor and returns an event lookup table</span>
 
 <span class="sd">        Parameters</span>
 <span class="sd">        ----------</span>
 <span class="sd">        code_map_f : str</span>
-<span class="sd">            Excel, YAML, or tab-separated text, see mkh5 docs for format details.</span>
-<span class="sd">        </span>
+<span class="sd">            Excel, YAML, or tab-separated text, see mkh5 docs for</span>
+<span class="sd">            format details.</span>
+
+<span class="sd">        header_map_f : str</span>
+<span class="sd">            YAML header extractor file, keys match header keys, values specify</span>
+<span class="sd">            name of the event table column to put the header data</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        event_table : pandas.DataFrame</span>
+<span class="sd">           See Notes.</span>
+
+<span class="sd">        Notes</span>
+<span class="sd">        -----</span>
 
 <span class="sd">        This sweeps the code tag map across the data to generate a lookup</span>
 <span class="sd">        table for specific event (sequence patterns) where the rows specify</span>
@@ -1198,6 +1210,7 @@
 <span class="sd">        specification is in lieu of .blf (for EEG epoching and</span>
 <span class="sd">        time-locking), .rts (for event-to-event timing), and .hdr (for</span>
 <span class="sd">        experimental design specification).</span>
+
 <span class="sd">        &quot;&quot;&quot;</span>
 
         <span class="c1"># instantiate the codemapper w/ its map and code finder</span>
@@ -1240,6 +1253,7 @@
                         <span class="n">code_pattern_matches</span> <span class="o">=</span> <span class="n">ctagger</span><span class="o">.</span><span class="n">_find_evcodes</span><span class="p">(</span>
                             <span class="n">cm</span><span class="p">[</span><span class="s2">&quot;regexp&quot;</span><span class="p">],</span> <span class="n">dblock_ticks</span><span class="p">,</span> <span class="n">log_evcodes</span>
                         <span class="p">)</span>
+
                         <span class="k">if</span> <span class="n">code_pattern_matches</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
                             <span class="k">for</span> <span class="n">m</span> <span class="ow">in</span> <span class="n">code_pattern_matches</span><span class="p">:</span>
                                 <span class="k">for</span> <span class="n">mm</span> <span class="ow">in</span> <span class="n">m</span><span class="p">:</span>
@@ -1265,16 +1279,19 @@
                                             <span class="p">]</span>
                                         <span class="p">]</span>
                                     <span class="p">)</span>
+
                                     <span class="k">if</span> <span class="n">is_anchor</span><span class="p">:</span>
                                         <span class="k">assert</span> <span class="n">anchor_tick</span> <span class="o">==</span> <span class="n">match_tick</span>
                                     <span class="k">else</span><span class="p">:</span>
                                         <span class="k">assert</span> <span class="n">anchor_tick</span> <span class="o">!=</span> <span class="n">match_tick</span>
+
+                                    <span class="c1"># ok, this is the tick of the pattern match</span>
+                                    <span class="c1"># and it must be unique</span>
                                     <span class="n">tick_idx</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span>
                                         <span class="n">dblock_ticks</span> <span class="o">==</span> <span class="n">match_tick</span>
                                     <span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
-                                    <span class="k">assert</span> <span class="p">(</span>
-                                        <span class="nb">len</span><span class="p">(</span><span class="n">tick_idx</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span>
-                                    <span class="p">)</span>  <span class="c1"># better be a unique tick</span>
+                                    <span class="k">assert</span> <span class="nb">len</span><span class="p">(</span><span class="n">tick_idx</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span>
+
                                     <span class="n">sample_data</span> <span class="o">=</span> <span class="p">[</span>
                                         <span class="p">(</span><span class="s2">&quot;Index&quot;</span><span class="p">,</span> <span class="n">idx</span><span class="p">),</span>
                                         <span class="p">(</span><span class="s2">&quot;data_group&quot;</span><span class="p">,</span> <span class="n">dgp</span><span class="p">),</span>
@@ -1326,11 +1343,15 @@
 
         <span class="c1"># handle no matches ...</span>
         <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">match_list</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+
             <span class="n">event_table</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">([</span><span class="nb">dict</span><span class="p">(</span><span class="n">m</span><span class="p">)</span> <span class="k">for</span> <span class="n">m</span> <span class="ow">in</span> <span class="n">match_list</span><span class="p">])</span>
+
+            <span class="c1"># code map ccode triggers backwards compatibility</span>
+            <span class="c1"># with Kutas Lab ERPSS cdbl</span>
+            <span class="k">if</span> <span class="s2">&quot;ccode&quot;</span> <span class="ow">in</span> <span class="n">ctagger</span><span class="o">.</span><span class="n">code_map</span><span class="o">.</span><span class="n">columns</span><span class="p">:</span>
+                <span class="n">event_table</span> <span class="o">=</span> <span class="n">event_table</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="s2">&quot;ccode == log_ccodes&quot;</span><span class="p">)</span>
+
             <span class="n">event_table</span><span class="o">.</span><span class="n">set_index</span><span class="p">(</span><span class="s2">&quot;Index&quot;</span><span class="p">,</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-            <span class="c1"># do not use ... overmaps duplicate Indexs</span>
-            <span class="c1"># event_table = pd.merge(event_table, ctagger.code_map,</span>
-            <span class="c1">#                       left_index=True, right_index=True)</span>
 
             <span class="bp">self</span><span class="o">.</span><span class="n">_h5_check_events</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">h5_fname</span><span class="p">,</span> <span class="n">event_table</span><span class="p">)</span>
             <span class="k">return</span> <span class="n">event_table</span>
@@ -1348,7 +1369,7 @@
 <span class="sd">        h5_f : str</span>
 <span class="sd">            path to mkh5 format hdf5 file</span>
 <span class="sd">        e_table: (pandas.DataFrame, np.ndarray)</span>
-<span class="sd">            as returned by mkh5.get_event_table() </span>
+<span class="sd">            as returned by mkh5.get_event_table()</span>
 
 <span class="sd">        Returns</span>
 <span class="sd">        -------</span>

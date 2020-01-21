@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>mkpy.mkh5 module &mdash; mkpy 0.1.9 documentation</title>
+  <title>mkpy.mkh5 module &mdash; mkpy 0.1.10 documentation</title>
   
 
   
@@ -836,9 +836,21 @@ table returned</p>
 <dd><p>Reads the code tag and header extractor and returns an event lookup table</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>code_map_f</strong> (<em>str</em>) – Excel, YAML, or tab-separated text, see mkh5 docs for format details.</p>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>code_map_f</strong> (<em>str</em>) – Excel, YAML, or tab-separated text, see mkh5 docs for
+format details.</p></li>
+<li><p><strong>header_map_f</strong> (<em>str</em>) – YAML header extractor file, keys match header keys, values specify
+name of the event table column to put the header data</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><strong>event_table</strong> – See Notes.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>pandas.DataFrame</p>
 </dd>
 </dl>
+<p class="rubric">Notes</p>
 <p>This sweeps the code tag map across the data to generate a lookup
 table for specific event (sequence patterns) where the rows specify</p>
 <blockquote>
