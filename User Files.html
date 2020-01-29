@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>User input files &mdash; mkpy 0.2.0 documentation</title>
+  <title>User input files &mdash; mkpy 0.2.1 documentation</title>
   
 
   
@@ -102,7 +102,6 @@
 <li class="toctree-l3"><a class="reference internal" href="#yaml-header-specification">YAML header specification</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="#yaml-header-data-extractors-yhdx">YAML header data extractors: <code class="docutils literal notranslate"><span class="pre">.yhdx</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="#event-codemap-files-xlsx-ytbl-txt">Event codemap files: <cite>.xlsx</cite>, <cite>.ytbl</cite>, <cite>.txt</cite></a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#codemap-specification">Codemap specification</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#how-it-works-event-code-sequence-pattern-matching">How it works: event code sequence pattern matching</a></li>
@@ -263,10 +262,8 @@ e.g., importing <code class="docutils literal notranslate"><span class="pre">mkh
 </pre></div>
 </div>
 <p>Real Example:</p>
-</div>
-</div>
-<div class="section" id="yaml-header-data-extractors-yhdx">
-<span id="yhdx"></span><h2>YAML header data extractors: <code class="docutils literal notranslate"><span class="pre">.yhdx</span></code><a class="headerlink" href="#yaml-header-data-extractors-yhdx" title="Permalink to this headline">¶</a></h2>
+<p id="yhdx">YAML header data extractors: <code class="docutils literal notranslate"><span class="pre">.yhdx</span></code>
+~————————————-</p>
 <p>A <code class="docutils literal notranslate"><span class="pre">.yhdx</span></code> YAML header extraction file is used to extract information
 from the stored header so it can be included in an event table.</p>
 <p>The format of the <code class="docutils literal notranslate"><span class="pre">.yhdx</span></code> is identical to the YAML header except
@@ -322,6 +319,7 @@ this:</p>
 </table>
 </div></blockquote>
 </div>
+</div>
 <div class="section" id="event-codemap-files-xlsx-ytbl-txt">
 <span id="codemap"></span><h2>Event codemap files: <cite>.xlsx</cite>, <cite>.ytbl</cite>, <cite>.txt</cite><a class="headerlink" href="#event-codemap-files-xlsx-ytbl-txt" title="Permalink to this headline">¶</a></h2>
 <p>These user defined helper files contain information about how to tag
@@ -330,18 +328,10 @@ experimental design information.</p>
 <div class="section" id="codemap-specification">
 <h3>Codemap specification<a class="headerlink" href="#codemap-specification" title="Permalink to this headline">¶</a></h3>
 <ul class="simple">
-<li><p>Regardless of the disk file format, the codemap is always rows x
-columns (tabular, dataframe).</p></li>
-<li><p>There are three special columns. The first (<code class="docutils literal notranslate"><span class="pre">Index</span></code>) guarantees
-there is at least one tag to attach to the matched event codes. The
-next two (<code class="docutils literal notranslate"><span class="pre">regexp</span></code>, <code class="docutils literal notranslate"><span class="pre">ccode</span></code>) control what codes are matched.</p>
+<li><p>Regardless of the file format, the codemap is always tabular: rows x
+columns.</p></li>
+<li><p>Two special columns control what (sequences) of codes are matched.</p>
 <ol class="arabic simple">
-<li><dl class="simple">
-<dt><code class="docutils literal notranslate"><span class="pre">Index</span></code> (mandatory)</dt><dd><p>specifies any experimenter defined number or string tag to
-attach to the matched pattern.</p>
-</dd>
-</dl>
-</li>
 <li><dl class="simple">
 <dt><code class="docutils literal notranslate"><span class="pre">regexp</span></code> (mandatory)</dt><dd><p>Specifies the pattern of the code sequence
 to match, at least one code, possibly flanked by others.</p>
@@ -349,7 +339,8 @@ to match, at least one code, possibly flanked by others.</p>
 </dl>
 </li>
 <li><dl class="simple">
-<dt><code class="docutils literal notranslate"><span class="pre">ccode</span></code> (optional) If present in the code map, restricts</dt><dd><p>matches to data where the <code class="docutils literal notranslate"><span class="pre">log_ccode</span></code> in the HDF5 data block
+<dt><code class="docutils literal notranslate"><span class="pre">ccode</span></code> (optional)</dt><dd><p>If present in the code map, the <code class="docutils literal notranslate"><span class="pre">ccode</span></code> column restricts
+matches to data where the <code class="docutils literal notranslate"><span class="pre">log_ccode</span></code> in the HDF5 data block
 equals <code class="docutils literal notranslate"><span class="pre">ccode</span></code> in the code map. This emulates the familar
 behavior of Kutas Lab ERPSS <code class="docutils literal notranslate"><span class="pre">cdbl</span></code> code sequence pattern
 matching where, e.g., event code 1 with ccode==0 is a
@@ -360,12 +351,12 @@ experimental stimulus.</p>
 </li>
 </ol>
 </li>
-<li><p>The rest of the columns in the codemap, if any, give the values of
-additional experimental variables to tag the matched event code
-with. These may be string labels for factor levels, numeric
-co-variates. There may be a few or many, though the latter multiply
-the storage requirements in RAM or on disk when processing time
-series of continuous data instead of the (typically) relatively
+<li><p>The rest of the columns in the codemap are user-defined tags that
+attach to the codes that matches the pattern.  These may be for
+general information or a experimental variables factor levels, or
+numeric co-variates. There may be a few or many, though the latter
+multiply the storage requirements in RAM or on disk when processing
+time series of continuous data instead of the (typically) relatively
 small numbers of event codes.</p></li>
 </ul>
 <div class="admonition warning">
@@ -406,7 +397,7 @@ non-anchor code_pattern.</p>
 <p>Examples: <code class="docutils literal notranslate"><span class="pre">'(#1)'</span></code>, <code class="docutils literal notranslate"><span class="pre">(#12\d+)</span></code>, <code class="docutils literal notranslate"><span class="pre">(#1[23]\d+)</span></code>, <code class="docutils literal notranslate"><span class="pre">(#1024)</span></code></p>
 </dd>
 <dt>search pattern</dt><dd><p>a regular expression with <strong>exactly one</strong> anchor pattern flanked
-by <strong>one or more</strong> code patterns on either side, separated by a
+by <strong>zero or more</strong> code patterns on either side, separated by a
 single whitespace</p>
 <blockquote>
 <div><p><code class="docutils literal notranslate"><span class="pre">code_pattern*</span> <span class="pre">anchor_pattern</span> <span class="pre">code_pattern*</span></code></p>
@@ -418,7 +409,6 @@ single whitespace</p>
 <h3>Code map specification<a class="headerlink" href="#code-map-specification" title="Permalink to this headline">¶</a></h3>
 <p>In addition</p>
 <ul>
-<li><p>The <code class="docutils literal notranslate"><span class="pre">Index</span></code> column values must be integers or string labels</p></li>
 <li><p>The <code class="docutils literal notranslate"><span class="pre">regexp</span></code> column must be a regular expression string pattern</p></li>
 <li><p>The remaining columns can numeric or string values with or without missing
 data <strong>provided the values in a column all have the same data type</strong></p>
@@ -503,35 +493,35 @@ described below.</p>
 <blockquote>
 <div><dl>
 <dt>Excel and Tabbed-text</dt><dd><ol class="arabic simple">
-<li><p>the data must be tabular in i rows and j columns (i,j &gt;= 1)</p></li>
+<li><p>the data must be tabular in n rows and m columns (i,j &gt;= 2)</p></li>
 <li><p>column labels must be in the first row</p></li>
-<li><p>the first two column labels must be ‘Index’, ‘regexp’</p></li>
-<li><p>the columns may continue ad lib.</p></li>
+<li><p>the column labels must include ‘regexp’</p></li>
+<li><p>there must be at least one tag column, there may be more</p></li>
 </ol>
 <table class="docutils align-default">
 <colgroup>
-<col style="width: 25%" />
-<col style="width: 30%" />
-<col style="width: 45%" />
+<col style="width: 27%" />
+<col style="width: 32%" />
+<col style="width: 41%" />
 </colgroup>
 <thead>
-<tr class="row-odd"><th class="head"><p>Index</p></th>
-<th class="head"><p>regexp</p></th>
-<th class="head"><p>&lt;col_label_j&gt;*</p></th>
+<tr class="row-odd"><th class="head"><p>regexp</p></th>
+<th class="head"><p>col_label_1</p></th>
+<th class="head"><p>&lt;col_label_m&gt;*</p></th>
 </tr>
 </thead>
 <tbody>
-<tr class="row-even"><td><p>Index_11</p></td>
-<td><p>pattern_12</p></td>
-<td><p>&lt;datum_1j&gt;*</p></td>
+<tr class="row-even"><td><p>pattern_1</p></td>
+<td><p>code_tag_11</p></td>
+<td><p>&lt;code_tag_1m&gt;*</p></td>
 </tr>
 <tr class="row-odd"><td><p>…</p></td>
 <td><p>…</p></td>
 <td><p>…</p></td>
 </tr>
-<tr class="row-even"><td><p>Index_n1</p></td>
-<td><p>pattern_n2</p></td>
-<td><p>&lt;datum_ij&gt;*</p></td>
+<tr class="row-even"><td><p>pattern_n</p></td>
+<td><p>code_tag_n1</p></td>
+<td><p>&lt;datum_nm&gt;*</p></td>
 </tr>
 </tbody>
 </table>

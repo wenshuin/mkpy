@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>mkpy.mkh5 module &mdash; mkpy 0.2.0 documentation</title>
+  <title>mkpy.mkh5 module &mdash; mkpy 0.2.1 documentation</title>
   
 
   
@@ -285,6 +285,11 @@ EEG data files into readily accessible HDF5 files.</p>
 <dd class="field-odd"><p><strong>h5_fname</strong> (<em>str</em>) – Path to a new or existing HDF5 file used as the database.</p>
 </dd>
 </dl>
+<dl class="attribute">
+<dt id="mkpy.mkh5.mkh5.EPOCH_TABLES_PATH">
+<code class="sig-name descname">EPOCH_TABLES_PATH</code><em class="property"> = '_epoch_tables'</em><a class="headerlink" href="#mkpy.mkh5.mkh5.EPOCH_TABLES_PATH" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
 <dl class="exception">
 <dt id="mkpy.mkh5.mkh5.EpochsTableDataError">
 <em class="property">exception </em><code class="sig-name descname">EpochsTableDataError</code><span class="sig-paren">(</span><em class="sig-param">pd_data_type</em>, <em class="sig-param">series</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/mkpy/mkh5.html#mkh5.EpochsTableDataError"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mkpy.mkh5.mkh5.EpochsTableDataError" title="Permalink to this definition">¶</a></dt>
@@ -781,7 +786,7 @@ datablock at h5_path</p>
 <dl class="method">
 <dt id="mkpy.mkh5.mkh5.get_epochs">
 <code class="sig-name descname">get_epochs</code><span class="sig-paren">(</span><em class="sig-param">epochs_name</em>, <em class="sig-param">format='numpy'</em>, <em class="sig-param">columns=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/mkpy/mkh5.html#mkh5.get_epochs"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mkpy.mkh5.mkh5.get_epochs" title="Permalink to this definition">¶</a></dt>
-<dd><p>fetch single trial epochs in tabluar form along</p>
+<dd><p>fetch single trial epochs in tabluar form</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
@@ -794,7 +799,7 @@ datablock at h5_path</p>
 <dd class="field-even"><p><ul>
 <li><p><strong>epochs</strong> (<em>numpy.ndarray or pandas.DataFrame</em>) –  epochs.shape == (i x m, n + 2) where</p>
 <blockquote>
-<div><p>i = the number of epochs, indexed uniquely by epoch_table[‘Epoch_idx’]
+<div><p>i = the number of epochs, indexed uniquely by epoch_table[‘epoch_id’]
 m = epoch length in samples
 n = the number of columns in the <cite>epochs_name</cite> epochs table</p>
 </div></blockquote>
@@ -964,27 +969,24 @@ float-like (float, np.float32, np.float64)</p>
 </ul>
 </dd>
 <dt class="field-even">Returns</dt>
-<dd class="field-even"><p>updates h5_f/epochs/ with the named epoch table h5py.Dataset</p>
-</dd>
-<dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p>None</p>
+<dd class="field-even"><p><ul class="simple">
+<li><p><em>None</em> – updates h5_f/EPOCH_TABLES_PATH/ with the named epoch table h5py.Dataset</p></li>
+<li><p><em>The epochs table is a lightweight lookup table specific to</em></p></li>
+<li><p><em>this mkh5 instance’s hdf5 file,</em> – h5[‘epochs’][epochs_table_name] = epochs_table</p></li>
+<li><p><em>Event tables by default are “epochs” 1 sample long with 0</em></p></li>
+<li><p><em>prestimulus.</em></p></li>
+<li><p><em>This simply updates the prestimulus interval and length</em></p></li>
+<li><p><em>accordingly, adds the peri-event time interval information for</em></p></li>
+<li><p><em>slicing mkh5 datablocks and massages the event table</em></p></li>
+<li><p><em>(pandas.DataFrame) into a numpy ndarray for hdf5 storage.</em></p></li>
+<li><p><em>For reproducibility, by design epochs tables can be added to</em></p></li>
+<li><p><em>an mkh5 file but not overwritten or deleted. If you need to</em></p></li>
+<li><p><em>the revise the epochs, rebuild the mkh5 file from crws/logs</em></p></li>
+<li><p><em>with the ones you want.</em></p></li>
+</ul>
+</p>
 </dd>
 </dl>
-<p>The epochs table is a lightweight lookup table specific to
-this mkh5 instance’s hdf5 file,</p>
-<blockquote>
-<div><p>h5[‘epochs’][epochs_table_name] = epochs_table</p>
-</div></blockquote>
-<p>Event tables by default are “epochs” 1 sample long with 0
-prestimulus.</p>
-<p>This simply updates the prestimulus interval and length
-accordingly, adds the peri-event time interval information for
-slicing mkh5 datablocks and massages the event table
-(pandas.DataFrame) into a numpy ndarray for hdf5 storage.</p>
-<p>For reproducibility, by design epochs tables can be added to
-an mkh5 file but not overwritten or deleted. If you need to
-the revise the epochs, rebuild the mkh5 file from crws/logs
-with the ones you want.</p>
 </dd></dl>
 
 <dl class="method">

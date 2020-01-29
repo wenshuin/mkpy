@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>mkpy.mkh5 &mdash; mkpy 0.2.0 documentation</title>
+  <title>mkpy.mkh5 &mdash; mkpy 0.2.1 documentation</title>
   
 
   
@@ -272,6 +272,9 @@
     <span class="c1"># white list of dig raw (*NOT LOG*) event codes for</span>
     <span class="c1"># splitting the .raw/.crw into mkh5 dblocks</span>
     <span class="n">_dig_pause_marks</span> <span class="o">=</span> <span class="p">(</span><span class="o">-</span><span class="mi">16384</span><span class="p">,)</span>
+
+    <span class="c1"># HDF5 slashpath to where epochs tables are stashed in the mkh5 file</span>
+    <span class="n">EPOCH_TABLES_PATH</span> <span class="o">=</span> <span class="s2">&quot;_epoch_tables&quot;</span>
 
 <div class="viewcode-block" id="mkh5.Mkh5Error"><a class="viewcode-back" href="../../source/mkpy.mkh5.html#mkpy.mkh5.mkh5.Mkh5Error">[docs]</a>    <span class="k">class</span> <span class="nc">Mkh5Error</span><span class="p">(</span><span class="ne">Exception</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;general purposes mkh5 error&quot;&quot;&quot;</span>
@@ -614,7 +617,7 @@
                 <span class="n">sheet_name</span> <span class="o">=</span> <span class="mi">0</span>
 
             <span class="n">slicer</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_excel</span><span class="p">(</span>
-                <span class="n">xl_f</span><span class="p">,</span> <span class="n">sheet_name</span><span class="o">=</span><span class="n">sheet_name</span><span class="p">,</span> <span class="n">header</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">index_col</span><span class="o">=</span><span class="s2">&quot;Index&quot;</span>
+                <span class="n">xl_f</span><span class="p">,</span> <span class="n">sheet_name</span><span class="o">=</span><span class="n">sheet_name</span><span class="p">,</span> <span class="n">header</span><span class="o">=</span><span class="mi">0</span>  <span class="c1"># , index_col=&quot;Index&quot;</span>
             <span class="p">)</span>
 
             <span class="k">if</span> <span class="n">slicer</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
@@ -625,7 +628,7 @@
             <span class="k">raise</span> <span class="bp">NotImplemented</span>
             <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">slicer_f</span><span class="p">,</span> <span class="s2">&quot;r&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">d</span><span class="p">:</span>
                 <span class="n">mapper</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_table</span><span class="p">(</span>
-                    <span class="n">slicer_f</span><span class="p">,</span> <span class="n">delimiter</span><span class="o">=</span><span class="s2">&quot;</span><span class="se">\t</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">header</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">index_col</span><span class="o">=</span><span class="s2">&quot;Index&quot;</span>
+                    <span class="n">slicer_f</span><span class="p">,</span> <span class="n">delimiter</span><span class="o">=</span><span class="s2">&quot;</span><span class="se">\t</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">header</span><span class="o">=</span><span class="mi">0</span>  <span class="c1"># , index_col=&quot;Index&quot;</span>
                 <span class="p">)</span>
             <span class="k">return</span> <span class="n">mapper</span>
 
@@ -1314,7 +1317,7 @@
                                     <span class="k">assert</span> <span class="nb">len</span><span class="p">(</span><span class="n">tick_idx</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span>
 
                                     <span class="n">sample_data</span> <span class="o">=</span> <span class="p">[</span>
-                                        <span class="p">(</span><span class="s2">&quot;Index&quot;</span><span class="p">,</span> <span class="n">idx</span><span class="p">),</span>
+                                        <span class="c1"># (&quot;Index&quot;, idx),</span>
                                         <span class="p">(</span><span class="s2">&quot;data_group&quot;</span><span class="p">,</span> <span class="n">dgp</span><span class="p">),</span>
                                         <span class="p">(</span><span class="s2">&quot;dblock_path&quot;</span><span class="p">,</span> <span class="n">dbp</span><span class="p">),</span>
                                         <span class="p">(</span><span class="s2">&quot;dblock_tick_idx&quot;</span><span class="p">,</span> <span class="n">tick_idx</span><span class="p">[</span><span class="mi">0</span><span class="p">]),</span>
@@ -1367,12 +1370,12 @@
 
             <span class="n">event_table</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">([</span><span class="nb">dict</span><span class="p">(</span><span class="n">m</span><span class="p">)</span> <span class="k">for</span> <span class="n">m</span> <span class="ow">in</span> <span class="n">match_list</span><span class="p">])</span>
 
-            <span class="c1"># code map ccode triggers backwards compatibility</span>
+            <span class="c1"># codemap ccode triggers backwards compatibility</span>
             <span class="c1"># with Kutas Lab ERPSS cdbl</span>
             <span class="k">if</span> <span class="s2">&quot;ccode&quot;</span> <span class="ow">in</span> <span class="n">ctagger</span><span class="o">.</span><span class="n">code_map</span><span class="o">.</span><span class="n">columns</span><span class="p">:</span>
                 <span class="n">event_table</span> <span class="o">=</span> <span class="n">event_table</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="s2">&quot;ccode == log_ccodes&quot;</span><span class="p">)</span>
 
-            <span class="n">event_table</span><span class="o">.</span><span class="n">set_index</span><span class="p">(</span><span class="s2">&quot;Index&quot;</span><span class="p">,</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+            <span class="c1"># event_table.set_index(&quot;Index&quot;, inplace=True)</span>
 
             <span class="bp">self</span><span class="o">.</span><span class="n">_h5_check_events</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">h5_fname</span><span class="p">,</span> <span class="n">event_table</span><span class="p">)</span>
             <span class="k">return</span> <span class="n">event_table</span>
@@ -1559,8 +1562,7 @@
 <span class="sd">        Returns</span>
 <span class="sd">        -------</span>
 <span class="sd">        None</span>
-<span class="sd">            updates h5_f/epochs/ with the named epoch table h5py.Dataset</span>
-
+<span class="sd">            updates h5_f/EPOCH_TABLES_PATH/ with the named epoch table h5py.Dataset</span>
 
 <span class="sd">        The epochs table is a lightweight lookup table specific to</span>
 <span class="sd">        this mkh5 instance&#39;s hdf5 file,</span>
@@ -1583,8 +1585,8 @@
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">with</span> <span class="n">h5py</span><span class="o">.</span><span class="n">File</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">h5_fname</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="s2">&quot;r&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">h5</span><span class="p">:</span>
             <span class="k">if</span> <span class="p">(</span>
-                <span class="s2">&quot;epochs&quot;</span> <span class="ow">in</span> <span class="n">h5</span><span class="o">.</span><span class="n">keys</span><span class="p">()</span>
-                <span class="ow">and</span> <span class="n">epochs_table_name</span> <span class="ow">in</span> <span class="n">h5</span><span class="p">[</span><span class="s2">&quot;epochs&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">keys</span><span class="p">()</span>
+                <span class="n">mkh5</span><span class="o">.</span><span class="n">EPOCH_TABLES_PATH</span> <span class="ow">in</span> <span class="n">h5</span><span class="o">.</span><span class="n">keys</span><span class="p">()</span>
+                <span class="ow">and</span> <span class="n">epochs_table_name</span> <span class="ow">in</span> <span class="n">h5</span><span class="p">[</span><span class="n">mkh5</span><span class="o">.</span><span class="n">EPOCH_TABLES_PATH</span><span class="p">]</span><span class="o">.</span><span class="n">keys</span><span class="p">()</span>
             <span class="p">):</span>
                 <span class="n">msg</span> <span class="o">=</span> <span class="p">(</span>
                     <span class="sa">f</span><span class="s2">&quot;epochs name </span><span class="si">{epochs_table_name}</span><span class="s2"> is in use, &quot;</span>
@@ -1604,23 +1606,23 @@
         <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Sanitizing event table data types for mkh5 epochs table ...&quot;</span><span class="p">)</span>
 
         <span class="c1"># enforce Index data type is str or int</span>
-        <span class="k">try</span><span class="p">:</span>
-            <span class="n">msg</span> <span class="o">=</span> <span class="kc">None</span>
-            <span class="k">if</span> <span class="n">event_table</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">values</span><span class="o">.</span><span class="n">dtype</span> <span class="o">==</span> <span class="n">np</span><span class="o">.</span><span class="n">dtype</span><span class="p">(</span><span class="s2">&quot;O&quot;</span><span class="p">):</span>
-                <span class="n">maxbytes</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span>
-                    <span class="p">[</span><span class="nb">len</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">event_table</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">values</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">bytes</span><span class="p">)]</span>
-                <span class="p">)</span>
-                <span class="n">index_dt_type</span> <span class="o">=</span> <span class="s2">&quot;S&quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">maxbytes</span><span class="p">)</span>
-            <span class="k">elif</span> <span class="n">event_table</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">values</span><span class="o">.</span><span class="n">dtype</span> <span class="o">==</span> <span class="n">np</span><span class="o">.</span><span class="n">dtype</span><span class="p">(</span><span class="nb">int</span><span class="p">):</span>
-                <span class="n">index_dt_type</span> <span class="o">=</span> <span class="s2">&quot;int&quot;</span>
-            <span class="k">else</span><span class="p">:</span>
-                <span class="n">msg</span> <span class="o">=</span> <span class="s2">&quot;uh oh, cannot convert event table index column to bytes or integer&quot;</span>
-        <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">err</span><span class="p">:</span>
-            <span class="nb">print</span><span class="p">(</span><span class="n">msg</span><span class="p">)</span>
-            <span class="k">raise</span> <span class="n">err</span>
+        <span class="c1"># try:</span>
+        <span class="c1">#     msg = None</span>
+        <span class="c1">#     if event_table.index.values.dtype == np.dtype(&quot;O&quot;):</span>
+        <span class="c1">#         maxbytes = max(</span>
+        <span class="c1">#             [len(x) for x in event_table.index.values.astype(bytes)]</span>
+        <span class="c1">#         )</span>
+        <span class="c1">#         index_dt_type = &quot;S&quot; + str(maxbytes)</span>
+        <span class="c1">#     elif event_table.index.values.dtype == np.dtype(int):</span>
+        <span class="c1">#         index_dt_type = &quot;int&quot;</span>
+        <span class="c1">#     else:</span>
+        <span class="c1">#         msg = &quot;uh oh, cannot convert event table index column to bytes or integer&quot;</span>
+        <span class="c1"># except Exception as err:</span>
+        <span class="c1">#     print(msg)</span>
+        <span class="c1">#     raise err</span>
 
-        <span class="c1"># move Index into columns for santizing</span>
-        <span class="n">event_table</span> <span class="o">=</span> <span class="n">event_table</span><span class="o">.</span><span class="n">reset_index</span><span class="p">(</span><span class="s2">&quot;Index&quot;</span><span class="p">)</span>
+        <span class="c1"># # move Index into columns for santizing</span>
+        <span class="c1"># event_table = event_table.reset_index(&quot;Index&quot;)</span>
 
         <span class="c1"># remap pandas &#39;O&#39; dtype columns to hdf5 friendly np.arrays if possible</span>
         <span class="n">tidy_table</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">()</span>
@@ -1634,8 +1636,8 @@
         <span class="c1"># 2. define a numpy compound data type to hold the event_table</span>
         <span class="c1"># info and region refs</span>
 
-        <span class="c1"># start with Epoch_idx</span>
-        <span class="n">epoch_dt_names</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;Epoch_idx&quot;</span><span class="p">]</span>
+        <span class="c1"># start with epoch_id</span>
+        <span class="n">epoch_dt_names</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;epoch_id&quot;</span><span class="p">]</span>
         <span class="n">epoch_dt_types</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;uint64&quot;</span><span class="p">]</span>
 
         <span class="c1"># continue new dtype for event info columns, mapped to hdf5 compatible np.dtype</span>
@@ -1648,8 +1650,8 @@
         <span class="n">epoch_dt</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">dtype</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="nb">zip</span><span class="p">(</span><span class="n">epoch_dt_names</span><span class="p">,</span> <span class="n">epoch_dt_types</span><span class="p">)))</span>
         <span class="n">epochs</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">(</span><span class="n">shape</span><span class="o">=</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">event_table</span><span class="p">),),</span> <span class="n">dtype</span><span class="o">=</span><span class="n">epoch_dt</span><span class="p">)</span>
 
-        <span class="c1"># set the Epoch_idx counting index and copy the tidied event table</span>
-        <span class="n">epochs</span><span class="p">[</span><span class="s2">&quot;Epoch_idx&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="n">idx</span> <span class="k">for</span> <span class="n">idx</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">event_table</span><span class="p">))]</span>
+        <span class="c1"># set the epoch_id counting index and copy the tidied event table</span>
+        <span class="n">epochs</span><span class="p">[</span><span class="s2">&quot;epoch_id&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="n">idx</span> <span class="k">for</span> <span class="n">idx</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">event_table</span><span class="p">))]</span>
         <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">event_table</span><span class="o">.</span><span class="n">columns</span><span class="p">:</span>
             <span class="n">epochs</span><span class="p">[</span><span class="n">c</span><span class="p">]</span> <span class="o">=</span> <span class="n">event_table</span><span class="p">[</span><span class="n">c</span><span class="p">]</span>
 
@@ -1711,9 +1713,9 @@
         <span class="c1"># check the epochs for consistency</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_check_epochs_table</span><span class="p">(</span><span class="n">epochs</span><span class="p">)</span>
 
-        <span class="c1"># 4. add or overwrite the epochs in the mkh5 file under /epochs/epochs_table_name</span>
+        <span class="c1"># 4. add epoch table in the mkh5 file under /EPOCH_TABLES_PATH/epochs_table_name</span>
         <span class="k">with</span> <span class="n">h5py</span><span class="o">.</span><span class="n">File</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">h5_fname</span><span class="p">,</span> <span class="s2">&quot;r+&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">h5</span><span class="p">:</span>
-            <span class="n">epochs_path</span> <span class="o">=</span> <span class="s2">&quot;epochs/&quot;</span> <span class="o">+</span> <span class="n">epochs_table_name</span>
+            <span class="n">epochs_path</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{mkh5.EPOCH_TABLES_PATH}</span><span class="s2">/</span><span class="si">{epochs_table_name}</span><span class="s2">&quot;</span>
             <span class="n">ep</span> <span class="o">=</span> <span class="n">h5</span><span class="o">.</span><span class="n">create_dataset</span><span class="p">(</span><span class="n">epochs_path</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">epochs</span><span class="p">)</span>
             <span class="n">attrs</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;tmin_ms&quot;</span><span class="p">:</span> <span class="n">tmin_ms</span><span class="p">,</span> <span class="s2">&quot;tmax_ms&quot;</span><span class="p">:</span> <span class="n">tmax_ms</span><span class="p">}</span>
             <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">attrs</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
@@ -1749,7 +1751,7 @@
         <span class="n">epochs_names</span> <span class="o">=</span> <span class="p">[]</span>
         <span class="k">try</span><span class="p">:</span>
             <span class="k">with</span> <span class="n">h5py</span><span class="o">.</span><span class="n">File</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">h5_fname</span><span class="p">,</span> <span class="s2">&quot;r&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">h5</span><span class="p">:</span>
-                <span class="n">epochs_names</span> <span class="o">=</span> <span class="p">[</span><span class="n">t</span> <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="n">h5</span><span class="p">[</span><span class="s2">&quot;epochs&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">keys</span><span class="p">()]</span>
+                <span class="n">epochs_names</span> <span class="o">=</span> <span class="p">[</span><span class="n">t</span> <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="n">h5</span><span class="p">[</span><span class="n">mkh5</span><span class="o">.</span><span class="n">EPOCH_TABLES_PATH</span><span class="p">]</span><span class="o">.</span><span class="n">keys</span><span class="p">()]</span>
         <span class="k">except</span><span class="p">:</span>
             <span class="k">pass</span>
         <span class="k">return</span> <span class="n">epochs_names</span></div>
@@ -1927,8 +1929,7 @@
 
         <span class="n">epochs_table</span> <span class="o">=</span> <span class="kc">None</span>
         <span class="k">with</span> <span class="n">h5py</span><span class="o">.</span><span class="n">File</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">h5_fname</span><span class="p">,</span> <span class="s2">&quot;r&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">h5</span><span class="p">:</span>
-            <span class="n">epochs_path</span> <span class="o">=</span> <span class="s2">&quot;epochs/&quot;</span> <span class="o">+</span> <span class="n">epochs_name</span>
-            <span class="c1"># epochs_table = h5[epochs_path].value</span>
+            <span class="n">epochs_path</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{mkh5.EPOCH_TABLES_PATH}</span><span class="s2">/</span><span class="si">{epochs_name}</span><span class="s2">&quot;</span>
             <span class="n">epochs_table</span> <span class="o">=</span> <span class="n">h5</span><span class="p">[</span><span class="n">epochs_path</span><span class="p">][</span><span class="o">...</span><span class="p">]</span>
         <span class="k">if</span> <span class="n">epochs_table</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
             <span class="n">msg</span> <span class="o">=</span> <span class="s2">&quot;epochs table not found: </span><span class="si">{0}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">epochs_name</span><span class="p">)</span>
@@ -1959,11 +1960,11 @@
 
         <span class="k">if</span> <span class="nb">format</span> <span class="o">==</span> <span class="s2">&quot;pandas&quot;</span><span class="p">:</span>
             <span class="n">eptbl</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">eptbl</span><span class="p">)</span>
-            <span class="n">eptbl</span><span class="o">.</span><span class="n">set_index</span><span class="p">(</span><span class="s2">&quot;Index&quot;</span><span class="p">,</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+            <span class="c1"># eptbl.set_index(&quot;Index&quot;, inplace=True)</span>
         <span class="k">return</span> <span class="n">eptbl</span></div>
 
     <span class="k">def</span> <span class="nf">_h5_get_epochs</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">epochs_name</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;merge datablock segments (event codes, EEG) with code tags and timestamp.</span>
+        <span class="sd">&quot;&quot;&quot;merge datablock segments (event codes, EEG) with code tags and timestamps.</span>
 
 <span class="sd">        Each row (1, n) in the epochs table is broadcast to an (m, n)</span>
 <span class="sd">        array for the samples in the specified epochs interval and</span>
@@ -1994,8 +1995,8 @@
 <span class="sd">             in `epoch_table.dtype.names`. This broadcasts the</span>
 <span class="sd">             experimental event code tags to all samples in the epoch.</span>
 
-<span class="sd">           epoch[&#39;Time&#39;]: uint64</span>
-<span class="sd">             epoch[&#39;Time&#39;] == 0  for the *matched* event</span>
+<span class="sd">           epoch[&#39;match_time&#39;]: uint64</span>
+<span class="sd">             epoch[&#39;match_time&#39;] == 0  for the *matched* event</span>
 
 <span class="sd">           epoch[&#39;anchor_time&#39;]: uint64</span>
 <span class="sd">             epoch[&#39;anchor_time&#39;] == 0 for the *anchor* event</span>
@@ -2011,7 +2012,7 @@
 <span class="sd">        &quot;&quot;&quot;</span>
 
         <span class="k">with</span> <span class="n">h5py</span><span class="o">.</span><span class="n">File</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">h5_fname</span><span class="p">,</span> <span class="s2">&quot;r&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">h5</span><span class="p">:</span>
-            <span class="n">epochs_path</span> <span class="o">=</span> <span class="s2">&quot;epochs/&quot;</span> <span class="o">+</span> <span class="n">epochs_name</span>
+            <span class="n">epochs_path</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{mkh5.EPOCH_TABLES_PATH}</span><span class="s2">/</span><span class="si">{epochs_name}</span><span class="s2">&quot;</span>
             <span class="n">epoch_view</span> <span class="o">=</span> <span class="n">h5</span><span class="p">[</span><span class="n">epochs_path</span><span class="p">]</span>
             <span class="n">epoch_cols</span> <span class="o">=</span> <span class="n">epoch_view</span><span class="o">.</span><span class="n">dtype</span><span class="o">.</span><span class="n">names</span>
 
@@ -2023,7 +2024,6 @@
                 <span class="n">nsamp</span> <span class="o">=</span> <span class="n">e</span><span class="p">[</span><span class="s2">&quot;epoch_ticks&quot;</span><span class="p">]</span>
 
                 <span class="c1"># fill nsamp rows x event info columns</span>
-                <span class="c1"># FIX ME ... subset columns here</span>
                 <span class="n">event_info</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">stack</span><span class="p">([</span><span class="n">e</span> <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">nsamp</span><span class="p">)],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
 
                 <span class="c1"># set for epoch slice</span>
@@ -2046,10 +2046,13 @@
                 <span class="n">f4_streams_dtype</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">dtype</span><span class="p">(</span><span class="n">f4_streams_dtype</span><span class="p">)</span>
                 <span class="n">epoch_streams</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">epoch_streams</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">f4_streams_dtype</span><span class="p">)</span>
 
-                <span class="c1"># merge epoch table, Time, and datablock stream table column names</span>
+                <span class="c1"># merge epoch table, match_time, and datablock stream table column names</span>
                 <span class="n">all_cols</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">event_info</span><span class="o">.</span><span class="n">dtype</span><span class="o">.</span><span class="n">names</span><span class="p">)</span>
-                <span class="n">all_cols</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&quot;Time&quot;</span><span class="p">)</span>  <span class="c1"># matched code timestamp</span>
+                <span class="n">all_cols</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&quot;match_time&quot;</span><span class="p">)</span>  <span class="c1"># matched code timestamp</span>
                 <span class="n">all_cols</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&quot;anchor_time&quot;</span><span class="p">)</span>  <span class="c1"># anchor code timestamp</span>
+                <span class="n">all_cols</span><span class="o">.</span><span class="n">append</span><span class="p">(</span>
+                    <span class="s2">&quot;anchor_time_delta&quot;</span>
+                <span class="p">)</span>  <span class="c1"># time between match and anchor</span>
                 <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">epoch_streams</span><span class="o">.</span><span class="n">dtype</span><span class="o">.</span><span class="n">names</span><span class="p">:</span>
                     <span class="k">if</span> <span class="n">c</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">all_cols</span><span class="p">:</span>
                         <span class="n">all_cols</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">c</span><span class="p">)</span>
@@ -2075,7 +2078,11 @@
                 <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="n">epoch_dt_names</span><span class="p">:</span>
                     <span class="k">if</span> <span class="n">n</span> <span class="ow">in</span> <span class="n">epoch_streams</span><span class="o">.</span><span class="n">dtype</span><span class="o">.</span><span class="n">names</span><span class="p">:</span>
                         <span class="n">epoch_dt_types</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">epoch_streams</span><span class="o">.</span><span class="n">dtype</span><span class="p">[</span><span class="n">n</span><span class="p">])</span>
-                    <span class="k">elif</span> <span class="n">n</span> <span class="ow">in</span> <span class="p">[</span><span class="s2">&quot;Time&quot;</span><span class="p">,</span> <span class="s2">&quot;anchor_time&quot;</span><span class="p">]:</span>
+                    <span class="k">elif</span> <span class="n">n</span> <span class="ow">in</span> <span class="p">[</span>
+                        <span class="s2">&quot;match_time&quot;</span><span class="p">,</span>
+                        <span class="s2">&quot;anchor_time&quot;</span><span class="p">,</span>
+                        <span class="s2">&quot;anchor_time_delta&quot;</span><span class="p">,</span>
+                    <span class="p">]:</span>
                         <span class="n">epoch_dt_types</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&quot;int64&quot;</span><span class="p">)</span>
                     <span class="k">elif</span> <span class="n">n</span> <span class="ow">in</span> <span class="n">e</span><span class="o">.</span><span class="n">dtype</span><span class="o">.</span><span class="n">names</span><span class="p">:</span>
                         <span class="n">epoch_dt_types</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">event_info</span><span class="o">.</span><span class="n">dtype</span><span class="p">[</span><span class="n">n</span><span class="p">])</span>
@@ -2091,7 +2098,7 @@
                 <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="n">epoch_dt_names</span><span class="p">:</span>
                     <span class="k">if</span> <span class="n">n</span> <span class="ow">in</span> <span class="n">epoch_streams</span><span class="o">.</span><span class="n">dtype</span><span class="o">.</span><span class="n">names</span><span class="p">:</span>
                         <span class="n">epoch</span><span class="p">[</span><span class="n">n</span><span class="p">]</span> <span class="o">=</span> <span class="n">epoch_streams</span><span class="p">[</span><span class="n">n</span><span class="p">]</span>
-                    <span class="k">elif</span> <span class="n">n</span> <span class="o">==</span> <span class="s2">&quot;Time&quot;</span><span class="p">:</span>
+                    <span class="k">elif</span> <span class="n">n</span> <span class="o">==</span> <span class="s2">&quot;match_time&quot;</span><span class="p">:</span>
                         <span class="n">epoch</span><span class="p">[</span><span class="n">n</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span>
                             <span class="nb">int</span><span class="p">(</span><span class="n">mkh5</span><span class="o">.</span><span class="n">_samp2ms</span><span class="p">(</span><span class="n">x</span> <span class="o">-</span> <span class="n">e</span><span class="p">[</span><span class="s2">&quot;match_tick&quot;</span><span class="p">],</span> <span class="n">srate</span><span class="p">))</span>
                             <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">start_samp</span><span class="p">,</span> <span class="n">stop_samp</span><span class="p">)</span>
@@ -2099,6 +2106,15 @@
                     <span class="k">elif</span> <span class="n">n</span> <span class="o">==</span> <span class="s2">&quot;anchor_time&quot;</span><span class="p">:</span>
                         <span class="n">epoch</span><span class="p">[</span><span class="n">n</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span>
                             <span class="nb">int</span><span class="p">(</span><span class="n">mkh5</span><span class="o">.</span><span class="n">_samp2ms</span><span class="p">(</span><span class="n">x</span> <span class="o">-</span> <span class="n">e</span><span class="p">[</span><span class="s2">&quot;anchor_tick&quot;</span><span class="p">],</span> <span class="n">srate</span><span class="p">))</span>
+                            <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">start_samp</span><span class="p">,</span> <span class="n">stop_samp</span><span class="p">)</span>
+                        <span class="p">]</span>
+                    <span class="k">elif</span> <span class="n">n</span> <span class="o">==</span> <span class="s2">&quot;anchor_time_delta&quot;</span><span class="p">:</span>
+                        <span class="n">epoch</span><span class="p">[</span><span class="n">n</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span>
+                            <span class="nb">int</span><span class="p">(</span>
+                                <span class="n">mkh5</span><span class="o">.</span><span class="n">_samp2ms</span><span class="p">(</span>
+                                    <span class="n">x</span> <span class="o">-</span> <span class="n">e</span><span class="p">[</span><span class="s2">&quot;anchor_tick_delta&quot;</span><span class="p">],</span> <span class="n">srate</span>
+                                <span class="p">)</span>
+                            <span class="p">)</span>
                             <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">start_samp</span><span class="p">,</span> <span class="n">stop_samp</span><span class="p">)</span>
                         <span class="p">]</span>
                     <span class="k">elif</span> <span class="n">n</span> <span class="ow">in</span> <span class="n">event_info</span><span class="o">.</span><span class="n">dtype</span><span class="o">.</span><span class="n">names</span><span class="p">:</span>
@@ -2114,8 +2130,7 @@
                 <span class="k">yield</span> <span class="p">(</span><span class="n">epoch</span><span class="p">)</span>
 
 <div class="viewcode-block" id="mkh5.get_epochs"><a class="viewcode-back" href="../../source/mkpy.mkh5.html#mkpy.mkh5.mkh5.get_epochs">[docs]</a>    <span class="k">def</span> <span class="nf">get_epochs</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">epochs_name</span><span class="p">,</span> <span class="nb">format</span><span class="o">=</span><span class="s2">&quot;numpy&quot;</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot; fetch single trial epochs in tabluar form along </span>
-
+        <span class="sd">&quot;&quot;&quot; fetch single trial epochs in tabluar form</span>
 
 <span class="sd">        Parameters</span>
 <span class="sd">        ----------</span>
@@ -2130,7 +2145,7 @@
 <span class="sd">        epochs : numpy.ndarray or pandas.DataFrame</span>
 <span class="sd">           epochs.shape == (i x m, n + 2) where</span>
 
-<span class="sd">           i = the number of epochs, indexed uniquely by epoch_table[&#39;Epoch_idx&#39;]</span>
+<span class="sd">           i = the number of epochs, indexed uniquely by epoch_table[&#39;epoch_id&#39;]</span>
 <span class="sd">           m = epoch length in samples</span>
 <span class="sd">           n = the number of columns in the `epochs_name` epochs table</span>
 
@@ -2168,7 +2183,7 @@
         <span class="c1"># fetch the attrs for this epoch dataset</span>
         <span class="k">with</span> <span class="n">h5py</span><span class="o">.</span><span class="n">File</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">h5_fname</span><span class="p">,</span> <span class="s2">&quot;r&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">h5</span><span class="p">:</span>
             <span class="n">attrs</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">()</span>
-            <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">h5</span><span class="p">[</span><span class="s2">&quot;epochs&quot;</span><span class="p">][</span><span class="n">epochs_name</span><span class="p">]</span><span class="o">.</span><span class="n">attrs</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+            <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">h5</span><span class="p">[</span><span class="n">mkh5</span><span class="o">.</span><span class="n">EPOCH_TABLES_PATH</span><span class="p">][</span><span class="n">epochs_name</span><span class="p">]</span><span class="o">.</span><span class="n">attrs</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
                 <span class="n">attrs</span><span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="o">=</span> <span class="n">v</span>
 
         <span class="k">return</span> <span class="n">epochs</span><span class="p">,</span> <span class="n">attrs</span></div>

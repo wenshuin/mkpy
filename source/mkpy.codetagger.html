@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>mkpy.codetagger module &mdash; mkpy 0.2.0 documentation</title>
+  <title>mkpy.codetagger module &mdash; mkpy 0.2.1 documentation</title>
   
 
   
@@ -207,8 +207,8 @@
 <ul class="simple">
 <li><p>the integer values are event-markers recorded on an event or
 timing track of a digital data acquisition system.</p></li>
-<li><p>Each integer maps to a specific event or event-types, e.g., a
-stimulus onset/offset, a response.</p></li>
+<li><p>Each integer maps to a specific event or event-type, e.g., a
+stimulus onset/offset, a response, a timing mark.</p></li>
 <li><p>A sequence of integers corresponds to a sequence of events or
 event types.</p></li>
 <li><p>The metadata (tabular rows x columns) add further information
@@ -244,15 +244,38 @@ described below.</p>
 <blockquote>
 <div><dl>
 <dt>Excel and Tabbed-text</dt><dd><ol class="arabic simple">
-<li><p>the data must be tabular in i rows and j columns (i,j &gt;= 1)</p></li>
+<li><p>the data must be tabular in n rows and m columns (i,j &gt;= 2)</p></li>
 <li><p>column labels must be in the first row</p></li>
-<li><p>the first two column labels must be ‘Index’, ‘regexp’</p></li>
-<li><p>the columns may continue ad lib.</p></li>
+<li><p>the column labels must include ‘regexp’</p></li>
+<li><p>there must be at least one tag column, there may be more</p></li>
 </ol>
-<p>Index     regexp      &lt;col_label_j&gt;*
-Index_11  pattern_12  &lt;datum_1j&gt;*
-…
-Index_n1  pattern_n2  &lt;datum_ij&gt;*</p>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 27%" />
+<col style="width: 32%" />
+<col style="width: 41%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>regexp</p></th>
+<th class="head"><p>col_label_1</p></th>
+<th class="head"><p>&lt;col_label_m&gt;*</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>pattern_1</p></td>
+<td><p>code_tag_11</p></td>
+<td><p>&lt;code_tag_1m&gt;*</p></td>
+</tr>
+<tr class="row-odd"><td><p>…</p></td>
+<td><p>…</p></td>
+<td><p>…</p></td>
+</tr>
+<tr class="row-even"><td><p>pattern_n</p></td>
+<td><p>code_tag_n1</p></td>
+<td><p>&lt;datum_nm&gt;*</p></td>
+</tr>
+</tbody>
+</table>
 </dd>
 <dt>YAML files</dt><dd><p>The YAML can be any combination of inline (JSON-ic) and
 YAML indentation that PyYAML yaml.load can handle.</p>
@@ -267,16 +290,16 @@ YAML indentation that PyYAML yaml.load can handle.</p>
 <p>Example</p>
 <div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nn">---</span>
 <span class="s">&#39;columns&#39;</span><span class="p p-Indicator">:</span>
-  <span class="p p-Indicator">[</span><span class="nv">Index</span><span class="p p-Indicator">,</span> <span class="nv">regexp</span><span class="p p-Indicator">,</span> <span class="nv">probability</span><span class="p p-Indicator">,</span> <span class="nv">frequency</span><span class="p p-Indicator">,</span> <span class="nv">source</span><span class="p p-Indicator">]</span>
+  <span class="p p-Indicator">[</span><span class="nv">regexp</span><span class="p p-Indicator">,</span> <span class="nv">bin</span><span class="p p-Indicator">,</span> <span class="nv">probability</span><span class="p p-Indicator">,</span> <span class="nv">frequency</span><span class="p p-Indicator">,</span> <span class="nv">source</span><span class="p p-Indicator">]</span>
 <span class="s">&#39;rows&#39;</span><span class="p p-Indicator">:</span>
-  <span class="p p-Indicator">-</span> <span class="p p-Indicator">[</span><span class="nv">1</span><span class="p p-Indicator">,</span> <span class="s">&#39;(#1)&#39;</span><span class="p p-Indicator">,</span> <span class="nv">hi</span><span class="p p-Indicator">,</span>   <span class="nv">880</span><span class="p p-Indicator">,</span> <span class="nv">oboe</span><span class="p p-Indicator">]</span>
-  <span class="p p-Indicator">-</span> <span class="p p-Indicator">[</span><span class="nv">2</span><span class="p p-Indicator">,</span> <span class="s">&#39;(#2)&#39;</span><span class="p p-Indicator">,</span> <span class="nv">hi</span><span class="p p-Indicator">,</span>   <span class="nv">440</span><span class="p p-Indicator">,</span> <span class="nv">oboe</span><span class="p p-Indicator">]</span>
-  <span class="p p-Indicator">-</span> <span class="p p-Indicator">[</span><span class="nv">3</span><span class="p p-Indicator">,</span> <span class="s">&#39;(#3)&#39;</span><span class="p p-Indicator">,</span> <span class="nv">lo</span><span class="p p-Indicator">,</span>   <span class="nv">880</span><span class="p p-Indicator">,</span> <span class="nv">oboe</span><span class="p p-Indicator">]</span>
-  <span class="p p-Indicator">-</span> <span class="p p-Indicator">[</span><span class="nv">4</span><span class="p p-Indicator">,</span> <span class="s">&#39;(#4)&#39;</span><span class="p p-Indicator">,</span> <span class="nv">lo</span><span class="p p-Indicator">,</span>   <span class="nv">440</span><span class="p p-Indicator">,</span> <span class="nv">oboe</span><span class="p p-Indicator">]</span>
-  <span class="p p-Indicator">-</span> <span class="p p-Indicator">[</span><span class="nv">5</span><span class="p p-Indicator">,</span> <span class="s">&#39;(#5)&#39;</span><span class="p p-Indicator">,</span> <span class="nv">hi</span><span class="p p-Indicator">,</span>   <span class="nv">880</span><span class="p p-Indicator">,</span> <span class="nv">tuba</span><span class="p p-Indicator">]</span>
-  <span class="p p-Indicator">-</span> <span class="p p-Indicator">[</span><span class="nv">6</span><span class="p p-Indicator">,</span> <span class="s">&#39;(#6)&#39;</span><span class="p p-Indicator">,</span> <span class="nv">hi</span><span class="p p-Indicator">,</span>   <span class="nv">440</span><span class="p p-Indicator">,</span> <span class="nv">tuba</span><span class="p p-Indicator">]</span>
-  <span class="p p-Indicator">-</span> <span class="p p-Indicator">[</span><span class="nv">7</span><span class="p p-Indicator">,</span> <span class="s">&#39;(#7)&#39;</span><span class="p p-Indicator">,</span> <span class="nv">lo</span><span class="p p-Indicator">,</span>   <span class="nv">880</span><span class="p p-Indicator">,</span> <span class="nv">tuba</span><span class="p p-Indicator">]</span>
-  <span class="p p-Indicator">-</span> <span class="p p-Indicator">[</span><span class="nv">8</span><span class="p p-Indicator">,</span> <span class="s">&#39;(#8)&#39;</span><span class="p p-Indicator">,</span> <span class="nv">lo</span><span class="p p-Indicator">,</span>   <span class="nv">440</span><span class="p p-Indicator">,</span> <span class="nv">tuba</span><span class="p p-Indicator">]</span>
+  <span class="p p-Indicator">-</span> <span class="p p-Indicator">[</span><span class="s">&#39;(#1)&#39;</span><span class="p p-Indicator">,</span> <span class="nv">1</span><span class="p p-Indicator">,</span> <span class="nv">hi</span><span class="p p-Indicator">,</span>   <span class="nv">880</span><span class="p p-Indicator">,</span> <span class="nv">oboe</span><span class="p p-Indicator">]</span>
+  <span class="p p-Indicator">-</span> <span class="p p-Indicator">[</span><span class="s">&#39;(#2)&#39;</span><span class="p p-Indicator">,</span> <span class="nv">2</span><span class="p p-Indicator">,</span> <span class="nv">hi</span><span class="p p-Indicator">,</span>   <span class="nv">440</span><span class="p p-Indicator">,</span> <span class="nv">oboe</span><span class="p p-Indicator">]</span>
+  <span class="p p-Indicator">-</span> <span class="p p-Indicator">[</span><span class="s">&#39;(#3)&#39;</span><span class="p p-Indicator">,</span> <span class="nv">3</span><span class="p p-Indicator">,</span> <span class="nv">lo</span><span class="p p-Indicator">,</span>   <span class="nv">880</span><span class="p p-Indicator">,</span> <span class="nv">oboe</span><span class="p p-Indicator">]</span>
+  <span class="p p-Indicator">-</span> <span class="p p-Indicator">[</span><span class="s">&#39;(#4)&#39;</span><span class="p p-Indicator">,</span> <span class="nv">4</span><span class="p p-Indicator">,</span> <span class="nv">lo</span><span class="p p-Indicator">,</span>   <span class="nv">440</span><span class="p p-Indicator">,</span> <span class="nv">oboe</span><span class="p p-Indicator">]</span>
+  <span class="p p-Indicator">-</span> <span class="p p-Indicator">[</span><span class="s">&#39;(#5)&#39;</span><span class="p p-Indicator">,</span> <span class="nv">5</span><span class="p p-Indicator">,</span> <span class="nv">hi</span><span class="p p-Indicator">,</span>   <span class="nv">880</span><span class="p p-Indicator">,</span> <span class="nv">tuba</span><span class="p p-Indicator">]</span>
+  <span class="p p-Indicator">-</span> <span class="p p-Indicator">[</span><span class="s">&#39;(#6)&#39;</span><span class="p p-Indicator">,</span> <span class="nv">6</span><span class="p p-Indicator">,</span> <span class="nv">hi</span><span class="p p-Indicator">,</span>   <span class="nv">440</span><span class="p p-Indicator">,</span> <span class="nv">tuba</span><span class="p p-Indicator">]</span>
+  <span class="p p-Indicator">-</span> <span class="p p-Indicator">[</span><span class="s">&#39;(#7)&#39;</span><span class="p p-Indicator">,</span> <span class="nv">7</span><span class="p p-Indicator">,</span> <span class="nv">lo</span><span class="p p-Indicator">,</span>   <span class="nv">880</span><span class="p p-Indicator">,</span> <span class="nv">tuba</span><span class="p p-Indicator">]</span>
+  <span class="p p-Indicator">-</span> <span class="p p-Indicator">[</span><span class="s">&#39;(#8)&#39;</span><span class="p p-Indicator">,</span> <span class="nv">8</span><span class="p p-Indicator">,</span> <span class="nv">lo</span><span class="p p-Indicator">,</span>   <span class="nv">440</span><span class="p p-Indicator">,</span> <span class="nv">tuba</span><span class="p p-Indicator">]</span>
 </pre></div>
 </div>
 </div></blockquote>
@@ -284,32 +307,22 @@ YAML indentation that PyYAML yaml.load can handle.</p>
 </ul>
 <p>Row value data types</p>
 <dl>
-<dt>Index<span class="classifier">( str, int )</span></dt><dd><p>data type is not checked, violate at your own risk. Each code
-pattern may but need not have a unique Index.</p>
-<dl class="simple">
-<dt>Example index sequences:</dt><dd><p>1,2,3, …
-id_1, id_2, id_3, …
-hi/880/oboe, hi/440/oboe, lo/880/oboe …</p>
-</dd>
-</dl>
-</dd>
-<dt>regexp<span class="classifier">regular expresion (<cite>flanker* (#anchor) flanker*</cite>)</span></dt><dd><p>This is the code sequence search pattern.  Log codes are
-separated by a single whitespace for matching. The <code class="docutils literal notranslate"><span class="pre">regexp</span></code>
-has exactly one anchor pattern capture group (# ) optionally
-flanked by zero or more code patterns.</p>
-<p>Flanking code patterns may capture groups (…) and
+<dt>regexp<span class="classifier">regular expresion <cite>pattern* (#pattern) pattern*</cite></span></dt><dd><p>This is the code sequence search pattern.  Log codes are separated
+by a single whitespace for matching. The <code class="docutils literal notranslate"><span class="pre">regexp</span></code> has one or
+more time-locking pattern capture groups of which one begins
+with the time-marking anchor symbol, <code class="docutils literal notranslate"><span class="pre">#</span></code>.</p>
+<p>Flanking code patterns may be capture groups (…) and
 non-capture groups (?:…)</p>
-<p>All matched capture event code patterns and their sample index
-(and other book-keeping info) are extracted and loaded into
-the returned code_tag_table for all capture groups.
-anchor code_pattern is always captured</p>
-</dd>
-<dt>Additional columns: scalar (string, float, int, bool)</dt><dd><p>this is not checked, violate at your own risk</p>
+<p>All matched time-locking codes, the anchor code, and distance
+between them are extracted from the mkpy.mkh5 datablocks and
+merged with the code tags in the returned event_table for all
+capture groups.</p>
 </dd>
 </dl>
-<p>That’s it. All the real work is done by 1) specifying
-regular expressions that match useful patterns and sequences of
-codes and 2) specifying the optional column values that label the
+<p>Additional columns: scalar (string, float, int, bool)</p>
+<p>That’s it. All the real work is done by 1) specifying regular
+expressions that match useful (sequences of) integer event codes
+and 2) specifying the optional column values that label the
 matched codes in useful ways, e.g., by specifying factors and
 levels of experimental design, or numeric values for regression
 modeling or …</p>
