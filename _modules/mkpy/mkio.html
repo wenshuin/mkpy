@@ -424,9 +424,7 @@
         <span class="p">)</span>  <span class="c1"># track for sanity checks and later processing</span>
         <span class="n">codes_chunk</span><span class="p">[</span>
             <span class="mi">0</span>
-        <span class="p">]</span> <span class="o">=</span> <span class="p">(</span>
-            <span class="mi">0</span>
-        <span class="p">)</span>  <span class="c1"># clear the record count so marktrack has all and only event codes TPU</span>
+        <span class="p">]</span> <span class="o">=</span> <span class="mi">0</span>  <span class="c1"># clear the record count so marktrack has all and only event codes TPU</span>
         <span class="n">all_codes</span> <span class="o">+=</span> <span class="n">codes_chunk</span>
         <span class="n">data_chunk</span><span class="o">.</span><span class="n">resize</span><span class="p">((</span><span class="mi">256</span><span class="p">,</span> <span class="n">nchans</span><span class="p">))</span>
         <span class="n">data_chunks</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">data_chunk</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">dtype</span><span class="p">))</span>
