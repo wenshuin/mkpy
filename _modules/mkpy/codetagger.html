@@ -393,9 +393,9 @@
 
         <span class="c1"># uh oh ...</span>
         <span class="k">for</span> <span class="n">fail</span> <span class="ow">in</span> <span class="n">fails</span><span class="p">:</span>
-            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;failed </span><span class="si">{fail[0]}</span><span class="s2">: </span><span class="si">{fail[1]}</span><span class="s2">&quot;</span><span class="p">)</span>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;failed </span><span class="si">{</span><span class="n">fail</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="n">fail</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
         <span class="k">raise</span> <span class="ne">IOError</span><span class="p">(</span>
-            <span class="sa">f</span><span class="s2">&quot;failed to load </span><span class="si">{cmf}</span><span class="s2"> as an xlsx, YAML, or text code map&quot;</span>
+            <span class="sa">f</span><span class="s2">&quot;failed to load </span><span class="si">{</span><span class="n">cmf</span><span class="si">}</span><span class="s2"> as an xlsx, YAML, or text code map&quot;</span>
         <span class="p">)</span>
 
         <span class="bp">self</span><span class="o">.</span><span class="n">_check_mapper</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">code_map</span><span class="p">)</span>
@@ -403,11 +403,11 @@
     <span class="k">def</span> <span class="nf">_check_mapper</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">mapper</span><span class="p">):</span>
 
         <span class="k">if</span> <span class="ow">not</span> <span class="s2">&quot;regexp&quot;</span> <span class="ow">in</span> <span class="n">mapper</span><span class="o">.</span><span class="n">columns</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;codemap </span><span class="si">{self.cmf}</span><span class="s2"> must include a regexp column&quot;</span><span class="p">)</span>
+            <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;codemap </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">cmf</span><span class="si">}</span><span class="s2"> must include a regexp column&quot;</span><span class="p">)</span>
 
         <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">mapper</span><span class="o">.</span><span class="n">columns</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mi">2</span><span class="p">:</span>
             <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span>
-                <span class="sa">f</span><span class="s2">&quot;codemap </span><span class="si">{self.cmf}</span><span class="s2"> must have regexp and &quot;</span>
+                <span class="sa">f</span><span class="s2">&quot;codemap </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">cmf</span><span class="si">}</span><span class="s2"> must have regexp and &quot;</span>
                 <span class="s2">&quot;at least one additional code tag column.&quot;</span>
             <span class="p">)</span>
 
@@ -415,7 +415,7 @@
             <span class="k">try</span><span class="p">:</span>
                 <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="n">pattern</span><span class="p">)</span>
             <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">fail</span><span class="p">:</span>
-                <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;regexp row </span><span class="si">{row}</span><span class="s2">&quot;</span><span class="p">)</span>
+                <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;regexp row </span><span class="si">{</span><span class="n">row</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
                 <span class="k">raise</span> <span class="n">fail</span>
 
         <span class="k">if</span> <span class="n">code_map</span><span class="o">.</span><span class="n">columns</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot;Index&quot;</span><span class="p">:</span>

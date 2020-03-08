@@ -720,7 +720,7 @@
             <span class="c1"># yhdr_f Path should be stringified by mkh5.create_mkdata</span>
             <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">yhdr_f</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
                 <span class="k">raise</span> <span class="n">HeaderIOError</span><span class="p">(</span>
-                    <span class="sa">f</span><span class="s2">&quot;please report mkpy bug: </span><span class="si">{yhdr_f}</span><span class="s2"> must be a str not {type(yhdr_f)}&quot;</span>
+                    <span class="sa">f</span><span class="s2">&quot;please report mkpy bug: </span><span class="si">{</span><span class="n">yhdr_f</span><span class="si">}</span><span class="s2"> must be a str not </span><span class="si">{</span><span class="nb">type</span><span class="p">(</span><span class="n">yhdr_f</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span>
                 <span class="p">)</span>
 
             <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">seed_dict</span><span class="p">,</span> <span class="nb">dict</span><span class="p">):</span>
@@ -944,7 +944,7 @@
             <span class="k">for</span> <span class="n">h_key</span><span class="p">,</span> <span class="n">dtype</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_mkh5_header_types</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
                 <span class="k">if</span> <span class="n">h_key</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">header_keys</span><span class="p">:</span>
                     <span class="n">msg</span> <span class="o">=</span> <span class="p">(</span>
-                        <span class="sa">f</span><span class="s1">&#39;uh oh ... mandatory key &quot;</span><span class="si">{h_key}</span><span class="s1">&quot; is missing from  &#39;</span>
+                        <span class="sa">f</span><span class="s1">&#39;uh oh ... mandatory key &quot;</span><span class="si">{</span><span class="n">h_key</span><span class="si">}</span><span class="s1">&quot; is missing from  &#39;</span>
                         <span class="s2">&quot;mkh5 dblock header:</span><span class="se">\n</span><span class="s2">&quot;</span>
                     <span class="p">)</span>
                     <span class="n">msg</span> <span class="o">+=</span> <span class="n">pprint</span><span class="o">.</span><span class="n">pformat</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_header</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span>
@@ -1234,7 +1234,7 @@
         <span class="k">if</span> <span class="s2">&quot;ccode&quot;</span> <span class="ow">in</span> <span class="n">ctagger</span><span class="o">.</span><span class="n">code_map</span><span class="o">.</span><span class="n">columns</span><span class="p">:</span>
             <span class="n">msg</span> <span class="o">=</span> <span class="p">(</span>
                 <span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">As of mkpy 0.2.0 to match events with a codemap regexp pattern, the</span><span class="se">\n</span><span class="s2">&quot;</span>
-                <span class="sa">f</span><span class="s2">&quot;ccode column in {Path(code_map_f).name} must also match the log_ccode</span><span class="se">\n</span><span class="s2">&quot;</span>
+                <span class="sa">f</span><span class="s2">&quot;ccode column in </span><span class="si">{</span><span class="n">Path</span><span class="p">(</span><span class="n">code_map_f</span><span class="p">)</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s2"> must also match the log_ccode</span><span class="se">\n</span><span class="s2">&quot;</span>
                 <span class="sa">f</span><span class="s2">&quot;in the datablock. If this behavior is not desired, delete or rename</span><span class="se">\n</span><span class="s2">&quot;</span>
                 <span class="sa">f</span><span class="s2">&quot;the ccode column in the codemap.&quot;</span>
             <span class="p">)</span>
@@ -1589,9 +1589,9 @@
                 <span class="ow">and</span> <span class="n">epochs_table_name</span> <span class="ow">in</span> <span class="n">h5</span><span class="p">[</span><span class="n">mkh5</span><span class="o">.</span><span class="n">EPOCH_TABLES_PATH</span><span class="p">]</span><span class="o">.</span><span class="n">keys</span><span class="p">()</span>
             <span class="p">):</span>
                 <span class="n">msg</span> <span class="o">=</span> <span class="p">(</span>
-                    <span class="sa">f</span><span class="s2">&quot;epochs name </span><span class="si">{epochs_table_name}</span><span class="s2"> is in use, &quot;</span>
+                    <span class="sa">f</span><span class="s2">&quot;epochs name </span><span class="si">{</span><span class="n">epochs_table_name</span><span class="si">}</span><span class="s2"> is in use, &quot;</span>
                     <span class="sa">f</span><span class="s2">&quot;pick another name or use reset_all() to &quot;</span>
-                    <span class="sa">f</span><span class="s2">&quot;completely wipe the mkh5 file: </span><span class="si">{self.h5_fname}</span><span class="s2">&quot;</span>
+                    <span class="sa">f</span><span class="s2">&quot;completely wipe the mkh5 file: </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">h5_fname</span><span class="si">}</span><span class="s2">&quot;</span>
                 <span class="p">)</span>
                 <span class="k">raise</span> <span class="ne">RuntimeError</span><span class="p">(</span><span class="n">msg</span><span class="p">)</span>
 
@@ -1715,7 +1715,7 @@
 
         <span class="c1"># 4. add epoch table in the mkh5 file under /EPOCH_TABLES_PATH/epochs_table_name</span>
         <span class="k">with</span> <span class="n">h5py</span><span class="o">.</span><span class="n">File</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">h5_fname</span><span class="p">,</span> <span class="s2">&quot;r+&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">h5</span><span class="p">:</span>
-            <span class="n">epochs_path</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{mkh5.EPOCH_TABLES_PATH}</span><span class="s2">/</span><span class="si">{epochs_table_name}</span><span class="s2">&quot;</span>
+            <span class="n">epochs_path</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">mkh5</span><span class="o">.</span><span class="n">EPOCH_TABLES_PATH</span><span class="si">}</span><span class="s2">/</span><span class="si">{</span><span class="n">epochs_table_name</span><span class="si">}</span><span class="s2">&quot;</span>
             <span class="n">ep</span> <span class="o">=</span> <span class="n">h5</span><span class="o">.</span><span class="n">create_dataset</span><span class="p">(</span><span class="n">epochs_path</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">epochs</span><span class="p">)</span>
             <span class="n">attrs</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;tmin_ms&quot;</span><span class="p">:</span> <span class="n">tmin_ms</span><span class="p">,</span> <span class="s2">&quot;tmax_ms&quot;</span><span class="p">:</span> <span class="n">tmax_ms</span><span class="p">}</span>
             <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">attrs</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
@@ -1929,7 +1929,7 @@
 
         <span class="n">epochs_table</span> <span class="o">=</span> <span class="kc">None</span>
         <span class="k">with</span> <span class="n">h5py</span><span class="o">.</span><span class="n">File</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">h5_fname</span><span class="p">,</span> <span class="s2">&quot;r&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">h5</span><span class="p">:</span>
-            <span class="n">epochs_path</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{mkh5.EPOCH_TABLES_PATH}</span><span class="s2">/</span><span class="si">{epochs_name}</span><span class="s2">&quot;</span>
+            <span class="n">epochs_path</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">mkh5</span><span class="o">.</span><span class="n">EPOCH_TABLES_PATH</span><span class="si">}</span><span class="s2">/</span><span class="si">{</span><span class="n">epochs_name</span><span class="si">}</span><span class="s2">&quot;</span>
             <span class="n">epochs_table</span> <span class="o">=</span> <span class="n">h5</span><span class="p">[</span><span class="n">epochs_path</span><span class="p">][</span><span class="o">...</span><span class="p">]</span>
         <span class="k">if</span> <span class="n">epochs_table</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
             <span class="n">msg</span> <span class="o">=</span> <span class="s2">&quot;epochs table not found: </span><span class="si">{0}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">epochs_name</span><span class="p">)</span>
@@ -2012,7 +2012,7 @@
 <span class="sd">        &quot;&quot;&quot;</span>
 
         <span class="k">with</span> <span class="n">h5py</span><span class="o">.</span><span class="n">File</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">h5_fname</span><span class="p">,</span> <span class="s2">&quot;r&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">h5</span><span class="p">:</span>
-            <span class="n">epochs_path</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{mkh5.EPOCH_TABLES_PATH}</span><span class="s2">/</span><span class="si">{epochs_name}</span><span class="s2">&quot;</span>
+            <span class="n">epochs_path</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">mkh5</span><span class="o">.</span><span class="n">EPOCH_TABLES_PATH</span><span class="si">}</span><span class="s2">/</span><span class="si">{</span><span class="n">epochs_name</span><span class="si">}</span><span class="s2">&quot;</span>
             <span class="n">epoch_view</span> <span class="o">=</span> <span class="n">h5</span><span class="p">[</span><span class="n">epochs_path</span><span class="p">]</span>
             <span class="n">epoch_cols</span> <span class="o">=</span> <span class="n">epoch_view</span><span class="o">.</span><span class="n">dtype</span><span class="o">.</span><span class="n">names</span>
 
@@ -2157,7 +2157,7 @@
 <span class="sd">        &quot;&quot;&quot;</span>
 
         <span class="k">if</span> <span class="nb">format</span> <span class="ow">not</span> <span class="ow">in</span> <span class="p">[</span><span class="s2">&quot;numpy&quot;</span><span class="p">,</span> <span class="s2">&quot;pandas&quot;</span><span class="p">]:</span>
-            <span class="n">msg</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;format=&#39;numpy&#39; or format=&#39;pandas&#39; not </span><span class="si">{format}</span><span class="s2">&quot;</span>
+            <span class="n">msg</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;format=&#39;numpy&#39; or format=&#39;pandas&#39; not </span><span class="si">{</span><span class="nb">format</span><span class="si">}</span><span class="s2">&quot;</span>
             <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="n">msg</span><span class="p">)</span>
 
         <span class="n">epochs</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span>
@@ -2243,7 +2243,7 @@
 
         <span class="n">known_formats</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;h5&quot;</span><span class="p">,</span> <span class="s2">&quot;pdh5&quot;</span><span class="p">,</span> <span class="s2">&quot;feather&quot;</span><span class="p">,</span> <span class="s2">&quot;txt&quot;</span><span class="p">]</span>
         <span class="k">if</span> <span class="n">file_format</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">known_formats</span><span class="p">:</span>
-            <span class="n">msg</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;unknown file_format=&#39;</span><span class="si">{file_format}</span><span class="s2">&#39;: must be one of {&#39; &#39;.join(known_formats)}&quot;</span>
+            <span class="n">msg</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;unknown file_format=&#39;</span><span class="si">{</span><span class="n">file_format</span><span class="si">}</span><span class="s2">&#39;: must be one of </span><span class="si">{</span><span class="s1">&#39; &#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">known_formats</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span>
             <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="n">msg</span><span class="p">)</span>
 
         <span class="k">if</span> <span class="n">file_format</span> <span class="o">==</span> <span class="s2">&quot;h5&quot;</span><span class="p">:</span>
@@ -3988,8 +3988,8 @@
         <span class="n">f</span><span class="o">.</span><span class="n">set_facecolor</span><span class="p">(</span><span class="s2">&quot;black&quot;</span><span class="p">)</span>
         <span class="n">st</span> <span class="o">=</span> <span class="p">(</span>
             <span class="sa">f</span><span class="s2">&quot;calibration pulses from: &quot;</span>
-            <span class="sa">f</span><span class="s2">&quot;{&#39; &#39;.join([str(arg) for arg in args])}</span><span class="se">\n</span><span class="s2">&quot;</span>
-            <span class="sa">f</span><span class="s2">&quot;{&#39; &#39;.join([k + &#39;=&#39; + str(v) for k, v in kwargs.items()])}&quot;</span>
+            <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="s1">&#39; &#39;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="nb">str</span><span class="p">(</span><span class="n">arg</span><span class="p">)</span> <span class="k">for</span> <span class="n">arg</span> <span class="ow">in</span> <span class="n">args</span><span class="p">])</span><span class="si">}</span><span class="se">\n</span><span class="s2">&quot;</span>
+            <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="s1">&#39; &#39;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="n">k</span> <span class="o">+</span> <span class="s1">&#39;=&#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">v</span><span class="p">)</span> <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">items</span><span class="p">()])</span><span class="si">}</span><span class="s2">&quot;</span>
         <span class="p">)</span>
         <span class="n">f</span><span class="o">.</span><span class="n">suptitle</span><span class="p">(</span><span class="n">st</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;lightgray&quot;</span><span class="p">)</span>
         <span class="c1"># plt.show()</span>

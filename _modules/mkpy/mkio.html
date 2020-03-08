@@ -352,12 +352,12 @@
     <span class="c1"># determine appropriate reader function</span>
     <span class="n">reader</span> <span class="o">=</span> <span class="n">_get_reader_for_magic</span><span class="p">(</span><span class="n">header</span><span class="p">[</span><span class="s2">&quot;magic&quot;</span><span class="p">])</span>
     <span class="k">if</span> <span class="n">reader</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Bad magic number: {hex(header[&quot;magic&quot;])}.&#39;</span><span class="p">)</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Bad magic number: </span><span class="si">{</span><span class="nb">hex</span><span class="p">(</span><span class="n">header</span><span class="p">[</span><span class="s2">&quot;magic&quot;</span><span class="p">])</span><span class="si">}</span><span class="s1">.&#39;</span><span class="p">)</span>
 
     <span class="c1"># calculate and validate sample rate</span>
     <span class="n">hz</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">/</span> <span class="p">(</span><span class="n">header</span><span class="p">[</span><span class="s2">&quot;10usec_per_tick&quot;</span><span class="p">]</span> <span class="o">/</span> <span class="mi">100_000</span><span class="p">)</span>
     <span class="k">if</span> <span class="ow">not</span> <span class="n">_is_valid_samplerate</span><span class="p">(</span><span class="n">hz</span><span class="p">):</span>
-        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;File claims weird non integer sample rate: </span><span class="si">{hz}</span><span class="s2">.&quot;</span><span class="p">)</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;File claims weird non integer sample rate: </span><span class="si">{</span><span class="n">hz</span><span class="si">}</span><span class="s2">.&quot;</span><span class="p">)</span>
 
     <span class="c1"># extract channel name codes from header</span>
     <span class="n">channel_names</span> <span class="o">=</span> <span class="n">_get_channel_names</span><span class="p">(</span><span class="n">header</span><span class="p">)</span>
