@@ -183,41 +183,41 @@
   <div class="section" id="glossary">
 <h1>Glossary<a class="headerlink" href="#glossary" title="Permalink to this headline">¶</a></h1>
 <dl class="glossary">
-<dt id="term-hdf5-file">HDF5 file</dt><dd><p>An HDF5 file is a container for storing a variety of scientific
+<dt id="term-HDF5-file">HDF5 file</dt><dd><p>An HDF5 file is a container for storing a variety of scientific
 data and is composed of two primary types of objects: groups and
 datasets. <a class="reference external" href="https://support.hdfgroup.org/HDF5/Tutor/fileorg.html">https://support.hdfgroup.org/HDF5/Tutor/fileorg.html</a></p>
 </dd>
-<dt id="term-hdf5-group">HDF5 group</dt><dd><p>a grouping structure containing zero or more HDF5 objects,
+<dt id="term-HDF5-group">HDF5 group</dt><dd><p>a grouping structure containing zero or more HDF5 objects,
 together with supporting metadata.
 <a class="reference external" href="https://support.hdfgroup.org/HDF5/Tutor/fileorg.html">https://support.hdfgroup.org/HDF5/Tutor/fileorg.html</a></p>
 </dd>
-<dt id="term-hdf5-dataset">HDF5 dataset</dt><dd><p>a multidimensional array of data elements, together with
+<dt id="term-HDF5-dataset">HDF5 dataset</dt><dd><p>a multidimensional array of data elements, together with
 supporting metadata.
 <a class="reference external" href="https://support.hdfgroup.org/HDF5/Tutor/fileorg.html">https://support.hdfgroup.org/HDF5/Tutor/fileorg.html</a></p>
 </dd>
-<dt id="term-hdf5-attribute">HDF5 attribute</dt><dd><p>a user-defined HDF5 structure attached to a specific HDF5 dataset
+<dt id="term-HDF5-attribute">HDF5 attribute</dt><dd><p>a user-defined HDF5 structure attached to a specific HDF5 dataset
 that provides extra information.
 <a class="reference external" href="https://support.hdfgroup.org/HDF5/Tutor/fileorg.html">https://support.hdfgroup.org/HDF5/Tutor/fileorg.html</a></p>
 </dd>
-<dt id="term-hdf5-datatype">HDF5 datatype:</dt><dd><p>The building blocks of HDF5 data files. Datatypes are either
+<dt id="term-HDF5-datatype">HDF5 datatype:</dt><dd><p>The building blocks of HDF5 data files. Datatypes are either
 atomic (“no smaller parts”) or composite (“aggregations of atomic
 types”). <a class="reference external" href="https://support.hdfgroup.org/HDF5/Tutor/datatypes.html">https://support.hdfgroup.org/HDF5/Tutor/datatypes.html</a>.</p>
 </dd>
-<dt id="term-hdf5-atomic-datatype">HDF5 atomic datatype</dt><dd><p>A datatype which cannot be decomposed into smaller datatype
+<dt id="term-HDF5-atomic-datatype">HDF5 atomic datatype</dt><dd><p>A datatype which cannot be decomposed into smaller datatype
 units: <code class="docutils literal notranslate"><span class="pre">integer</span></code>, <code class="docutils literal notranslate"><span class="pre">float</span></code>, <code class="docutils literal notranslate"><span class="pre">string</span></code>, <code class="docutils literal notranslate"><span class="pre">date</span> <span class="pre">and</span> <span class="pre">time</span></code>,
 <code class="docutils literal notranslate"><span class="pre">bitfield</span></code>, <code class="docutils literal notranslate"><span class="pre">reference</span></code>, <code class="docutils literal notranslate"><span class="pre">opaque</span></code></p>
 </dd>
-<dt id="term-hdf5-composite-datatype">HDF5 composite datatype</dt><dd><dl class="simple">
+<dt id="term-HDF5-composite-datatype">HDF5 composite datatype</dt><dd><dl class="simple">
 <dt>An aggregation of atomic data types that is either</dt><dd><p>#. a single atomic data type: <code class="docutils literal notranslate"><span class="pre">array</span></code>, <code class="docutils literal notranslate"><span class="pre">variable</span> <span class="pre">length</span></code>,
 <code class="docutils literal notranslate"><span class="pre">enumeration</span></code>
 #. a sequence of different atomic data types: <code class="docutils literal notranslate"><span class="pre">compound</span></code></p>
 </dd>
 </dl>
 </dd>
-<dt id="term-mkpy-mkh5-file">mkpy.mkh5 file</dt><dd><p>An mkh5 file is a type of HDF5 file with its HDF5 datasets and
+<dt id="term-mkpy.mkh5-file">mkpy.mkh5 file</dt><dd><p>An mkh5 file is a type of HDF5 file with its HDF5 datasets and
 their attributes named and organized as mkpy.mkh5 <code class="docutils literal notranslate"><span class="pre">datablocks</span></code>.</p>
 </dd>
-<dt id="term-mkpy-mkh5-datablock">mkpy.mkh5 datablock</dt><dd><p>An HDF5 dataset that
+<dt id="term-mkpy.mkh5-datablock">mkpy.mkh5 datablock</dt><dd><p>An HDF5 dataset that
 * is named <cite>dblock_N</cite>, for non-negative integer N
 * has an mkpy.mkh5 attribute
 * is a 1-D array of mkpy.mkh5 samples where the <cite>crw_ticks</cite> field of
@@ -231,7 +231,7 @@ stops or pauses.</p>
 </div>
 </div></blockquote>
 </dd>
-<dt id="term-mkpy-mkh5-sample">mkpy.mkh5 sample</dt><dd><p>an HDF5 compound datatype of named data types containing one
+<dt id="term-mkpy.mkh5-sample">mkpy.mkh5 sample</dt><dd><p>an HDF5 compound datatype of named data types containing one
 time-stamped sample of digitized EEG and event code information
 from an ERPSS <code class="docutils literal notranslate"><span class="pre">.crw</span></code> and <code class="docutils literal notranslate"><span class="pre">.log</span></code> file.</p>
 <div class="admonition-todo admonition" id="id1">
@@ -239,10 +239,10 @@ from an ERPSS <code class="docutils literal notranslate"><span class="pre">.crw<
 <p>Enumerate the names and types</p>
 </div>
 </dd>
-<dt id="term-mkpy-mkh5-attribute">mkpy.mkh5 attribute</dt><dd><p>an HDF5 attribute containing the key <cite>json_attrs</cite> where its value
+<dt id="term-mkpy.mkh5-attribute">mkpy.mkh5 attribute</dt><dd><p>an HDF5 attribute containing the key <cite>json_attrs</cite> where its value
 is a legal JSON string enconding an mkh5 header</p>
 </dd>
-<dt id="term-mkpy-hmkh5-header">mkpy.hmkh5 header</dt><dd><p>A key:value document structure containing at least these fields:</p>
+<dt id="term-mkpy.hmkh5-header">mkpy.hmkh5 header</dt><dd><p>A key:value document structure containing at least these fields:</p>
 <div class="admonition-todo admonition" id="id2">
 <p class="admonition-title">Todo</p>
 <p>enumerate the header fields</p>

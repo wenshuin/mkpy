@@ -265,9 +265,9 @@ tag: str</p>
 <div><p><cite>test</cite> names a pygarv test function, e.g., <cite>mxflat</cite>, <cite>ppadif</cite>
 <cite>tag</cite> is a user-defined descriptive tag, e.g., <em>blocking</em>, <em>heog</em>, <em>fancy test</em></p>
 </div></blockquote>
-<dl class="class">
+<dl class="py class">
 <dt id="mkpy.pygarv.PyGarv">
-<em class="property">class </em><code class="sig-prename descclassname">mkpy.pygarv.</code><code class="sig-name descname">PyGarv</code><span class="sig-paren">(</span><em class="sig-param">mkh5_f</em>, <em class="sig-param">yarf_f=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/mkpy/pygarv.html#PyGarv"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mkpy.pygarv.PyGarv" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="sig-prename descclassname">mkpy.pygarv.</code><code class="sig-name descname">PyGarv</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">mkh5_f</span></em>, <em class="sig-param"><span class="n">yarf_f</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/mkpy/pygarv.html#PyGarv"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mkpy.pygarv.PyGarv" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
 <p>container to hold an inventory of functions for computing sample-wise
 artifact masks.</p>
@@ -325,29 +325,29 @@ compute the artifact mask.</p>
 <p>where test_name is the test name and the list of key_i=dtype_i
 optionally gives extra parameters named key_1, … key_n
 with data type dtype.</p>
-<dl class="attribute">
+<dl class="py attribute">
 <dt id="mkpy.pygarv.PyGarv.cppa">
 <code class="sig-name descname">cppa</code><em class="property"> = {'interval': None, 'stream': None, 'tag': None, 'test': 'cppa', 'threshold': None}</em><a class="reference internal" href="../_modules/mkpy/pygarv.html#PyGarv.cppa"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mkpy.pygarv.PyGarv.cppa" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
-<dl class="attribute">
+<dl class="py attribute">
 <dt id="mkpy.pygarv.PyGarv.cppadif">
 <code class="sig-name descname">cppadif</code><em class="property"> = {'interval': None, 'stream': None, 'stream2': None, 'tag': None, 'test': 'cppadif', 'threshold': None}</em><a class="reference internal" href="../_modules/mkpy/pygarv.html#PyGarv.cppadif"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mkpy.pygarv.PyGarv.cppadif" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
-<dl class="attribute">
+<dl class="py attribute">
 <dt id="mkpy.pygarv.PyGarv.cstdev">
 <code class="sig-name descname">cstdev</code><em class="property"> = {'interval': None, 'stream': None, 'tag': None, 'test': 'cstdev', 'threshold': None}</em><a class="reference internal" href="../_modules/mkpy/pygarv.html#PyGarv.cstdev"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mkpy.pygarv.PyGarv.cstdev" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
-<dl class="method">
+<dl class="py method">
 <dt id="mkpy.pygarv.PyGarv.get_catalog">
 <code class="sig-name descname">get_catalog</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/mkpy/pygarv.html#PyGarv.get_catalog"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mkpy.pygarv.PyGarv.get_catalog" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
-<dl class="method">
+<dl class="py method">
 <dt id="mkpy.pygarv.PyGarv.get_result">
-<code class="sig-name descname">get_result</code><span class="sig-paren">(</span><em class="sig-param">pg_test_result</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/mkpy/pygarv.html#PyGarv.get_result"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mkpy.pygarv.PyGarv.get_result" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">get_result</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">pg_test_result</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/mkpy/pygarv.html#PyGarv.get_result"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mkpy.pygarv.PyGarv.get_result" title="Permalink to this definition">¶</a></dt>
 <dd><p>convenience wrapper to query a test result, decode the mask, and
 return with its test in a handy package.</p>
 <dl class="field-list simple">
@@ -357,29 +357,29 @@ return with its test in a handy package.</p>
 </dl>
 </dd></dl>
 
-<dl class="attribute">
+<dl class="py attribute">
 <dt id="mkpy.pygarv.PyGarv.maxflat">
 <code class="sig-name descname">maxflat</code><em class="property"> = {'nsamp': None, 'poststim': None, 'prestim': None, 'stream': None, 'tag': None, 'test': 'maxflat', 'threshold': None}</em><a class="reference internal" href="../_modules/mkpy/pygarv.html#PyGarv.maxflat"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mkpy.pygarv.PyGarv.maxflat" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
-<dl class="attribute">
+<dl class="py attribute">
 <dt id="mkpy.pygarv.PyGarv.param_types">
 <code class="sig-name descname">param_types</code><em class="property"> = {'interval': &lt;class 'float'&gt;, 'stream': &lt;class 'str'&gt;, 'threshold': &lt;class 'float'&gt;}</em><a class="headerlink" href="#mkpy.pygarv.PyGarv.param_types" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
-<dl class="attribute">
+<dl class="py attribute">
 <dt id="mkpy.pygarv.PyGarv.ppa">
 <code class="sig-name descname">ppa</code><em class="property"> = {'poststim': None, 'prestim': None, 'stream': None, 'tag': None, 'test': 'ppa', 'threshold': None}</em><a class="reference internal" href="../_modules/mkpy/pygarv.html#PyGarv.ppa"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mkpy.pygarv.PyGarv.ppa" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
-<dl class="attribute">
+<dl class="py attribute">
 <dt id="mkpy.pygarv.PyGarv.ppadif">
 <code class="sig-name descname">ppadif</code><em class="property"> = {'poststim': None, 'prestim': None, 'stream': None, 'stream2': None, 'tag': None, 'test': 'ppadif', 'threshold': None}</em><a class="reference internal" href="../_modules/mkpy/pygarv.html#PyGarv.ppadif"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mkpy.pygarv.PyGarv.ppadif" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
-<dl class="method">
+<dl class="py method">
 <dt id="mkpy.pygarv.PyGarv.run_dblock">
-<code class="sig-name descname">run_dblock</code><span class="sig-paren">(</span><em class="sig-param">dbp_idx</em>, <em class="sig-param">tr_doc</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/mkpy/pygarv.html#PyGarv.run_dblock"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mkpy.pygarv.PyGarv.run_dblock" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">run_dblock</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">dbp_idx</span></em>, <em class="sig-param"><span class="n">tr_doc</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/mkpy/pygarv.html#PyGarv.run_dblock"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mkpy.pygarv.PyGarv.run_dblock" title="Permalink to this definition">¶</a></dt>
 <dd><p>Run tests in the tr_doc for datablock at dbp_idx, returns 64-bit pygarv sample mask.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -413,7 +413,7 @@ return with its test in a handy package.</p>
 </dl>
 </dd></dl>
 
-<dl class="method">
+<dl class="py method">
 <dt id="mkpy.pygarv.PyGarv.run_tests">
 <code class="sig-name descname">run_tests</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/mkpy/pygarv.html#PyGarv.run_tests"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mkpy.pygarv.PyGarv.run_tests" title="Permalink to this definition">¶</a></dt>
 <dd><p>fetch tests and pygarv mask for all dblocks, does not modify mkh5</p>
@@ -430,9 +430,9 @@ return with its test in a handy package.</p>
 
 </dd></dl>
 
-<dl class="class">
+<dl class="py class">
 <dt id="mkpy.pygarv.PyGarvTest">
-<em class="property">class </em><code class="sig-prename descclassname">mkpy.pygarv.</code><code class="sig-name descname">PyGarvTest</code><span class="sig-paren">(</span><em class="sig-param">test</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/mkpy/pygarv.html#PyGarvTest"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mkpy.pygarv.PyGarvTest" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="sig-prename descclassname">mkpy.pygarv.</code><code class="sig-name descname">PyGarvTest</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">test</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/mkpy/pygarv.html#PyGarvTest"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mkpy.pygarv.PyGarvTest" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">collections.OrderedDict</span></code></p>
 <p>Decorator class for the PyGarv tests.</p>
 <p>This enforces an extensible standard form on PyGarv test specs and
@@ -494,9 +494,9 @@ setter/getter API wants and returns lists of dict, i.e.,
 </div></blockquote>
 </li>
 </ul>
-<dl class="method">
+<dl class="py method">
 <dt id="mkpy.pygarv.PyGarvTest.run">
-<code class="sig-name descname">run</code><span class="sig-paren">(</span><em class="sig-param">hdr</em>, <em class="sig-param">dblock</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#mkpy.pygarv.PyGarvTest.run" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">run</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">hdr</span></em>, <em class="sig-param"><span class="n">dblock</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="headerlink" href="#mkpy.pygarv.PyGarvTest.run" title="Permalink to this definition">¶</a></dt>
 <dd><dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
@@ -513,61 +513,61 @@ setter/getter API wants and returns lists of dict, i.e.,
 </dl>
 </dd></dl>
 
-<dl class="method">
+<dl class="py method">
 <dt id="mkpy.pygarv.PyGarvTest.Usage">
 <code class="sig-name descname">Usage</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#mkpy.pygarv.PyGarvTest.Usage" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
-<dl class="method">
+<dl class="py method">
 <dt>
 <code class="sig-name descname">-----</code></dt>
 <dd></dd></dl>
 
-<dl class="method">
+<dl class="py method">
 <dt id="mkpy.pygarv.PyGarvTest.get_specs">
 <code class="sig-name descname">get_specs</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/mkpy/pygarv.html#PyGarvTest.get_specs"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mkpy.pygarv.PyGarvTest.get_specs" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
-<dl class="method">
+<dl class="py method">
 <dt id="mkpy.pygarv.PyGarvTest.param_type">
-<code class="sig-name descname">param_type</code><span class="sig-paren">(</span><em class="sig-param">param</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/mkpy/pygarv.html#PyGarvTest.param_type"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mkpy.pygarv.PyGarvTest.param_type" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">param_type</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">param</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/mkpy/pygarv.html#PyGarvTest.param_type"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mkpy.pygarv.PyGarvTest.param_type" title="Permalink to this definition">¶</a></dt>
 <dd><p>type of param</p>
 </dd></dl>
 
-<dl class="method">
+<dl class="py method">
 <dt id="mkpy.pygarv.PyGarvTest.param_types">
 <em class="property">property </em><code class="sig-name descname">param_types</code><a class="headerlink" href="#mkpy.pygarv.PyGarvTest.param_types" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
-<dl class="method">
+<dl class="py method">
 <dt id="mkpy.pygarv.PyGarvTest.params">
 <em class="property">property </em><code class="sig-name descname">params</code><a class="headerlink" href="#mkpy.pygarv.PyGarvTest.params" title="Permalink to this definition">¶</a></dt>
 <dd><p>names of the parameters this test as a list</p>
 </dd></dl>
 
-<dl class="method">
+<dl class="py method">
 <dt id="mkpy.pygarv.PyGarvTest.reset">
 <code class="sig-name descname">reset</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/mkpy/pygarv.html#PyGarvTest.reset"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mkpy.pygarv.PyGarvTest.reset" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
-<dl class="method">
+<dl class="py method">
 <dt id="mkpy.pygarv.PyGarvTest.set_specs">
-<code class="sig-name descname">set_specs</code><span class="sig-paren">(</span><em class="sig-param">test_params</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/mkpy/pygarv.html#PyGarvTest.set_specs"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mkpy.pygarv.PyGarvTest.set_specs" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">set_specs</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">test_params</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/mkpy/pygarv.html#PyGarvTest.set_specs"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mkpy.pygarv.PyGarvTest.set_specs" title="Permalink to this definition">¶</a></dt>
 <dd><p>test_params is {key:value, … } for test keys,values</p>
 </dd></dl>
 
-<dl class="method">
+<dl class="py method">
 <dt id="mkpy.pygarv.PyGarvTest.specs">
 <em class="property">property </em><code class="sig-name descname">specs</code><a class="headerlink" href="#mkpy.pygarv.PyGarvTest.specs" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
-<dl class="method">
+<dl class="py method">
 <dt id="mkpy.pygarv.PyGarvTest.specs_as_yaml">
 <em class="property">property </em><code class="sig-name descname">specs_as_yaml</code><a class="headerlink" href="#mkpy.pygarv.PyGarvTest.specs_as_yaml" title="Permalink to this definition">¶</a></dt>
 <dd><p>returns current specs as yaml string</p>
 </dd></dl>
 
-<dl class="method">
+<dl class="py method">
 <dt id="mkpy.pygarv.PyGarvTest.types">
 <em class="property">property </em><code class="sig-name descname">types</code><a class="headerlink" href="#mkpy.pygarv.PyGarvTest.types" title="Permalink to this definition">¶</a></dt>
 <dd><p>data types of the values for the parameters as a list</p>
@@ -575,9 +575,9 @@ setter/getter API wants and returns lists of dict, i.e.,
 
 </dd></dl>
 
-<dl class="class">
+<dl class="py class">
 <dt id="mkpy.pygarv.PyYarf">
-<em class="property">class </em><code class="sig-prename descclassname">mkpy.pygarv.</code><code class="sig-name descname">PyYarf</code><span class="sig-paren">(</span><em class="sig-param">yarf_f=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/mkpy/pygarv.html#PyYarf"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mkpy.pygarv.PyYarf" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="sig-prename descclassname">mkpy.pygarv.</code><code class="sig-name descname">PyYarf</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">yarf_f</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/mkpy/pygarv.html#PyYarf"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mkpy.pygarv.PyYarf" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
 <p>YAML test file I/O for PyGarv artifact test parameters</p>
 <dl class="field-list simple">
@@ -598,7 +598,7 @@ setter/getter API wants and returns lists of dict, i.e.,
 </p>
 </dd>
 </dl>
-<dl class="method">
+<dl class="py method">
 <dt>
 <code class="sig-name descname">IO methods</code></dt>
 <dd><p>read yarf_docs from yaml
@@ -648,20 +648,20 @@ read yarf_docs from mkh5 headers</p>
 <span class="nt">tests</span><span class="p">:</span> <span class="p p-Indicator">[]</span>
 </pre></div>
 </div>
-<dl class="method">
+<dl class="py method">
 <dt id="mkpy.pygarv.PyYarf.check_yarf_doc">
-<code class="sig-name descname">check_yarf_doc</code><span class="sig-paren">(</span><em class="sig-param">yarf_doc</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/mkpy/pygarv.html#PyYarf.check_yarf_doc"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mkpy.pygarv.PyYarf.check_yarf_doc" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">check_yarf_doc</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">yarf_doc</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/mkpy/pygarv.html#PyYarf.check_yarf_doc"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mkpy.pygarv.PyYarf.check_yarf_doc" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
-<dl class="method">
+<dl class="py method">
 <dt id="mkpy.pygarv.PyYarf.lint_yarf">
-<code class="sig-name descname">lint_yarf</code><span class="sig-paren">(</span><em class="sig-param">yarf_stream</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/mkpy/pygarv.html#PyYarf.lint_yarf"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mkpy.pygarv.PyYarf.lint_yarf" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">lint_yarf</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">yarf_stream</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/mkpy/pygarv.html#PyYarf.lint_yarf"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mkpy.pygarv.PyYarf.lint_yarf" title="Permalink to this definition">¶</a></dt>
 <dd><p>run yamllint on yarf_stream, if errors die informatively</p>
 </dd></dl>
 
-<dl class="method">
+<dl class="py method">
 <dt id="mkpy.pygarv.PyYarf.read_from_mkh5">
-<code class="sig-name descname">read_from_mkh5</code><span class="sig-paren">(</span><em class="sig-param">mkh5_f</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/mkpy/pygarv.html#PyYarf.read_from_mkh5"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mkpy.pygarv.PyYarf.read_from_mkh5" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">read_from_mkh5</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">mkh5_f</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/mkpy/pygarv.html#PyYarf.read_from_mkh5"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mkpy.pygarv.PyYarf.read_from_mkh5" title="Permalink to this definition">¶</a></dt>
 <dd><p>scan mkh5 dblock headers and dblock[‘pygarv’] stream artifact test info</p>
 <dl class="field-list simple">
 <dt class="field-odd">Returns</dt>
@@ -673,15 +673,15 @@ read yarf_docs from mkh5 headers</p>
 </dl>
 </dd></dl>
 
-<dl class="method">
+<dl class="py method">
 <dt id="mkpy.pygarv.PyYarf.read_from_yaml">
-<code class="sig-name descname">read_from_yaml</code><span class="sig-paren">(</span><em class="sig-param">yarf_f</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/mkpy/pygarv.html#PyYarf.read_from_yaml"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mkpy.pygarv.PyYarf.read_from_yaml" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">read_from_yaml</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">yarf_f</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/mkpy/pygarv.html#PyYarf.read_from_yaml"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mkpy.pygarv.PyYarf.read_from_yaml" title="Permalink to this definition">¶</a></dt>
 <dd><p>return yarf_doc list populated with yarf info, if any, from mkh5 dblock headers</p>
 </dd></dl>
 
-<dl class="method">
+<dl class="py method">
 <dt id="mkpy.pygarv.PyYarf.to_yaml">
-<code class="sig-name descname">to_yaml</code><span class="sig-paren">(</span><em class="sig-param">yarf_docs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/mkpy/pygarv.html#PyYarf.to_yaml"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mkpy.pygarv.PyYarf.to_yaml" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">to_yaml</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">yarf_docs</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/mkpy/pygarv.html#PyYarf.to_yaml"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mkpy.pygarv.PyYarf.to_yaml" title="Permalink to this definition">¶</a></dt>
 <dd><p>return yarf_docs YAML-ized as string suitable for serialization</p>
 </dd></dl>
 

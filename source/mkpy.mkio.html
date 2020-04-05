@@ -208,14 +208,14 @@
 <li><p>Writers</p></li>
 </ol>
 </div></blockquote>
-<dl class="function">
+<dl class="py function">
 <dt id="mkpy.mkio.load">
 <code class="sig-prename descclassname">mkpy.mkio.</code><code class="sig-name descname">load</code><span class="sig-paren">(</span><em class="sig-param">f_raw</em>, <em class="sig-param">f_log</em>, <em class="sig-param">dtype=&lt;class 'numpy.float64'&gt;</em>, <em class="sig-param">delete_channels=[]</em>, <em class="sig-param">calibrate=True</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/mkpy/mkio.html#load"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mkpy.mkio.load" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
-<dl class="function">
+<dl class="py function">
 <dt id="mkpy.mkio.read_log">
-<code class="sig-prename descclassname">mkpy.mkio.</code><code class="sig-name descname">read_log</code><span class="sig-paren">(</span><em class="sig-param">fo</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/mkpy/mkio.html#read_log"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mkpy.mkio.read_log" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname">mkpy.mkio.</code><code class="sig-name descname">read_log</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">fo</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/mkpy/mkio.html#read_log"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mkpy.mkio.read_log" title="Permalink to this definition">¶</a></dt>
 <dd><p>generator reads kutaslab binary log, returns (code, tick, condition, flag)</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -229,9 +229,9 @@
 </dl>
 </dd></dl>
 
-<dl class="function">
+<dl class="py function">
 <dt id="mkpy.mkio.read_raw">
-<code class="sig-prename descclassname">mkpy.mkio.</code><code class="sig-name descname">read_raw</code><span class="sig-paren">(</span><em class="sig-param">stream</em>, <em class="sig-param">dtype</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/mkpy/mkio.html#read_raw"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mkpy.mkio.read_raw" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname">mkpy.mkio.</code><code class="sig-name descname">read_raw</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">stream</span></em>, <em class="sig-param"><span class="n">dtype</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/mkpy/mkio.html#read_raw"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mkpy.mkio.read_raw" title="Permalink to this definition">¶</a></dt>
 <dd><p>parses bytestream of from kutaslab eeg file into usable data</p>
 <dl class="field-list simple">
 <dt class="field-odd">Returns</dt>
@@ -246,9 +246,9 @@ final_data, info)</p>
 final_data – a np.array: samples (rows) x eeg channels (columns)</p>
 </dd></dl>
 
-<dl class="function">
+<dl class="py function">
 <dt id="mkpy.mkio.write_erp_as_avg">
-<code class="sig-prename descclassname">mkpy.mkio.</code><code class="sig-name descname">write_erp_as_avg</code><span class="sig-paren">(</span><em class="sig-param">erp</em>, <em class="sig-param">stream</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/mkpy/mkio.html#write_erp_as_avg"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mkpy.mkio.write_erp_as_avg" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname">mkpy.mkio.</code><code class="sig-name descname">write_erp_as_avg</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">erp</span></em>, <em class="sig-param"><span class="n">stream</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/mkpy/mkio.html#write_erp_as_avg"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mkpy.mkio.write_erp_as_avg" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 </div>

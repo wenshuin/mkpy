@@ -198,9 +198,9 @@
             
   <div class="section" id="module-mkpy.codetagger">
 <span id="mkpy-codetagger-module"></span><h1>mkpy.codetagger module<a class="headerlink" href="#module-mkpy.codetagger" title="Permalink to this headline">¶</a></h1>
-<dl class="class">
+<dl class="py class">
 <dt id="mkpy.codetagger.CodeTagger">
-<em class="property">class </em><code class="sig-prename descclassname">mkpy.codetagger.</code><code class="sig-name descname">CodeTagger</code><span class="sig-paren">(</span><em class="sig-param">cmf</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/mkpy/codetagger.html#CodeTagger"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mkpy.codetagger.CodeTagger" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="sig-prename descclassname">mkpy.codetagger.</code><code class="sig-name descname">CodeTagger</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">cmf</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/mkpy/codetagger.html#CodeTagger"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mkpy.codetagger.CodeTagger" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
 <p>Tag pattern-matched sequences of time-indexed integer with key:value metadata.</p>
 <p>In the intended use case</p>
@@ -351,21 +351,21 @@ rounding error, e.g.,0.35700000000000004.</p></li>
 <li><p>There is no provision for &lt;t:n-m&gt; time interval constraints on
 code patterns. Maybe someday.</p></li>
 </ul>
-<dl class="exception">
+<dl class="py exception">
 <dt id="mkpy.codetagger.CodeTagger.BadCodePattern">
-<em class="property">exception </em><code class="sig-name descname">BadCodePattern</code><span class="sig-paren">(</span><em class="sig-param">in_patt</em>, <em class="sig-param">cause=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/mkpy/codetagger.html#CodeTagger.BadCodePattern"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mkpy.codetagger.CodeTagger.BadCodePattern" title="Permalink to this definition">¶</a></dt>
+<em class="property">exception </em><code class="sig-name descname">BadCodePattern</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">in_patt</span></em>, <em class="sig-param"><span class="n">cause</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/mkpy/codetagger.html#CodeTagger.BadCodePattern"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mkpy.codetagger.CodeTagger.BadCodePattern" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Exception</span></code></p>
 </dd></dl>
 
-<dl class="exception">
+<dl class="py exception">
 <dt id="mkpy.codetagger.CodeTagger.MissingAnchor">
-<em class="property">exception </em><code class="sig-name descname">MissingAnchor</code><span class="sig-paren">(</span><em class="sig-param">cause</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/mkpy/codetagger.html#CodeTagger.MissingAnchor"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mkpy.codetagger.CodeTagger.MissingAnchor" title="Permalink to this definition">¶</a></dt>
+<em class="property">exception </em><code class="sig-name descname">MissingAnchor</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">cause</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/mkpy/codetagger.html#CodeTagger.MissingAnchor"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mkpy.codetagger.CodeTagger.MissingAnchor" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Exception</span></code></p>
 </dd></dl>
 
-<dl class="exception">
+<dl class="py exception">
 <dt id="mkpy.codetagger.CodeTagger.MultipleAnchors">
-<em class="property">exception </em><code class="sig-name descname">MultipleAnchors</code><span class="sig-paren">(</span><em class="sig-param">cause</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/mkpy/codetagger.html#CodeTagger.MultipleAnchors"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mkpy.codetagger.CodeTagger.MultipleAnchors" title="Permalink to this definition">¶</a></dt>
+<em class="property">exception </em><code class="sig-name descname">MultipleAnchors</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">cause</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/mkpy/codetagger.html#CodeTagger.MultipleAnchors"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mkpy.codetagger.CodeTagger.MultipleAnchors" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Exception</span></code></p>
 </dd></dl>
 
