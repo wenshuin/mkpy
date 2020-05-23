@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>mkpy.codetagger &mdash; mkpy 0.2.2 documentation</title>
+  <title>mkpy.codetagger &mdash; mkpy 0.2.3 documentation</title>
   
 
   
@@ -189,6 +189,7 @@
 <div class="viewcode-block" id="CodeTagger"><a class="viewcode-back" href="../../source/mkpy.codetagger.html#mkpy.codetagger.CodeTagger">[docs]</a><span class="k">class</span> <span class="nc">CodeTagger</span><span class="p">:</span>
     <span class="sd">&quot;&quot;&quot;Tag pattern-matched sequences of time-indexed integer with key:value metadata.</span>
 
+
 <span class="sd">    In the intended use case</span>
 
 <span class="sd">    * the integer values are event-markers recorded on an event or</span>
@@ -213,7 +214,15 @@
 <span class="sd">    The mechanism here is general, abstracting away from the source of</span>
 <span class="sd">    the integer 1-D arrays and the intended purpose of the metadata.</span>
 
-<span class="sd">    Usage</span>
+
+<span class="sd">    .. note::</span>
+
+<span class="sd">       Starting with mkpy v0.2.1 codemaps allow but do not require</span>
+<span class="sd">       an `Index`.</span>
+
+
+
+<span class="sd">    Notes</span>
 <span class="sd">    -----</span>
 
 <span class="sd">    The UI for specifying a code tag map can be any of these file types</span>
@@ -258,7 +267,7 @@
 <span class="sd">            YAML indentation that PyYAML yaml.load can handle.</span>
 
 <span class="sd">            1. must have one YAML document with two keys: ``columns`` and ``rows``.</span>
-<span class="sd">            2. the first two column items must be `Index` and `regexp`.</span>
+<span class="sd">            2. the columns must start with `regexp`</span>
 <span class="sd">            3. the columns may continue ad lib.</span>
 <span class="sd">            4. each row must be a YAML sequence with the same number of items as there are columns</span>
 

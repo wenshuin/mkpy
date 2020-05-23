@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>mkpy.mkh5 &mdash; mkpy 0.2.2 documentation</title>
+  <title>mkpy.mkh5 &mdash; mkpy 0.2.3 documentation</title>
   
 
   
@@ -2459,49 +2459,95 @@
             <span class="n">h5</span><span class="o">.</span><span class="n">attrs</span><span class="p">[</span><span class="s2">&quot;version&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">__version__</span></div>
 
     <span class="c1"># create a new data set in specified group</span>
-<div class="viewcode-block" id="mkh5.create_mkdata"><a class="viewcode-back" href="../../source/mkpy.mkh5.html#mkpy.mkh5.mkh5.create_mkdata">[docs]</a>    <span class="k">def</span> <span class="nf">create_mkdata</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">h5_path</span><span class="p">,</span> <span class="n">eeg_f</span><span class="p">,</span> <span class="n">log_f</span><span class="p">,</span> <span class="n">yhdr_f</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+<div class="viewcode-block" id="mkh5.create_mkdata"><a class="viewcode-back" href="../../source/mkpy.mkh5.html#mkpy.mkh5.mkh5.create_mkdata">[docs]</a>    <span class="k">def</span> <span class="nf">create_mkdata</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">h5_path</span><span class="p">,</span>
+        <span class="n">eeg_f</span><span class="p">,</span>
+        <span class="n">log_f</span><span class="p">,</span>
+        <span class="n">yhdr_f</span><span class="p">,</span>
+        <span class="o">*</span><span class="n">args</span><span class="p">,</span>
+        <span class="n">with_log_events</span><span class="o">=</span><span class="s2">&quot;aligned&quot;</span><span class="p">,</span>
+        <span class="o">**</span><span class="n">kwargs</span><span class="p">,</span>
+    <span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Convert Kutas lab ERPSS `.crw` and `.log` to the </span>
 <span class="sd">        `mkh5` hdf5 format.</span>
 
-<span class="sd">        This is the analog of ERPSS `dig` program both create new</span>
-<span class="sd">        EEG + header + log data files, albeit in different formats. </span>
+<span class="sd">        This merges dig `.crw`, `.log`, and user-specified `.yml` data into a tidy</span>
+<span class="sd">        HDF5 dataset of continuous EEG recording + jsonic header.</span>
+
+
+<span class="sd">        .. note::</span>
+
+<span class="sd">           Log events are automatically truncated if log event codes</span>
+<span class="sd">           occur after the end of the EEG data. This is rare but can</span>
+<span class="sd">           happen when dig crashes or drops the last event code.</span>
+
 
 <span class="sd">        Parameters</span>
 <span class="sd">        ----------</span>
-<span class="sd">        h5_path : string</span>
+<span class="sd">        h5_path : str</span>
 <span class="sd">             The full slashpath location in the `.h5` file where the</span>
 <span class="sd">             new data blocks will be stored in the hdf5 file. Must be</span>
 <span class="sd">             the full slashpath from the root without the leading</span>
 <span class="sd">             slash.</span>
-<span class="sd">        eeg_f : string</span>
-<span class="sd">             file path to the `.crw` files.</span>
-<span class="sd">        log_f : string</span>
-<span class="sd">             file path to corresponding `.log` file.</span>
-<span class="sd">        yhdr_f : string</span>
-<span class="sd">             path to the YAML header file.</span>
+<span class="sd">        eeg_f : str</span>
+<span class="sd">             file path to the `.crw` file.</span>
+<span class="sd">        log_f : str or None</span>
+<span class="sd">             file path to corresponding `.log` file, if any.</span>
+<span class="sd">        yhdr_f : str</span>
+<span class="sd">             file path to the YAML header file.</span>
+<span class="sd">        with_log_events : {&quot;aligned&quot;, &quot;from_eeg&quot;, &quot;none&quot;, &quot;as_is&quot;}, optional</span>
+<span class="sd">             how to handle log file event codes (`log_evcodes`)</span>
+<span class="sd">             relative to the eeg event codes (`raw_evcodes`) from the</span>
+<span class="sd">             eeg recording.  </span>
+<span class="sd">  </span>
+<span class="sd">             `aligned` (default)</span>
+<span class="sd">                   ensures eeg and log event code</span>
+<span class="sd">                   timestamps are 1-1 but allows discrepant, e.g., logpoked,</span>
+<span class="sd">                   event codes with a warning. Requires a log file. This</span>
+<span class="sd">                   default is the mkpy.mkh5 &lt;= 0.2.2 behavior.  </span>
+
+<span class="sd">             `from_eeg` </span>
+<span class="sd">                   propagates the eeg event codes (dig mark track) to the `log_evcodes`</span>
+<span class="sd">                   column. Requires `log_f` is `None`.</span>
+
+<span class="sd">             `none`</span>
+<span class="sd">                   sets `log_evcodes`, `log_ccode`, `log_flags` all to 0. Requires `log_f` is `None`.</span>
+
+<span class="sd">             `as_is`</span>
+<span class="sd">                   loads whatever codes are in the log file without</span>
+<span class="sd">                   checking against the eeg data. Requires a log</span>
+<span class="sd">                   file. Silently allows eeg and log event code</span>
+<span class="sd">                   misalignment. Exceedingly dangerous but useful for</span>
+<span class="sd">                   disaster recovery.</span>
+
 <span class="sd">        *args : strings, optional</span>
 <span class="sd">            passed in to `h5py.create_dataset()`</span>
 <span class="sd">        *kwargs : key=values, optional</span>
 <span class="sd">            passed in to `h5py.create_dataset()`, e.g., </span>
 <span class="sd">            `compression=&quot;gzip&quot;`.</span>
 
-<span class="sd">  </span>
-<span class="sd">        Nathaniel Smith did all the hard work of low level ERPSS file</span>
-<span class="sd">        IO.</span>
 
-<span class="sd">        Uncompressed ERPSS `.raw` files are also legal but there is no</span>
-<span class="sd">        good reason to have them around. If the raw won&#39;t compress</span>
-<span class="sd">        because it is defective it won&#39;t convert to `mkh5` either.</span>
-<span class="sd">        there are no useful `**kwargs`. Chunking fails when the</span>
-<span class="sd">        size of datablock is smaller than the chunk and</span>
-<span class="sd">        compression makes files a little smaller and a lot slower</span>
-<span class="sd">        to read/write.</span>
+<span class="sd">        Notes</span>
+<span class="sd">        ----</span>
 
 <span class="sd">        The EEG and event code data streams are snipped apart into</span>
 <span class="sd">        uninterrupted &quot;datablocks&quot; at pause marks. Each data block has</span>
 <span class="sd">        its own header containing information from the `.crw` file</span>
 <span class="sd">        merged with the additional information from the YAML header</span>
 <span class="sd">        file `yhdr_f`.</span>
+
+<span class="sd">        Uncompressed ERPSS `.raw` files are also legal but there is no</span>
+<span class="sd">        good reason to have them around. If the raw won&#39;t compress</span>
+<span class="sd">        because it is defective it won&#39;t convert to `mkh5` either.</span>
+<span class="sd">        There are no known useful `**kwargs`. HDF5 chunking fails when the</span>
+<span class="sd">        size of datablock is smaller than the chunk and</span>
+<span class="sd">        compression makes files a little smaller and a lot slower</span>
+<span class="sd">        to read/write.</span>
+
+
+<span class="sd">        Nathaniel Smith did all the hard work of low level ERPSS file</span>
+<span class="sd">        IO.</span>
 
 
 <span class="sd">        Examples</span>
@@ -2512,10 +2558,13 @@
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="c1"># clean up Path</span>
         <span class="n">eeg_f</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">eeg_f</span><span class="p">)</span>
-        <span class="n">log_f</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">log_f</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">log_f</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">log_f</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">log_f</span><span class="p">)</span>
         <span class="n">yhdr_f</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">yhdr_f</span><span class="p">)</span>
 
-        <span class="p">(</span><span class="n">attr</span><span class="p">,</span> <span class="n">data</span><span class="p">)</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_read_raw_log</span><span class="p">(</span><span class="n">eeg_f</span><span class="p">,</span> <span class="n">log_f</span><span class="p">)</span>
+        <span class="p">(</span><span class="n">attr</span><span class="p">,</span> <span class="n">data</span><span class="p">)</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_read_raw_log</span><span class="p">(</span>
+            <span class="n">eeg_f</span><span class="p">,</span> <span class="n">log_f</span><span class="p">,</span> <span class="n">with_log_events</span><span class="o">=</span><span class="n">with_log_events</span>
+        <span class="p">)</span>
 
         <span class="n">hio</span> <span class="o">=</span> <span class="n">mkh5</span><span class="o">.</span><span class="n">HeaderIO</span><span class="p">()</span>
         <span class="n">hio</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="n">attr</span><span class="p">,</span> <span class="n">yhdr_f</span><span class="p">)</span>  <span class="c1"># merge the .crw and yhdr into the new header</span>
@@ -2542,33 +2591,44 @@
     <span class="c1"># ------------------------------------------------------------</span>
     <span class="c1"># add eeg data to a group under the same header</span>
     <span class="c1"># ------------------------------------------------------------</span>
-<div class="viewcode-block" id="mkh5.append_mkdata"><a class="viewcode-back" href="../../source/mkpy.mkh5.html#mkpy.mkh5.mkh5.append_mkdata">[docs]</a>    <span class="k">def</span> <span class="nf">append_mkdata</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">h5_path</span><span class="p">,</span> <span class="n">eeg_f</span><span class="p">,</span> <span class="n">log_f</span><span class="p">,</span> <span class="n">yhdr_f</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+<div class="viewcode-block" id="mkh5.append_mkdata"><a class="viewcode-back" href="../../source/mkpy.mkh5.html#mkpy.mkh5.mkh5.append_mkdata">[docs]</a>    <span class="k">def</span> <span class="nf">append_mkdata</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">h5_path</span><span class="p">,</span>
+        <span class="n">eeg_f</span><span class="p">,</span>
+        <span class="n">log_f</span><span class="p">,</span>
+        <span class="n">yhdr_f</span><span class="p">,</span>
+        <span class="o">*</span><span class="n">args</span><span class="p">,</span>
+        <span class="n">with_log_events</span><span class="o">=</span><span class="s2">&quot;aligned&quot;</span><span class="p">,</span>
+        <span class="o">**</span><span class="n">kwargs</span><span class="p">,</span>
+    <span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Append .crw, .log, .yhdr to an existing h5_path</span>
 
-<span class="sd">        This function extend an existing sequence of datablocks</span>
-<span class="sd">        `h5_path/dblock_0`, ... `h5_path/dblock_N`, with the</span>
-<span class="sd">        continuation, `h5_path/dblock_N+1`, ... </span>
+<span class="sd">        Extend an existing sequence of datablocks `h5_path/dblock_0`,</span>
+<span class="sd">        ... `h5_path/dblock_N`, with the continuation,</span>
+<span class="sd">        `h5_path/dblock_N+1`, ...</span>
 
 <span class="sd">        The intended applicaton is to combine `.crw`, `.log` files</span>
 <span class="sd">        together that could or should be grouped, e.g., to add</span>
-<span class="sd">        separately recorded cals, recover from dig crashes, to pool an </span>
-<span class="sd">        individuals data recorded in different sessions. </span>
+<span class="sd">        separately recorded cals, recover from dig crashes, to pool an</span>
+<span class="sd">        individuals data recorded in different sessions.</span>
 
 
 <span class="sd">        Parameters</span>
 <span class="sd">        ----------</span>
-<span class="sd">        h5_path : string</span>
+<span class="sd">        h5_path : str</span>
 <span class="sd">             The full slashpath location in the `.h5` file where the</span>
 <span class="sd">             new data blocks will be stored in the hdf5 file. Must be</span>
 <span class="sd">             the full slashpath from the root without the leading</span>
 <span class="sd">             slash.</span>
-<span class="sd">        eeg_f : string</span>
+<span class="sd">        eeg_f : str</span>
 <span class="sd">             file path to the `.crw` files.</span>
-<span class="sd">        log_f : string</span>
+<span class="sd">        log_f : str or None</span>
 <span class="sd">             file path to corresponding `.log` file.</span>
+<span class="sd">        with_log_events : str</span>
+<span class="sd">             how to handle the log event codes, see `mkh5.create_mkdata()` for details</span>
 <span class="sd">        yhdr_f : string</span>
 <span class="sd">             path to the YAML header file.</span>
-<span class="sd">        </span>
+
 
 <span class="sd">        Raises</span>
 <span class="sd">        -------</span>
@@ -2581,15 +2641,17 @@
 <span class="sd">        ---------</span>
 <span class="sd">        :meth:`~mkpy.mkh5.mkh5.create_mkdata`</span>
 
-
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="c1"># clean up Path</span>
         <span class="n">eeg_f</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">eeg_f</span><span class="p">)</span>
-        <span class="n">log_f</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">log_f</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">log_f</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">log_f</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">log_f</span><span class="p">)</span>
         <span class="n">yhdr_f</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">yhdr_f</span><span class="p">)</span>
 
         <span class="c1"># slurp crw/log</span>
-        <span class="p">(</span><span class="n">crw_hdr</span><span class="p">,</span> <span class="n">crw_data</span><span class="p">)</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_read_raw_log</span><span class="p">(</span><span class="n">eeg_f</span><span class="p">,</span> <span class="n">log_f</span><span class="p">)</span>
+        <span class="p">(</span><span class="n">crw_hdr</span><span class="p">,</span> <span class="n">crw_data</span><span class="p">)</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_read_raw_log</span><span class="p">(</span>
+            <span class="n">eeg_f</span><span class="p">,</span> <span class="n">log_f</span><span class="p">,</span> <span class="n">with_log_events</span><span class="o">=</span><span class="n">with_log_events</span>
+        <span class="p">)</span>
 
         <span class="c1"># build the new header</span>
         <span class="n">new_hio</span> <span class="o">=</span> <span class="n">mkh5</span><span class="o">.</span><span class="n">HeaderIO</span><span class="p">()</span>
@@ -3131,19 +3193,29 @@
         <span class="k">return</span> <span class="n">h5tools</span><span class="o">.</span><span class="n">get_data_group_paths</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">h5_fname</span><span class="p">)</span>
 
     <span class="nd">@property</span>
-    <span class="k">def</span> <span class="nf">data_blocks</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="n">data_blocks</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">def</span> <span class="nf">dblock_paths</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;an iterable list of HDF5 paths to all the data blocks in the mkh5 file&quot;&quot;&quot;</span>
+        <span class="n">dblock_paths</span> <span class="o">=</span> <span class="p">[]</span>
         <span class="n">h5_paths</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">data_groups</span>
         <span class="k">for</span> <span class="n">h5_path</span> <span class="ow">in</span> <span class="n">h5_paths</span><span class="p">:</span>
-            <span class="n">data_blocks</span> <span class="o">+=</span> <span class="n">h5tools</span><span class="o">.</span><span class="n">get_dblock_paths</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">h5_fname</span><span class="p">,</span> <span class="n">h5_path</span><span class="p">)</span>
-        <span class="k">return</span> <span class="n">data_blocks</span>
+            <span class="n">dblock_paths</span> <span class="o">+=</span> <span class="n">h5tools</span><span class="o">.</span><span class="n">get_dblock_paths</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">h5_fname</span><span class="p">,</span> <span class="n">h5_path</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">dblock_paths</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">data_blocks</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;deprecated use mkh5.dblock_paths for a list of HDF5 paths to all the data blocks&quot;&quot;&quot;</span>
+        <span class="n">msg</span> <span class="o">=</span> <span class="p">(</span>
+            <span class="s2">&quot;mkh5.data_blocks is deprecated and will be removed in a future &quot;</span>
+            <span class="s2">&quot;release, use mkh5.dblock_paths instead&quot;</span>
+        <span class="p">)</span>
+        <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span><span class="n">msg</span><span class="p">,</span> <span class="ne">FutureWarning</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">dblock_paths</span>
 
     <span class="c1">#</span>
     <span class="k">def</span> <span class="nf">_load_eeg</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">eeg_f</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;kutaslab .crw or .raw data loader, also populates self.dig_header</span>
 
 <span class="sd">        Similar to MATLAB erpio2</span>
-<span class="sd">   </span>
 
 <span class="sd">        Parameters</span>
 <span class="sd">        ----------</span>
@@ -3376,34 +3448,109 @@
     <span class="c1"># ------------------------------------------------------------</span>
     <span class="c1"># Model: data handling</span>
     <span class="c1"># ------------------------------------------------------------</span>
-    <span class="k">def</span> <span class="nf">_read_raw_log</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">eeg_f</span><span class="p">,</span> <span class="n">log_f</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;slurp, merge, and return the log and raw as typed np.ndarray plus</span>
-<span class="sd">        header dict</span>
-
-<span class="sd">        NJS crw/log slurpers plus TPU decorations.</span>
+    <span class="k">def</span> <span class="nf">_read_raw_log</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">eeg_f</span><span class="p">,</span> <span class="n">log_f</span><span class="p">,</span> <span class="n">with_log_events</span><span class="o">=</span><span class="s2">&quot;aligned&quot;</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;NJS crw/log slurpers plus TPU decorations and log wrangling. </span>
 
 <span class="sd">        Parameters</span>
 <span class="sd">        ----------</span>
 <span class="sd">        eeg_f : str</span>
 <span class="sd">           path to ERPSS .crw or .raw file</span>
-<span class="sd">        log_f : str</span>
-<span class="sd">           path to ERPSS .log file</span>
+
+<span class="sd">        log_f : str or None</span>
+<span class="sd">           path to ERPSS .log file, if any. </span>
+
+<span class="sd">        with_log_events : str (&quot;aligned&quot;, &quot;from_eeg&quot;, &quot;none&quot;, &quot;as_is&quot; )</span>
+
+<span class="sd">           `aligned` (default) ensures eeg log event code timestamps</span>
+<span class="sd">            are 1-1 but allows values, e.g, logpoked event codes with</span>
+<span class="sd">            a warning. Requires log file. This is mkpy.mkh5 &lt;= 0.2.2</span>
+<span class="sd">            behavior.</span>
+
+<span class="sd">           &quot;from_eeg&quot; propagates the eeg event codes (dig mark track)</span>
+<span class="sd">           to the log_evcodes column. Not allowed with a log filename.</span>
+
+<span class="sd">           `none` sets `log_evcodes`, `ccode`, `log_flags` all to 0.</span>
+<span class="sd">           Not allowed with a log filename.</span>
+
+<span class="sd">           `as_is` loads whatever codes are in the log file without</span>
+<span class="sd">           checking against the eeg data. Requires a log file. Allows</span>
+<span class="sd">           silent eeg and log event code misalignment. Excedingly</span>
+<span class="sd">           dangerous but useful for disaster recovery.</span>
+
 
 <span class="sd">        Returns</span>
 <span class="sd">        -------</span>
-<span class="sd">        log and raw in single np.ndarray</span>
+<span class="sd">        log and raw data merged into a 2-D numpy structured array</span>
 
 
+<span class="sd">        Notes</span>
+<span class="sd">        -----</span>
+
+<span class="sd">        `with_log_events` added in 0.2.3 to allow loading `.crw`</span>
+<span class="sd">        files with badly mismatching and/or missing `.log` files. The</span>
+<span class="sd">        change is backwards compatible, the default option</span>
+<span class="sd">        `with_log_events=&#39;aligned&#39;` is the same behavior as for</span>
+<span class="sd">        `mkpy.mkh5` &lt;= 0.2.2</span>
+
+<span class="sd">        Handle logs with care. The crw is the recorded data log of</span>
+<span class="sd">        eeg data and digital events (marktrack). The log file</span>
+<span class="sd">        contains events only. Event discrepancies between the crw</span>
+<span class="sd">        and log can also arise from data logging errors in the crw</span>
+<span class="sd">        or log or both but these are rare. Discrepancies can also be</span>
+<span class="sd">        introduced deliberately by logpoking the log to revise event</span>
+<span class="sd">        codes. Also binary log files can be (mis)constructed from</span>
+<span class="sd">        text files but there is no known instance of this in the</span>
+<span class="sd">        past 20 years. Discrepancies involving the digital sample</span>
+<span class="sd">        (tick) on which the event occurs are pathological, something</span>
+<span class="sd">        in the A/D recording failed.  Discrepancies where sample</span>
+<span class="sd">        ticks align but event code values differ typically indicate</span>
+<span class="sd">        logpoking but there is no way to determine programmatically</span>
+<span class="sd">        because the logpoked values can be anything for any reason.</span>
+
+<span class="sd">        EEG data underruns. This can happen when dig fails and doesn&#39;t</span>
+<span class="sd">        flush a data buffer. Rare but it happens.  The eeg + log data</span>
+<span class="sd">        array columns have to be the same length, the choice is to pad</span>
+<span class="sd">        the EEG data or drop the trailing log codes. Neither is good,</span>
+<span class="sd">        the log events may have useful info ... stim and response</span>
+<span class="sd">        codes. But these are available in other ways. For EEG data</span>
+<span class="sd">        analysis, it is worse to pretend EEG data was recorded when it</span>
+<span class="sd">        wasn&#39;t.</span>
+
+<span class="sd">        Spurious event code 0 in the log. The crw marktrack 0 value is</span>
+<span class="sd">        reserved for &quot;no event&quot; so a event code 0 in the log is a</span>
+<span class="sd">        contradiction in terms. It is a fixable data error if the eeg</span>
+<span class="sd">        marktrack at the corresponding tick is zero. If not, it is an</span>
+<span class="sd">        eeg v. log code mismatch and left as such. There is one known</span>
+<span class="sd">        case of the former and none of the latter.</span>
 
 <span class="sd">        Each dig record contains 256 sweeps == samples == ticks. Within a</span>
-<span class="sd">        record, each sweep is a  clock tick by definition. The records in</span>
-<span class="sd">        sequence comprise all the sweeps and provides. </span>
+<span class="sd">        record, each sweep is a clock tick by definition. The records in</span>
+<span class="sd">        sequence comprise all the sweeps and provides.</span>
+
 
 <span class="sd">        .. TO DO: some day patch mkio to yield rather than copy eeg</span>
 
 <span class="sd">        &quot;&quot;&quot;</span>
 
-        <span class="c1"># load crw</span>
+        <span class="c1"># modicum of guarding</span>
+        <span class="n">log_options</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;aligned&quot;</span><span class="p">,</span> <span class="s2">&quot;as_is&quot;</span><span class="p">,</span> <span class="s2">&quot;from_eeg&quot;</span><span class="p">,</span> <span class="s2">&quot;none&quot;</span><span class="p">]</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">with_log_events</span> <span class="ow">in</span> <span class="n">log_options</span><span class="p">:</span>
+            <span class="n">msg</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;with_log_events must be one of these: </span><span class="si">{</span><span class="s1">&#39; &#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">log_options</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="n">msg</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">log_f</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">with_log_events</span> <span class="ow">in</span> <span class="p">[</span><span class="s2">&quot;aligned&quot;</span><span class="p">,</span> <span class="s2">&quot;as_is&quot;</span><span class="p">]:</span>
+            <span class="n">msg</span> <span class="o">=</span> <span class="p">(</span>
+                <span class="sa">f</span><span class="s2">&quot;with_log_events=</span><span class="si">{</span><span class="n">with_log_events</span><span class="si">}</span><span class="s2"> requires a log file: log_f&quot;</span>
+            <span class="p">)</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="n">msg</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">log_f</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">with_log_events</span> <span class="ow">in</span> <span class="p">[</span><span class="s2">&quot;from_eeg&quot;</span><span class="p">,</span> <span class="s2">&quot;none&quot;</span><span class="p">]:</span>
+            <span class="n">msg</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;to use with_log_events=</span><span class="si">{</span><span class="n">with_log_events</span><span class="si">}</span><span class="s2">, set log_f=None&quot;</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="n">msg</span><span class="p">)</span>
+
+        <span class="c1"># ------------------------------------------------------------</span>
+        <span class="c1"># eeg data are read &quot;as is&quot;</span>
+        <span class="c1"># ------------------------------------------------------------</span>
         <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">eeg_f</span><span class="p">,</span> <span class="s2">&quot;rb&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">fr</span><span class="p">:</span>
             <span class="p">(</span>
                 <span class="n">channel_names</span><span class="p">,</span>
@@ -3412,74 +3559,96 @@
                 <span class="n">eeg</span><span class="p">,</span>
                 <span class="n">dig_header</span><span class="p">,</span>
             <span class="p">)</span> <span class="o">=</span> <span class="n">mkio</span><span class="o">.</span><span class="n">read_raw</span><span class="p">(</span><span class="n">fr</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="s2">&quot;int16&quot;</span><span class="p">)</span>
-        <span class="n">n_ticks</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">raw_evcodes</span><span class="p">)</span>  <span class="c1"># eeg.shape[0]</span>
-
-        <span class="c1"># load log, screen out 0&#39;s and codes at ticks beyond data fringe</span>
-        <span class="n">tmp_log</span> <span class="o">=</span> <span class="p">[]</span>
-        <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">log_f</span><span class="p">,</span> <span class="s2">&quot;rb&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">fid</span><span class="p">:</span>
-            <span class="k">for</span> <span class="p">(</span><span class="n">code</span><span class="p">,</span> <span class="n">tick</span><span class="p">,</span> <span class="n">condition</span><span class="p">,</span> <span class="n">flag</span><span class="p">)</span> <span class="ow">in</span> <span class="n">mkio</span><span class="o">.</span><span class="n">read_log</span><span class="p">(</span><span class="n">fid</span><span class="p">):</span>
-                <span class="k">if</span> <span class="n">n_ticks</span> <span class="o">&lt;=</span> <span class="n">tick</span><span class="p">:</span>
-                    <span class="n">msg</span> <span class="o">=</span> <span class="p">(</span>
-                        <span class="s2">&quot;uh oh ... log has events beyond the raw data.&quot;</span>
-                        <span class="s2">&quot; Check raw vs log for discrepancies or else.&quot;</span>
-                        <span class="s2">&quot; Discarding these log events as out of bounds: &quot;</span>
-                    <span class="p">)</span>
-                    <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span><span class="n">msg</span><span class="p">,</span> <span class="n">LogRawEventCodeMismatch</span><span class="p">)</span>
-                <span class="k">elif</span> <span class="n">code</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
-                    <span class="n">msg</span> <span class="o">=</span> <span class="p">(</span>
-                        <span class="s2">&quot;Trimming illegal log event code 0 at clock tick </span><span class="si">{0}</span><span class="s2">. &quot;</span>
-                        <span class="s2">&quot;Make sure you know how it got there&quot;</span>
-                    <span class="p">)</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">code</span><span class="p">)</span>
-                    <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span><span class="n">msg</span><span class="p">)</span>
-                <span class="k">else</span><span class="p">:</span>
-                    <span class="c1"># non-zero code, in bounds so add to the list</span>
-                    <span class="n">tmp_log</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">code</span><span class="p">,</span> <span class="n">tick</span><span class="p">,</span> <span class="n">condition</span><span class="p">,</span> <span class="n">flag</span><span class="p">))</span>
-
-        <span class="c1"># compare screened log event codes with raw event codes</span>
-        <span class="n">raw_events</span> <span class="o">=</span> <span class="n">raw_evcodes</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">raw_evcodes</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">)[</span><span class="mi">0</span><span class="p">]]</span>
+        <span class="k">assert</span> <span class="nb">len</span><span class="p">(</span><span class="n">raw_evcodes</span><span class="p">)</span> <span class="o">==</span> <span class="n">eeg</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="s2">&quot;bug, please report&quot;</span>
+        <span class="n">n_ticks</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">raw_evcodes</span><span class="p">)</span>
+        <span class="n">raw_event_ticks</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">raw_evcodes</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="n">raw_events</span> <span class="o">=</span> <span class="n">raw_evcodes</span><span class="p">[</span><span class="n">raw_event_ticks</span><span class="p">]</span>
         <span class="n">n_raw_events</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">raw_events</span><span class="p">)</span>
-        <span class="n">n_log_events</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">tmp_log</span><span class="p">)</span>
 
-        <span class="c1"># not enough log codes is fatal. raw does not have ccodes</span>
-        <span class="c1"># needed for calibration.</span>
-        <span class="k">if</span> <span class="n">n_log_events</span> <span class="o">&lt;</span> <span class="n">n_raw_events</span><span class="p">:</span>
-            <span class="n">msg</span> <span class="o">=</span> <span class="p">(</span>
-                <span class="s2">&quot;uh oh ... fewer events in the log than raw. &quot;</span>
-                <span class="s2">&quot;To use mkpy.mkh5 you must rebuild a valid log&quot;</span>
-                <span class="s2">&quot;from a raw2asci -events dump then asci2log. &quot;</span>
-                <span class="s2">&quot;To simply load raw data use mkpy.mkio.read_raw()&quot;</span>
+        <span class="c1"># ------------------------------------------------------------</span>
+        <span class="c1"># log data may get tidied</span>
+        <span class="c1"># log_data[evcode, crw_tick, ccode, log_flag]</span>
+        <span class="c1"># ------------------------------------------------------------</span>
+        <span class="n">log_data</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="k">if</span> <span class="n">log_f</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">log_f</span><span class="p">,</span> <span class="s2">&quot;rb&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">fid</span><span class="p">:</span>
+                <span class="n">log_data</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">row</span> <span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">mkio</span><span class="o">.</span><span class="n">read_log</span><span class="p">(</span><span class="n">fid</span><span class="p">)])</span>
+
+            <span class="c1"># log event code ticks are not allowed to exceed EEG data ticks</span>
+            <span class="c1"># under any circumstances. This can happen when dig crashes</span>
+
+            <span class="n">is_trailer</span> <span class="o">=</span> <span class="n">log_data</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">]</span> <span class="o">&gt;</span> <span class="n">raw_event_ticks</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+            <span class="k">if</span> <span class="nb">any</span><span class="p">(</span><span class="n">is_trailer</span><span class="p">):</span>
+                <span class="n">oob_events</span> <span class="o">=</span> <span class="n">log_data</span><span class="p">[</span><span class="n">is_trailer</span><span class="p">]</span>
+                <span class="n">msg</span> <span class="o">=</span> <span class="p">(</span>
+                    <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">eeg_f</span><span class="si">}</span><span class="s2"> eeg data underrun </span><span class="si">{</span><span class="n">log_f</span><span class="si">}</span><span class="s2">, &quot;</span>
+                    <span class="sa">f</span><span class="s2">&quot;dropping trailing log events </span><span class="si">{</span><span class="n">oob_events</span><span class="si">}</span><span class="s2">&quot;</span>
+                <span class="p">)</span>
+                <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span><span class="n">msg</span><span class="p">,</span> <span class="n">LogRawEventCodeMismatch</span><span class="p">)</span>
+                <span class="n">log_data</span> <span class="o">=</span> <span class="n">log_data</span><span class="p">[</span><span class="o">~</span><span class="n">is_trailer</span><span class="p">]</span>
+
+        <span class="k">if</span> <span class="n">with_log_events</span> <span class="o">==</span> <span class="s2">&quot;aligned&quot;</span><span class="p">:</span>
+            <span class="c1"># aligned (default) is mkpy.mkh5 &lt;= 0.2.2 legacy behavior</span>
+            <span class="k">assert</span> <span class="n">log_data</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">,</span> <span class="s2">&quot;bug, please report&quot;</span>
+
+            <span class="c1"># log zero codes are spurious iff the eeg marktrack at that tick is also 0</span>
+            <span class="n">is_spurious_zero</span> <span class="o">=</span> <span class="p">(</span><span class="n">log_data</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span>
+                <span class="n">raw_evcodes</span><span class="p">[</span><span class="n">log_data</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">]]</span> <span class="o">==</span> <span class="mi">0</span>
             <span class="p">)</span>
-            <span class="k">raise</span> <span class="p">(</span><span class="ne">RuntimeError</span><span class="p">(</span><span class="n">msg</span><span class="p">))</span>
+            <span class="k">if</span> <span class="nb">any</span><span class="p">(</span><span class="n">is_spurious_zero</span><span class="p">):</span>
+                <span class="n">msg</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;dropping spurious 0 event code(s) in </span><span class="si">{</span><span class="n">log_f</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="n">log_data</span><span class="p">[</span><span class="n">is_spurious_zero</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span>
+                <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span><span class="n">msg</span><span class="p">)</span>
+                <span class="k">assert</span> <span class="nb">all</span><span class="p">(</span>
+                    <span class="n">log_data</span><span class="p">[</span><span class="n">is_spurious_zero</span><span class="p">][:,</span> <span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="mi">0</span>
+                <span class="p">),</span> <span class="s2">&quot;this is a bug, please report&quot;</span>
+                <span class="n">log_data</span> <span class="o">=</span> <span class="n">log_data</span><span class="p">[</span><span class="o">~</span><span class="n">is_spurious_zero</span><span class="p">]</span>
 
-        <span class="c1"># to get here we have the same number of raw and log event</span>
-        <span class="c1"># codes at the same ticks though the codes may be different</span>
-        <span class="k">assert</span> <span class="n">n_raw_events</span> <span class="o">==</span> <span class="nb">len</span><span class="p">(</span><span class="n">tmp_log</span><span class="p">)</span>
-        <span class="k">assert</span> <span class="nb">all</span><span class="p">([</span><span class="n">raw_evcodes</span><span class="p">[</span><span class="n">tick</span><span class="p">]</span> <span class="o">!=</span> <span class="mi">0</span> <span class="k">for</span> <span class="n">_</span><span class="p">,</span> <span class="n">tick</span><span class="p">,</span> <span class="n">_</span><span class="p">,</span> <span class="n">_</span> <span class="ow">in</span> <span class="n">tmp_log</span><span class="p">])</span>
+            <span class="c1"># fail if eeg and log event code ticks differ</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="n">np</span><span class="o">.</span><span class="n">array_equal</span><span class="p">(</span><span class="n">log_data</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">],</span> <span class="n">raw_event_ticks</span><span class="p">):</span>
+                <span class="n">align_msg</span> <span class="o">=</span> <span class="s2">&quot;eeg and log event code ticks do not align&quot;</span>
+                <span class="k">raise</span> <span class="ne">RuntimeError</span><span class="p">(</span><span class="n">align_msg</span><span class="p">)</span>
 
-        <span class="c1"># # too many log codes is merely dangerous ...</span>
-        <span class="c1"># if n_log_events &gt; n_raw_events:</span>
-        <span class="c1">#     msg = (&#39;careful ... more events in the log than raw. The raw may be truncated &#39;</span>
-        <span class="c1">#            &#39;at the end and/or pathologically misaligned. Figure out which.&#39;)</span>
-        <span class="c1">#     warnings.warn(msg, LogRawEventCodeMismatch)</span>
+            <span class="c1"># ticks are aligned if we get here, but warn of different values, e.g., logpoked</span>
+            <span class="n">mismatch_events</span> <span class="o">=</span> <span class="n">log_data</span><span class="p">[</span><span class="n">log_data</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">]</span> <span class="o">!=</span> <span class="n">raw_events</span><span class="p">]</span>
+            <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">mismatch_events</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+                <span class="n">mismatch_msg</span> <span class="o">=</span> <span class="p">(</span>
+                    <span class="s2">&quot;These log event codes differ from the EEG codes, &quot;</span>
+                    <span class="s2">&quot;make sure you know why</span><span class="se">\n</span><span class="si">{mismatch_events}</span><span class="s2">&quot;</span>
+                <span class="p">)</span>
+                <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span><span class="n">mismatch_msg</span><span class="p">,</span> <span class="n">LogRawEventCodeMismatch</span><span class="p">)</span>
 
-        <span class="c1"># # 1. check log &lt;-&gt; raw event code consistency</span>
-        <span class="c1"># for i,(code, tick, condition, flag) in enumerate(tmp_log):</span>
+        <span class="k">elif</span> <span class="n">with_log_events</span> <span class="o">==</span> <span class="s2">&quot;as_is&quot;</span><span class="p">:</span>
+            <span class="k">assert</span> <span class="n">log_data</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">,</span> <span class="s2">&quot;bug, please report&quot;</span>
+            <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span>
+                <span class="sa">f</span><span class="s2">&quot;not checking for event code mismatches in </span><span class="si">{</span><span class="n">eeg_f</span><span class="si">}</span><span class="s2"> and </span><span class="si">{</span><span class="n">log_f</span><span class="si">}</span><span class="s2">&quot;</span>
+            <span class="p">)</span>
 
-        <span class="c1">#     #  find some non-zero event code or other at the log clock or die</span>
-        <span class="c1">#     if raw_evcodes[tick] == 0:</span>
-        <span class="c1">#         msg = ((&#39;mismatch raw sample {0} event code {1}: log sample {2}&#39;</span>
-        <span class="c1">#                 &#39; event code {3}&#39;).format(i, raw_evcodes[i], tick, code))</span>
-        <span class="c1">#         raise ValueError(msg)</span>
+        <span class="k">elif</span> <span class="n">with_log_events</span> <span class="o">==</span> <span class="s2">&quot;from_eeg&quot;</span><span class="p">:</span>
+            <span class="k">assert</span> <span class="n">log_data</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">,</span> <span class="s2">&quot;bug, please report&quot;</span>
+            <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span>
+                <span class="sa">f</span><span class="s2">&quot;setting all log_evcodes to match EEG event codes codes in </span><span class="si">{</span><span class="n">eeg_f</span><span class="si">}</span><span class="s2"> &quot;</span>
+            <span class="p">)</span>
+            <span class="n">log_data</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span>
+                <span class="p">[(</span><span class="n">raw_evcodes</span><span class="p">[</span><span class="n">tick</span><span class="p">],</span> <span class="n">tick</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span> <span class="k">for</span> <span class="n">tick</span> <span class="ow">in</span> <span class="n">raw_event_ticks</span><span class="p">]</span>
+            <span class="p">)</span>
 
-        <span class="c1">#     # warn if it is a mismatch ... could be logpoked or serious error</span>
-        <span class="c1">#     if code != raw_evcodes[tick]:</span>
-        <span class="c1">#         msg = ((&#39;mismatch at raw sample {0} event code {1}: log sample {2}&#39;</span>
-        <span class="c1">#                 &#39; event code {3}&#39;).format(i, raw_evcodes[i], tick, code))</span>
-        <span class="c1">#         warnings.warn(msg, LogRawEventCodeMismatch)</span>
+        <span class="k">elif</span> <span class="n">with_log_events</span> <span class="o">==</span> <span class="s2">&quot;none&quot;</span><span class="p">:</span>
+            <span class="k">assert</span> <span class="n">log_data</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">,</span> <span class="s2">&quot;bug, please report&quot;</span>
+            <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span>
+                <span class="sa">f</span><span class="s2">&quot;setting all log_evcodes, log_ccodes, log_flags to 0&quot;</span>
+            <span class="p">)</span>
+            <span class="n">log_data</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span>
+                <span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">raw_events</span><span class="p">),</span> <span class="mi">4</span><span class="p">),</span> <span class="n">dtype</span><span class="o">=</span><span class="s2">&quot;i4&quot;</span>
+            <span class="p">)</span>  <span class="c1"># evcode, tick, ccode, log_flag</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+                <span class="sa">f</span><span class="s2">&quot;bad parameter value: with_log_events=</span><span class="si">{</span><span class="n">with_log_events</span><span class="si">}</span><span class="s2">&quot;</span>
+            <span class="p">)</span>
 
-        <span class="c1"># build datablocks in earnest</span>
-
-        <span class="c1"># tick and log info stream dtypes</span>
+        <span class="c1"># ------------------------------------------------------------</span>
+        <span class="c1"># construct output structured array</span>
+        <span class="c1"># ------------------------------------------------------------</span>
+        <span class="c1">#  tick and log info stream dtypes</span>
         <span class="n">dt_names</span> <span class="o">=</span> <span class="p">[</span>
             <span class="s2">&quot;dblock_ticks&quot;</span><span class="p">,</span>
             <span class="s2">&quot;crw_ticks&quot;</span><span class="p">,</span>
@@ -3518,7 +3687,7 @@
         <span class="n">data</span><span class="p">[</span><span class="s2">&quot;raw_evcodes&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">raw_evcodes</span>
 
         <span class="c1"># load the .log streams</span>
-        <span class="k">for</span> <span class="p">(</span><span class="n">code</span><span class="p">,</span> <span class="n">tick</span><span class="p">,</span> <span class="n">condition</span><span class="p">,</span> <span class="n">flag</span><span class="p">)</span> <span class="ow">in</span> <span class="n">tmp_log</span><span class="p">:</span>
+        <span class="k">for</span> <span class="p">(</span><span class="n">code</span><span class="p">,</span> <span class="n">tick</span><span class="p">,</span> <span class="n">condition</span><span class="p">,</span> <span class="n">flag</span><span class="p">)</span> <span class="ow">in</span> <span class="n">log_data</span><span class="p">:</span>
             <span class="n">data</span><span class="p">[</span><span class="s2">&quot;log_evcodes&quot;</span><span class="p">][</span><span class="n">tick</span><span class="p">]</span> <span class="o">=</span> <span class="n">code</span>
             <span class="n">data</span><span class="p">[</span><span class="s2">&quot;log_ccodes&quot;</span><span class="p">][</span><span class="n">tick</span><span class="p">]</span> <span class="o">=</span> <span class="n">condition</span>
             <span class="n">data</span><span class="p">[</span><span class="s2">&quot;log_flags&quot;</span><span class="p">][</span><span class="n">tick</span><span class="p">]</span> <span class="o">=</span> <span class="n">flag</span>
@@ -3560,11 +3729,14 @@
 
         <span class="c1"># decorate constant columns with more useful info</span>
         <span class="n">attr</span><span class="p">[</span><span class="s2">&quot;eeg_file&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">eeg_f</span>
-        <span class="n">attr</span><span class="p">[</span><span class="s2">&quot;log_file&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">log_f</span>
+        <span class="n">attr</span><span class="p">[</span><span class="s2">&quot;log_file&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">log_f</span> <span class="k">if</span> <span class="n">log_f</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="k">else</span> <span class="s2">&quot;None&quot;</span>
         <span class="n">attr</span><span class="p">[</span><span class="s2">&quot;uuid&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">uuid</span><span class="o">.</span><span class="n">uuid4</span><span class="p">())</span>
         <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">fname</span> <span class="ow">in</span> <span class="p">{</span><span class="s2">&quot;eeg_file_md5&quot;</span><span class="p">:</span> <span class="n">eeg_f</span><span class="p">,</span> <span class="s2">&quot;log_file_md5&quot;</span><span class="p">:</span> <span class="n">log_f</span><span class="p">}</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
-            <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">fname</span><span class="p">,</span> <span class="s2">&quot;rb&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
-                <span class="n">attr</span><span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="o">=</span> <span class="n">hashlib</span><span class="o">.</span><span class="n">md5</span><span class="p">(</span><span class="n">f</span><span class="o">.</span><span class="n">read</span><span class="p">())</span><span class="o">.</span><span class="n">hexdigest</span><span class="p">()</span>
+            <span class="k">if</span> <span class="n">fname</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">fname</span><span class="p">,</span> <span class="s2">&quot;rb&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+                    <span class="n">attr</span><span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="o">=</span> <span class="n">hashlib</span><span class="o">.</span><span class="n">md5</span><span class="p">(</span><span class="n">f</span><span class="o">.</span><span class="n">read</span><span class="p">())</span><span class="o">.</span><span class="n">hexdigest</span><span class="p">()</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">attr</span><span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;None&quot;</span>
 
         <span class="c1"># New version returns the header and stuff as a dict</span>
         <span class="c1"># jsonification occurs in dblock CRUD</span>
@@ -3579,9 +3751,11 @@
 <span class="sd">        dblock : h5py.Dataset</span>
 <span class="sd">            an open, readable mkh5 datablock, dblock_N</span>
 <span class="sd">        slicer : numpy.ndarray, dtype=dtype _evticks</span>
-<span class="sd">            i.e., tuples (start_samps, anchor_samps, stop_samps), </span>
+<span class="sd">            i.e., tuples (start_samps, anchor_samps, stop_samps)</span>
 
-<span class="sd">        Returns a copy of the data </span>
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">            a copy of the data</span>
 
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">epochs_data</span> <span class="o">=</span> <span class="p">[]</span>

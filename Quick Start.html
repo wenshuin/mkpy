@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Quick start &mdash; mkpy 0.2.2 documentation</title>
+  <title>Quick start &mdash; mkpy 0.2.3 documentation</title>
   
 
   
@@ -1125,10 +1125,11 @@ of the datablocks, c.f., HDF5 utility <cite>h5ls -rds</cite></p>
 <dt><a class="reference internal" href="User Files.html#codemap"><span class="std std-ref">Event codemap files: .xlsx, .ytbl, .txt</span></a></dt><dd><p>specifies what numeric event codes in the data get tagged with
 what experimental information</p>
 </dd>
-<dt><span class="xref std std-ref">yhdx</span></dt><dd><p>broadcast information from the header to a column in the event data table</p>
-</dd>
-<dt><a class="reference internal" href="source/mkpy.mkh5.html#mkpy.mkh5.mkh5.get_event_table" title="mkpy.mkh5.mkh5.get_event_table"><code class="xref py py-meth docutils literal notranslate"><span class="pre">get_event_table()</span></code></a></dt><dd><p>look up and tag single-trial event codes and event code sequences with
-imported experimental variables in a data table format. The</p>
+</dl>
+<p><span class="xref std std-ref">yhdx</span> extract <cite>key:value</cite> from the HDF5 dblock headers as <cite>column:values</cite> in the event data table</p>
+<dl class="simple">
+<dt><a class="reference internal" href="source/mkpy.mkh5.html#mkpy.mkh5.mkh5.get_event_table" title="mkpy.mkh5.mkh5.get_event_table"><code class="xref py py-meth docutils literal notranslate"><span class="pre">get_event_table()</span></code></a></dt><dd><p>look up and tag single-trial event codes and event code sequences
+with imported experimental variables in a data table format.</p>
 </dd>
 <dt><a class="reference internal" href="source/mkpy.mkh5.html#mkpy.mkh5.mkh5.set_epochs" title="mkpy.mkh5.mkh5.set_epochs"><code class="xref py py-meth docutils literal notranslate"><span class="pre">set_epochs()</span></code></a></dt><dd><p>write the single-trial tagged EEG epoch lookup table to the <code class="docutils literal notranslate"><span class="pre">mkh5</span></code> file</p>
 </dd>

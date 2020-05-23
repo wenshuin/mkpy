@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>mkpy.mkh5 module &mdash; mkpy 0.2.2 documentation</title>
+  <title>mkpy.mkh5 module &mdash; mkpy 0.2.3 documentation</title>
   
 
   
@@ -547,11 +547,11 @@ column information it gets from the code tag mapper.</p>
 
 <dl class="py method">
 <dt id="mkpy.mkh5.mkh5.append_mkdata">
-<code class="sig-name descname">append_mkdata</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">h5_path</span></em>, <em class="sig-param"><span class="n">eeg_f</span></em>, <em class="sig-param"><span class="n">log_f</span></em>, <em class="sig-param"><span class="n">yhdr_f</span></em>, <em class="sig-param"><span class="o">*</span><span class="n">args</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/mkpy/mkh5.html#mkh5.append_mkdata"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mkpy.mkh5.mkh5.append_mkdata" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">append_mkdata</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">h5_path</span></em>, <em class="sig-param"><span class="n">eeg_f</span></em>, <em class="sig-param"><span class="n">log_f</span></em>, <em class="sig-param"><span class="n">yhdr_f</span></em>, <em class="sig-param"><span class="o">*</span><span class="n">args</span></em>, <em class="sig-param"><span class="n">with_log_events</span><span class="o">=</span><span class="default_value">'aligned'</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/mkpy/mkh5.html#mkh5.append_mkdata"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mkpy.mkh5.mkh5.append_mkdata" title="Permalink to this definition">¶</a></dt>
 <dd><p>Append .crw, .log, .yhdr to an existing h5_path</p>
-<p>This function extend an existing sequence of datablocks
-<cite>h5_path/dblock_0</cite>, … <cite>h5_path/dblock_N</cite>, with the
-continuation, <cite>h5_path/dblock_N+1</cite>, …</p>
+<p>Extend an existing sequence of datablocks <cite>h5_path/dblock_0</cite>,
+… <cite>h5_path/dblock_N</cite>, with the continuation,
+<cite>h5_path/dblock_N+1</cite>, …</p>
 <p>The intended applicaton is to combine <cite>.crw</cite>, <cite>.log</cite> files
 together that could or should be grouped, e.g., to add
 separately recorded cals, recover from dig crashes, to pool an
@@ -559,12 +559,13 @@ individuals data recorded in different sessions.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>h5_path</strong> (<em>string</em>) – The full slashpath location in the <cite>.h5</cite> file where the
+<li><p><strong>h5_path</strong> (<em>str</em>) – The full slashpath location in the <cite>.h5</cite> file where the
 new data blocks will be stored in the hdf5 file. Must be
 the full slashpath from the root without the leading
 slash.</p></li>
-<li><p><strong>eeg_f</strong> (<em>string</em>) – file path to the <cite>.crw</cite> files.</p></li>
-<li><p><strong>log_f</strong> (<em>string</em>) – file path to corresponding <cite>.log</cite> file.</p></li>
+<li><p><strong>eeg_f</strong> (<em>str</em>) – file path to the <cite>.crw</cite> files.</p></li>
+<li><p><strong>log_f</strong> (<em>str or None</em>) – file path to corresponding <cite>.log</cite> file.</p></li>
+<li><p><strong>with_log_events</strong> (<em>str</em>) – how to handle the log event codes, see <cite>mkh5.create_mkdata()</cite> for details</p></li>
 <li><p><strong>yhdr_f</strong> (<em>string</em>) – path to the YAML header file.</p></li>
 </ul>
 </dd>
@@ -636,41 +637,70 @@ the EEG and has nothing to do with the A/D scaling factor</p></li>
 
 <dl class="py method">
 <dt id="mkpy.mkh5.mkh5.create_mkdata">
-<code class="sig-name descname">create_mkdata</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">h5_path</span></em>, <em class="sig-param"><span class="n">eeg_f</span></em>, <em class="sig-param"><span class="n">log_f</span></em>, <em class="sig-param"><span class="n">yhdr_f</span></em>, <em class="sig-param"><span class="o">*</span><span class="n">args</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/mkpy/mkh5.html#mkh5.create_mkdata"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mkpy.mkh5.mkh5.create_mkdata" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">create_mkdata</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">h5_path</span></em>, <em class="sig-param"><span class="n">eeg_f</span></em>, <em class="sig-param"><span class="n">log_f</span></em>, <em class="sig-param"><span class="n">yhdr_f</span></em>, <em class="sig-param"><span class="o">*</span><span class="n">args</span></em>, <em class="sig-param"><span class="n">with_log_events</span><span class="o">=</span><span class="default_value">'aligned'</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/mkpy/mkh5.html#mkh5.create_mkdata"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mkpy.mkh5.mkh5.create_mkdata" title="Permalink to this definition">¶</a></dt>
 <dd><p>Convert Kutas lab ERPSS <cite>.crw</cite> and <cite>.log</cite> to the
 <cite>mkh5</cite> hdf5 format.</p>
-<p>This is the analog of ERPSS <cite>dig</cite> program both create new
-EEG + header + log data files, albeit in different formats.</p>
-<dl class="field-list simple">
+<p>This merges dig <cite>.crw</cite>, <cite>.log</cite>, and user-specified <cite>.yml</cite> data into a tidy
+HDF5 dataset of continuous EEG recording + jsonic header.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Log events are automatically truncated if log event codes
+occur after the end of the EEG data. This is rare but can
+happen when dig crashes or drops the last event code.</p>
+</div>
+<dl class="field-list">
 <dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>h5_path</strong> (<em>string</em>) – The full slashpath location in the <cite>.h5</cite> file where the
+<dd class="field-odd"><ul>
+<li><p><strong>h5_path</strong> (<em>str</em>) – The full slashpath location in the <cite>.h5</cite> file where the
 new data blocks will be stored in the hdf5 file. Must be
 the full slashpath from the root without the leading
 slash.</p></li>
-<li><p><strong>eeg_f</strong> (<em>string</em>) – file path to the <cite>.crw</cite> files.</p></li>
-<li><p><strong>log_f</strong> (<em>string</em>) – file path to corresponding <cite>.log</cite> file.</p></li>
-<li><p><strong>yhdr_f</strong> (<em>string</em>) – path to the YAML header file.</p></li>
+<li><p><strong>eeg_f</strong> (<em>str</em>) – file path to the <cite>.crw</cite> file.</p></li>
+<li><p><strong>log_f</strong> (<em>str or None</em>) – file path to corresponding <cite>.log</cite> file, if any.</p></li>
+<li><p><strong>yhdr_f</strong> (<em>str</em>) – file path to the YAML header file.</p></li>
+<li><p><strong>with_log_events</strong> (<em>{“aligned”, “from_eeg”, “none”, “as_is”}, optional</em>) – how to handle log file event codes (<cite>log_evcodes</cite>)
+relative to the eeg event codes (<cite>raw_evcodes</cite>) from the
+eeg recording.</p>
+<dl class="simple">
+<dt><cite>aligned</cite> (default)</dt><dd><p>ensures eeg and log event code
+timestamps are 1-1 but allows discrepant, e.g., logpoked,
+event codes with a warning. Requires a log file. This
+default is the mkpy.mkh5 &lt;= 0.2.2 behavior.</p>
+</dd>
+<dt><cite>from_eeg</cite></dt><dd><p>propagates the eeg event codes (dig mark track) to the <cite>log_evcodes</cite>
+column. Requires <cite>log_f</cite> is <cite>None</cite>.</p>
+</dd>
+<dt><cite>none</cite></dt><dd><p>sets <cite>log_evcodes</cite>, <cite>log_ccode</cite>, <cite>log_flags</cite> all to 0. Requires <cite>log_f</cite> is <cite>None</cite>.</p>
+</dd>
+<dt><cite>as_is</cite></dt><dd><p>loads whatever codes are in the log file without
+checking against the eeg data. Requires a log
+file. Silently allows eeg and log event code
+misalignment. Exceedingly dangerous but useful for
+disaster recovery.</p>
+</dd>
+</dl>
+</li>
 <li><p><strong>*args</strong> (<em>strings, optional</em>) – passed in to <cite>h5py.create_dataset()</cite></p></li>
 <li><p><strong>*kwargs</strong> (<em>key=values, optional</em>) – passed in to <cite>h5py.create_dataset()</cite>, e.g.,
 <cite>compression=”gzip”</cite>.</p></li>
 </ul>
 </dd>
 </dl>
-<p>Nathaniel Smith did all the hard work of low level ERPSS file
-IO.</p>
-<p>Uncompressed ERPSS <cite>.raw</cite> files are also legal but there is no
-good reason to have them around. If the raw won’t compress
-because it is defective it won’t convert to <cite>mkh5</cite> either.
-there are no useful <cite>**kwargs</cite>. Chunking fails when the
-size of datablock is smaller than the chunk and
-compression makes files a little smaller and a lot slower
-to read/write.</p>
+<p class="rubric">Notes</p>
 <p>The EEG and event code data streams are snipped apart into
 uninterrupted “datablocks” at pause marks. Each data block has
 its own header containing information from the <cite>.crw</cite> file
 merged with the additional information from the YAML header
 file <cite>yhdr_f</cite>.</p>
+<p>Uncompressed ERPSS <cite>.raw</cite> files are also legal but there is no
+good reason to have them around. If the raw won’t compress
+because it is defective it won’t convert to <cite>mkh5</cite> either.
+There are no known useful <cite>**kwargs</cite>. HDF5 chunking fails when the
+size of datablock is smaller than the chunk and
+compression makes files a little smaller and a lot slower
+to read/write.</p>
+<p>Nathaniel Smith did all the hard work of low level ERPSS file
+IO.</p>
 <p>Examples</p>
 <div class="admonition-todo admonition" id="id1">
 <p class="admonition-title">Todo</p>
@@ -681,12 +711,19 @@ file <cite>yhdr_f</cite>.</p>
 <dl class="py method">
 <dt id="mkpy.mkh5.mkh5.data_blocks">
 <em class="property">property </em><code class="sig-name descname">data_blocks</code><a class="headerlink" href="#mkpy.mkh5.mkh5.data_blocks" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>deprecated use mkh5.dblock_paths for a list of HDF5 paths to all the data blocks</p>
+</dd></dl>
 
 <dl class="py method">
 <dt id="mkpy.mkh5.mkh5.data_groups">
 <em class="property">property </em><code class="sig-name descname">data_groups</code><a class="headerlink" href="#mkpy.mkh5.mkh5.data_groups" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
+
+<dl class="py method">
+<dt id="mkpy.mkh5.mkh5.dblock_paths">
+<em class="property">property </em><code class="sig-name descname">dblock_paths</code><a class="headerlink" href="#mkpy.mkh5.mkh5.dblock_paths" title="Permalink to this definition">¶</a></dt>
+<dd><p>an iterable list of HDF5 paths to all the data blocks in the mkh5 file</p>
+</dd></dl>
 
 <dl class="py method">
 <dt id="mkpy.mkh5.mkh5.delete_mkdata">

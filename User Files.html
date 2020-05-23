@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>User input files &mdash; mkpy 0.2.2 documentation</title>
+  <title>User input files &mdash; mkpy 0.2.3 documentation</title>
   
 
   
@@ -472,7 +472,7 @@ are worse.</p>
 <div class="section" id="file-types">
 <h3>File types<a class="headerlink" href="#file-types" title="Permalink to this headline">¶</a></h3>
 <blockquote>
-<div><p>A code tag map can be any of these file types:</p>
+<div><p>A codemap can be any of these file types:</p>
 <blockquote>
 <div><dl>
 <dt>Excel</dt><dd><p>an .xlsx file and (optional) named worksheet readable by
@@ -495,7 +495,7 @@ described below.</p>
 <dt>Excel and Tabbed-text</dt><dd><ol class="arabic simple">
 <li><p>the data must be tabular in n rows and m columns (i,j &gt;= 2)</p></li>
 <li><p>column labels must be in the first row</p></li>
-<li><p>the column labels must include ‘regexp’</p></li>
+<li><p>the columns must includel, ‘regexp’, by convention the first column</p></li>
 <li><p>there must be at least one tag column, there may be more</p></li>
 </ol>
 <table class="docutils align-default">
@@ -530,7 +530,7 @@ described below.</p>
 YAML indentation that PyYAML yaml.load can handle.</p>
 <ol class="arabic simple">
 <li><p>must have one YAML document with two keys: <code class="docutils literal notranslate"><span class="pre">columns</span></code> and <code class="docutils literal notranslate"><span class="pre">rows</span></code>.</p></li>
-<li><p>the first two column items must be <cite>Index</cite> and <cite>regexp</cite>.</p></li>
+<li><p>the first column item must be <cite>regexp</cite>.</p></li>
 <li><p>the columns may continue ad lib.</p></li>
 <li><p>each row must be a YAML sequence with the same number of items as there are columns</p></li>
 </ol>
@@ -539,30 +539,21 @@ YAML indentation that PyYAML yaml.load can handle.</p>
 <p>Example</p>
 <div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nn">---</span>
 <span class="s">&#39;columns&#39;</span><span class="p p-Indicator">:</span>
-  <span class="p p-Indicator">[</span><span class="nv">Index</span><span class="p p-Indicator">,</span> <span class="nv">regexp</span><span class="p p-Indicator">,</span> <span class="nv">probability</span><span class="p p-Indicator">,</span> <span class="nv">frequency</span><span class="p p-Indicator">,</span> <span class="nv">source</span><span class="p p-Indicator">]</span>
+  <span class="p p-Indicator">[</span><span class="nv">regexp</span><span class="p p-Indicator">,</span> <span class="nv">probability</span><span class="p p-Indicator">,</span> <span class="nv">frequency</span><span class="p p-Indicator">,</span> <span class="nv">source</span><span class="p p-Indicator">]</span>
 <span class="s">&#39;rows&#39;</span><span class="p p-Indicator">:</span>
-  <span class="p p-Indicator">-</span> <span class="p p-Indicator">[</span><span class="nv">1</span><span class="p p-Indicator">,</span> <span class="s">&#39;(#1)&#39;</span><span class="p p-Indicator">,</span> <span class="nv">hi</span><span class="p p-Indicator">,</span>   <span class="nv">880</span><span class="p p-Indicator">,</span> <span class="nv">oboe</span><span class="p p-Indicator">]</span>
-  <span class="p p-Indicator">-</span> <span class="p p-Indicator">[</span><span class="nv">2</span><span class="p p-Indicator">,</span> <span class="s">&#39;(#2)&#39;</span><span class="p p-Indicator">,</span> <span class="nv">hi</span><span class="p p-Indicator">,</span>   <span class="nv">440</span><span class="p p-Indicator">,</span> <span class="nv">oboe</span><span class="p p-Indicator">]</span>
-  <span class="p p-Indicator">-</span> <span class="p p-Indicator">[</span><span class="nv">3</span><span class="p p-Indicator">,</span> <span class="s">&#39;(#3)&#39;</span><span class="p p-Indicator">,</span> <span class="nv">lo</span><span class="p p-Indicator">,</span>   <span class="nv">880</span><span class="p p-Indicator">,</span> <span class="nv">oboe</span><span class="p p-Indicator">]</span>
-  <span class="p p-Indicator">-</span> <span class="p p-Indicator">[</span><span class="nv">4</span><span class="p p-Indicator">,</span> <span class="s">&#39;(#4)&#39;</span><span class="p p-Indicator">,</span> <span class="nv">lo</span><span class="p p-Indicator">,</span>   <span class="nv">440</span><span class="p p-Indicator">,</span> <span class="nv">oboe</span><span class="p p-Indicator">]</span>
-  <span class="p p-Indicator">-</span> <span class="p p-Indicator">[</span><span class="nv">5</span><span class="p p-Indicator">,</span> <span class="s">&#39;(#5)&#39;</span><span class="p p-Indicator">,</span> <span class="nv">hi</span><span class="p p-Indicator">,</span>   <span class="nv">880</span><span class="p p-Indicator">,</span> <span class="nv">tuba</span><span class="p p-Indicator">]</span>
-  <span class="p p-Indicator">-</span> <span class="p p-Indicator">[</span><span class="nv">6</span><span class="p p-Indicator">,</span> <span class="s">&#39;(#6)&#39;</span><span class="p p-Indicator">,</span> <span class="nv">hi</span><span class="p p-Indicator">,</span>   <span class="nv">440</span><span class="p p-Indicator">,</span> <span class="nv">tuba</span><span class="p p-Indicator">]</span>
-  <span class="p p-Indicator">-</span> <span class="p p-Indicator">[</span><span class="nv">7</span><span class="p p-Indicator">,</span> <span class="s">&#39;(#7)&#39;</span><span class="p p-Indicator">,</span> <span class="nv">lo</span><span class="p p-Indicator">,</span>   <span class="nv">880</span><span class="p p-Indicator">,</span> <span class="nv">tuba</span><span class="p p-Indicator">]</span>
-  <span class="p p-Indicator">-</span> <span class="p p-Indicator">[</span><span class="nv">8</span><span class="p p-Indicator">,</span> <span class="s">&#39;(#8)&#39;</span><span class="p p-Indicator">,</span> <span class="nv">lo</span><span class="p p-Indicator">,</span>   <span class="nv">440</span><span class="p p-Indicator">,</span> <span class="nv">tuba</span><span class="p p-Indicator">]</span>
+  <span class="p p-Indicator">-</span> <span class="p p-Indicator">[</span><span class="s">&#39;(#1)&#39;</span><span class="p p-Indicator">,</span> <span class="nv">hi</span><span class="p p-Indicator">,</span>   <span class="nv">880</span><span class="p p-Indicator">,</span> <span class="nv">oboe</span><span class="p p-Indicator">]</span>
+  <span class="p p-Indicator">-</span> <span class="p p-Indicator">[</span><span class="s">&#39;(#2)&#39;</span><span class="p p-Indicator">,</span> <span class="nv">hi</span><span class="p p-Indicator">,</span>   <span class="nv">440</span><span class="p p-Indicator">,</span> <span class="nv">oboe</span><span class="p p-Indicator">]</span>
+  <span class="p p-Indicator">-</span> <span class="p p-Indicator">[</span><span class="s">&#39;(#3)&#39;</span><span class="p p-Indicator">,</span> <span class="nv">lo</span><span class="p p-Indicator">,</span>   <span class="nv">880</span><span class="p p-Indicator">,</span> <span class="nv">oboe</span><span class="p p-Indicator">]</span>
+  <span class="p p-Indicator">-</span> <span class="p p-Indicator">[</span><span class="s">&#39;(#4)&#39;</span><span class="p p-Indicator">,</span> <span class="nv">lo</span><span class="p p-Indicator">,</span>   <span class="nv">440</span><span class="p p-Indicator">,</span> <span class="nv">oboe</span><span class="p p-Indicator">]</span>
+  <span class="p p-Indicator">-</span> <span class="p p-Indicator">[</span><span class="s">&#39;(#5)&#39;</span><span class="p p-Indicator">,</span> <span class="nv">hi</span><span class="p p-Indicator">,</span>   <span class="nv">880</span><span class="p p-Indicator">,</span> <span class="nv">tuba</span><span class="p p-Indicator">]</span>
+  <span class="p p-Indicator">-</span> <span class="p p-Indicator">[</span><span class="s">&#39;(#6)&#39;</span><span class="p p-Indicator">,</span> <span class="nv">hi</span><span class="p p-Indicator">,</span>   <span class="nv">440</span><span class="p p-Indicator">,</span> <span class="nv">tuba</span><span class="p p-Indicator">]</span>
+  <span class="p p-Indicator">-</span> <span class="p p-Indicator">[</span><span class="s">&#39;(#7)&#39;</span><span class="p p-Indicator">,</span> <span class="nv">lo</span><span class="p p-Indicator">,</span>   <span class="nv">880</span><span class="p p-Indicator">,</span> <span class="nv">tuba</span><span class="p p-Indicator">]</span>
+  <span class="p p-Indicator">-</span> <span class="p p-Indicator">[</span><span class="s">&#39;(#8)&#39;</span><span class="p p-Indicator">,</span> <span class="nv">lo</span><span class="p p-Indicator">,</span>   <span class="nv">440</span><span class="p p-Indicator">,</span> <span class="nv">tuba</span><span class="p p-Indicator">]</span>
 </pre></div>
 </div>
 </div></blockquote>
 <p>Row value data types</p>
 <dl>
-<dt>Index<span class="classifier">( str, int )</span></dt><dd><p>data type is not checked, violate at your own risk. Each code
-pattern may but need not have a unique Index.</p>
-<dl class="simple">
-<dt>Example index sequences:</dt><dd><p>1,2,3, …
-id_1, id_2, id_3, …
-hi/880/oboe, hi/440/oboe, lo/880/oboe …</p>
-</dd>
-</dl>
-</dd>
 <dt>regexp<span class="classifier">regular expresion (<cite>flanker* (#anchor) flanker*</cite>)</span></dt><dd><p>This is the code sequence search pattern.  Log codes are
 separated by a single whitespace for matching. The <code class="docutils literal notranslate"><span class="pre">regexp</span></code>
 has exactly one anchor pattern capture group (# ) optionally

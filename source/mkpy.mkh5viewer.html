@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>mkpy.mkh5viewer module &mdash; mkpy 0.2.2 documentation</title>
+  <title>mkpy.mkh5viewer module &mdash; mkpy 0.2.3 documentation</title>
   
 
   
@@ -318,7 +318,7 @@ to UI events.</p>
 <dd class="field-even"><ul class="simple">
 <li><p><strong>mkh5</strong> (<em>object</em>) – <a class="reference internal" href="mkpy.mkh5.html#mkpy.mkh5.mkh5" title="mkpy.mkh5.mkh5"><code class="xref py py-class docutils literal notranslate"><span class="pre">mkh5</span></code></a> instance that exposes the hdf5 data and methods</p></li>
 <li><p><strong>dblock_paths</strong> (<em>list of str</em>) – catalogue of all hdf5 slashpaths to mkh5 dblocks</p></li>
-<li><p><strong>epoch_tables</strong> (<em>list of str</em>) – each string is a slash path ‘_epoch_tables/<a href="#id1"><span class="problematic" id="id2">*</span></a>’ to an mkh5 epoch table dataset</p></li>
+<li><p><strong>epoch_tables</strong> (<em>list of str</em>) – each string is a slash path ‘_epoch_tables/*’ to an mkh5 epoch table dataset</p></li>
 <li><p><strong>dbp_idx</strong> (<em>uint</em>) – index of model’s current dblock_path</p></li>
 <li><p><strong>dblock_path</strong> (<em>string</em>) – slash path to the active mkpy.mkh5 data set, e.g.,
 <cite>sub01/dblock_0</cite> or <cite>exp1/S07/dblock_7</cite>.</p></li>
