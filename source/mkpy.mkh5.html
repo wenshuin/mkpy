@@ -93,16 +93,16 @@
 <li class="toctree-l1"><a class="reference internal" href="../Installation.html">Installation</a></li>
 </ul>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="../Quick Start.html">Quick start</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Quick%20Start.html">Quick start</a></li>
 </ul>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../Pygarv.html">pygarv: EEG visualization dashboard</a></li>
 </ul>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="../User Files.html">User input files</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../User%20Files.html">User input files</a></li>
 </ul>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="../Output Files.html">EEG data files</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Output%20Files.html">EEG data files</a></li>
 </ul>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../Learning.html">Background reading</a></li>
@@ -285,7 +285,7 @@ triples (see topofiles for theta, phi) and get mapped to x,y,z</p>
 EEG data files into readily accessible HDF5 files.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>h5_fname</strong> (<em>str</em>) – Path to a new or existing HDF5 file used as the database.</p>
+<dd class="field-odd"><p><strong>h5_fname</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>) – Path to a new or existing HDF5 file used as the database.</p>
 </dd>
 </dl>
 <dl class="py attribute">
@@ -348,7 +348,7 @@ file. See _load_yhdr() docstring for specs.</p>
 <dd><p>load header info from dblock into self._header</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>dblock</strong> (<em>h5py.Dataset</em>) – The HDF5 dataset whose attribute ‘json_header’ holds the header JSON string.</p>
+<dd class="field-odd"><p><strong>dblock</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">h5py.Dataset</span></code>) – The HDF5 dataset whose attribute ‘json_header’ holds the header JSON string.</p>
 </dd>
 </dl>
 </dd></dl>
@@ -359,14 +359,14 @@ file. See _load_yhdr() docstring for specs.</p>
 <dd><p>slice out data values from dblock header for use in event table columns</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>slicer</strong> (<em>dict</em>) – dictionary of col_name: slash_pattern where,
+<dd class="field-odd"><p><strong>slicer</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">dict</span></code>) – dictionary of col_name: slash_pattern where,
 * col_name (string) is the dict key that will appear as a table column heading
 * search_path (list of strings) as [ ‘key1’, ‘key2’, … key_n] to probe header</p>
 </dd>
 <dt class="field-even">Returns</dt>
 <dd class="field-even"><p><ul class="simple">
-<li><p><strong>slicer</strong> (<em>list of 2-ples, possibly empty)</em>) – each tuple is (col_name, datum) where</p></li>
-<li><p><strong>datum</strong> (<em>object</em>) – leaf returned by dpath.util.get(self._header, search_path)</p></li>
+<li><p><strong>slicer</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">list</span></code> of <code class="xref py py-class docutils literal notranslate"><span class="pre">2-ples</span></code>, <code class="xref py py-class docutils literal notranslate"><span class="pre">possibly</span> <span class="pre">empty)</span></code>) – each tuple is (col_name, datum) where</p></li>
+<li><p><strong>datum</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code>) – leaf returned by dpath.util.get(self._header, search_path)</p></li>
 </ul>
 </p>
 </dd>
@@ -398,7 +398,7 @@ mkh5 datablock header or die</p>
 <dd><p>jsonify the current self._header as value of dblock.attrs[self._json_key]</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>dblock</strong> (<em>h5py.Dataset</em>) – writeable mkh5 datablock reference</p>
+<dd class="field-odd"><p><strong>dblock</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">h5py.Dataset</span></code>) – writeable mkh5 datablock reference</p>
 </dd>
 </dl>
 </dd></dl>
@@ -409,7 +409,7 @@ mkh5 datablock header or die</p>
 <dd><p>load YAML header slicer for selecting subsets of mkh5 header values</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>slicer_f</strong> (<em>str</em>) – YAML file in mkh5 header slicer format</p>
+<dd class="field-odd"><p><strong>slicer_f</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>) – YAML file in mkh5 header slicer format</p>
 </dd>
 <dt class="field-even">Returns</dt>
 <dd class="field-even"><p>side effect: sets self._slicer</p>
@@ -562,14 +562,14 @@ individuals data recorded in different sessions.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>h5_path</strong> (<em>str</em>) – The full slashpath location in the <cite>.h5</cite> file where the
+<li><p><strong>h5_path</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>) – The full slashpath location in the <cite>.h5</cite> file where the
 new data blocks will be stored in the hdf5 file. Must be
 the full slashpath from the root without the leading
 slash.</p></li>
-<li><p><strong>eeg_f</strong> (<em>str</em>) – file path to the <cite>.crw</cite> files.</p></li>
-<li><p><strong>log_f</strong> (<em>str or None</em>) – file path to corresponding <cite>.log</cite> file.</p></li>
-<li><p><strong>with_log_events</strong> (<em>str</em>) – how to handle the log event codes, see <cite>mkh5.create_mkdata()</cite> for details</p></li>
-<li><p><strong>yhdr_f</strong> (<em>string</em>) – path to the YAML header file.</p></li>
+<li><p><strong>eeg_f</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>) – file path to the <cite>.crw</cite> files.</p></li>
+<li><p><strong>log_f</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code> or <code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code>) – file path to corresponding <cite>.log</cite> file.</p></li>
+<li><p><strong>with_log_events</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>) – how to handle the log event codes, see <cite>mkh5.create_mkdata()</cite> for details</p></li>
+<li><p><strong>yhdr_f</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">string</span></code>) – path to the YAML header file.</p></li>
 </ul>
 </dd>
 <dt class="field-even">Raises</dt>
@@ -597,21 +597,21 @@ calibration pulses.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>id_name</strong> (<em>str</em>) – h5 group name that is parent to mkpy format dblocks, id_name/dblocks</p></li>
-<li><p><strong>cal_size</strong> (<em>float</em>) – magnitude of calibration square wave step in microvolts, e.g., 10</p></li>
-<li><p><strong>polarity</strong> (<em>(1,0)</em>) – ignored, and should be deprecated. In ERPSS this inverts
+<li><p><strong>id_name</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>) – h5 group name that is parent to mkpy format dblocks, id_name/dblocks</p></li>
+<li><p><strong>cal_size</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code>) – magnitude of calibration square wave step in microvolts, e.g., 10</p></li>
+<li><p><strong>polarity</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">(1,0)</span></code>) – ignored, and should be deprecated. In ERPSS this inverts
 all waveforms … has nothing to do with calibration really.</p></li>
-<li><p><strong>lo_cursor</strong> (<em>float (positive value)</em>) – magnitude of the low cursor offset from the calibration
+<li><p><strong>lo_cursor</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">float</span> <span class="pre">(positive</span> <span class="pre">value)</span></code>) – magnitude of the low cursor offset from the calibration
 event in milliseconds</p></li>
-<li><p><strong>hi_cursor</strong> (<em>float (positive value)</em>) – magnitude of the high cursor offset from the calibration
+<li><p><strong>hi_cursor</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">float</span> <span class="pre">(positive</span> <span class="pre">value)</span></code>) – magnitude of the high cursor offset from the calibration
 event in milliseconds</p></li>
-<li><p><strong>n_points</strong> (<em>uint</em>) – number of points on either side of each cursor to measure,
+<li><p><strong>n_points</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">uint</span></code>) – number of points on either side of each cursor to measure,
 interval = 2*n_points + 1</p></li>
-<li><p><strong>cal_ccode</strong> (<em>uint (default = 0)</em>) – search for cal pulses only in dblocks where the ccode
+<li><p><strong>cal_ccode</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">uint</span> <span class="pre">(default</span> <span class="pre">=</span> <span class="pre">0)</span></code>) – search for cal pulses only in dblocks where the ccode
 column == cal_ccode.  The standing kutas lab convention is
 cal ccode == 0</p></li>
-<li><p><strong>use_cals</strong> (str (None defaults to <cite>id_name</cite>)) – slashpath to an alternate h5 group containing dblocks with the cal pulses</p></li>
-<li><p><strong>use_file</strong> (str (None defaults to <cite>self.f_name</cite>)) – slashpath to an alternate mkpy format h5 data file.</p></li>
+<li><p><strong>use_cals</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">str</span> <span class="pre">(None</span> <span class="pre">defaults</span></code> to <cite>id_name</cite>)) – slashpath to an alternate h5 group containing dblocks with the cal pulses</p></li>
+<li><p><strong>use_file</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">str</span> <span class="pre">(None</span> <span class="pre">defaults</span></code> to <cite>self.f_name</cite>)) – slashpath to an alternate mkpy format h5 data file.</p></li>
 </ul>
 </dd>
 </dl>
@@ -654,14 +654,14 @@ happen when dig crashes or drops the last event code.</p>
 <dl class="field-list">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul>
-<li><p><strong>h5_path</strong> (<em>str</em>) – The full slashpath location in the <cite>.h5</cite> file where the
+<li><p><strong>h5_path</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>) – The full slashpath location in the <cite>.h5</cite> file where the
 new data blocks will be stored in the hdf5 file. Must be
 the full slashpath from the root without the leading
 slash.</p></li>
-<li><p><strong>eeg_f</strong> (<em>str</em>) – file path to the <cite>.crw</cite> file.</p></li>
-<li><p><strong>log_f</strong> (<em>str or None</em>) – file path to corresponding <cite>.log</cite> file, if any.</p></li>
-<li><p><strong>yhdr_f</strong> (<em>str</em>) – file path to the YAML header file.</p></li>
-<li><p><strong>with_log_events</strong> (<em>{“aligned”, “from_eeg”, “none”, “as_is”}, optional</em>) – how to handle log file event codes (<cite>log_evcodes</cite>)
+<li><p><strong>eeg_f</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>) – file path to the <cite>.crw</cite> file.</p></li>
+<li><p><strong>log_f</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code> or <code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code>) – file path to corresponding <cite>.log</cite> file, if any.</p></li>
+<li><p><strong>yhdr_f</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>) – file path to the YAML header file.</p></li>
+<li><p><strong>with_log_events</strong> (<code class="docutils literal notranslate"><span class="pre">{&quot;aligned&quot;,</span> <span class="pre">&quot;from_eeg&quot;,</span> <span class="pre">&quot;none&quot;,</span> <span class="pre">&quot;as_is&quot;}</span></code>, <em>optional</em>) – how to handle log file event codes (<cite>log_evcodes</cite>)
 relative to the eeg event codes (<cite>raw_evcodes</cite>) from the
 eeg recording.</p>
 <dl class="simple">
@@ -683,8 +683,8 @@ disaster recovery.</p>
 </dd>
 </dl>
 </li>
-<li><p><strong>*args</strong> (<em>strings, optional</em>) – passed in to <cite>h5py.create_dataset()</cite></p></li>
-<li><p><strong>*kwargs</strong> (<em>key=values, optional</em>) – passed in to <cite>h5py.create_dataset()</cite>, e.g.,
+<li><p><strong>*args</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">strings</span></code>, <em>optional</em>) – passed in to <cite>h5py.create_dataset()</cite></p></li>
+<li><p><strong>*kwargs</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">key=values</span></code>, <em>optional</em>) – passed in to <cite>h5py.create_dataset()</cite>, e.g.,
 <cite>compression=”gzip”</cite>.</p></li>
 </ul>
 </dd>
@@ -751,9 +751,9 @@ in here.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>epochs_name</strong> (<em>string</em>) – must name one of the datasets in this h5[‘epochs’]</p></li>
-<li><p><strong>epochs_f</strong> (<em>string</em>) – file path and name of the data file</p></li>
-<li><p><strong>file_format</strong> (<em>string, {‘h5’, ‘pdh5’, ‘feather’, ‘txt’}</em>)</p></li>
+<li><p><strong>epochs_name</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">string</span></code>) – must name one of the datasets in this h5[‘epochs’]</p></li>
+<li><p><strong>epochs_f</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">string</span></code>) – file path and name of the data file</p></li>
+<li><p><strong>file_format</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">string</span></code>, <code class="docutils literal notranslate"><span class="pre">{'h5',</span> <span class="pre">'pdh5',</span> <span class="pre">'feather',</span> <span class="pre">'txt'}</span></code>)</p></li>
 </ul>
 </dd>
 </dl>
@@ -802,8 +802,8 @@ as tab-separated text with <cite>pandas.to_csv(…, sep=’  ‘)</cite>.</p></l
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>h5_data_group_path</strong> (<em>str</em>) – name of the h5 datagroup containing the dblocks to screen</p></li>
-<li><p><strong>skip_ccodes</strong> (<em>list of uint, None ([0])</em>) – dblocks with log_ccodes in the list are not scanned. Default
+<li><p><strong>h5_data_group_path</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>) – name of the h5 datagroup containing the dblocks to screen</p></li>
+<li><p><strong>skip_ccodes</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">list</span></code> of <code class="xref py py-class docutils literal notranslate"><span class="pre">uint</span></code>, <code class="xref py py-class docutils literal notranslate"><span class="pre">None</span> <span class="pre">([0])</span></code>) – dblocks with log_ccodes in the list are not scanned. Default
 is [0] to skip calibration blocks. Setting to None disables
 the skipper and scans all dblocks in the data group</p></li>
 </ul>
@@ -818,7 +818,7 @@ the skipper and scans all dblocks in the data group</p></li>
 datablock at h5_path</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>h5_path</strong> (<em>string</em>) – full slashpath to a datablock in this mkh5 instance</p>
+<dd class="field-odd"><p><strong>h5_path</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">string</span></code>) – full slashpath to a datablock in this mkh5 instance</p>
 </dd>
 </dl>
 </dd></dl>
@@ -830,14 +830,14 @@ datablock at h5_path</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>epochs_name</strong> (<em>str</em>) – name of previously set epochs table</p></li>
-<li><p><strong>format</strong> (<em>str {‘numpy’, ‘pandas’}</em>)</p></li>
-<li><p><strong>columns</strong> (<em>list of str or None {‘None’}</em>) – the subset of column names to extract</p></li>
+<li><p><strong>epochs_name</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>) – name of previously set epochs table</p></li>
+<li><p><strong>format</strong> (str <code class="docutils literal notranslate"><span class="pre">{'numpy',</span> <span class="pre">'pandas'}</span></code>)</p></li>
+<li><p><strong>columns</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">list</span></code> of <code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code> or None <code class="docutils literal notranslate"><span class="pre">{'None'}</span></code>) – the subset of column names to extract</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns</dt>
 <dd class="field-even"><p><ul>
-<li><p><strong>epochs</strong> (<em>numpy.ndarray or pandas.DataFrame</em>) –  epochs.shape == (i x m, n + 2) where</p>
+<li><p><strong>epochs</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">numpy.ndarray</span></code> or <code class="xref py py-class docutils literal notranslate"><span class="pre">pandas.DataFrame</span></code>) –  epochs.shape == (i x m, n + 2) where</p>
 <blockquote>
 <div><p>i = the number of epochs, indexed uniquely by epoch_table[‘epoch_id’]
 m = epoch length in samples
@@ -845,7 +845,7 @@ n = the number of columns in the <cite>epochs_name</cite> epochs table</p>
 </div></blockquote>
 <p>See <cite>_h5_get_epochs()</cite> for details.</p>
 </li>
-<li><p><strong>attrs</strong> (<em>dict</em>) – stub</p></li>
+<li><p><strong>attrs</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">dict</span></code>) – stub</p></li>
 </ul>
 </p>
 </dd>
@@ -859,16 +859,16 @@ n = the number of columns in the <cite>epochs_name</cite> epochs table</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>epochs_name</strong> (<em>str</em>) – name of a previously defined epochs table as set with an
+<li><p><strong>epochs_name</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>) – name of a previously defined epochs table as set with an
 mkh5.set_epochs(event_table)</p></li>
-<li><p><strong>format</strong> (<em>str  {‘pandas’, ‘numpy’}</em>) – pandas.Dataframe or numpy.ndarray</p></li>
+<li><p><strong>format</strong> (str  <code class="docutils literal notranslate"><span class="pre">{'pandas',</span> <span class="pre">'numpy'}</span></code>) – pandas.Dataframe or numpy.ndarray</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns</dt>
 <dd class="field-even"><p><strong>epochs_table</strong></p>
 </dd>
 <dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p>pandas.Dataframe or numpy.ndarray</p>
+<dd class="field-odd"><p><code class="xref py py-class docutils literal notranslate"><span class="pre">pandas.Dataframe</span></code> or <code class="xref py py-class docutils literal notranslate"><span class="pre">numpy.ndarray</span></code></p>
 </dd>
 </dl>
 <p>Bytestrings from the hdf5 are converted to unicode epochs_table
@@ -888,9 +888,9 @@ table returned</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>code_map_f</strong> (<em>str</em>) – Excel, YAML, or tab-separated text, see mkh5 docs for
+<li><p><strong>code_map_f</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>) – Excel, YAML, or tab-separated text, see mkh5 docs for
 format details.</p></li>
-<li><p><strong>header_map_f</strong> (<em>str</em>) – YAML header extractor file, keys match header keys, values specify
+<li><p><strong>header_map_f</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>) – YAML header extractor file, keys match header keys, values specify
 name of the event table column to put the header data</p></li>
 </ul>
 </dd>
@@ -898,7 +898,7 @@ name of the event table column to put the header data</p></li>
 <dd class="field-even"><p><strong>event_table</strong> – See Note.</p>
 </dd>
 <dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p>pandas.DataFrame</p>
+<dd class="field-odd"><p><code class="xref py py-class docutils literal notranslate"><span class="pre">pandas.DataFrame</span></code></p>
 </dd>
 </dl>
 <div class="admonition note">
@@ -944,7 +944,7 @@ pattern matching.</p></li>
 <dd><p>print header information matching the pattern regular expression to STDOUT</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>pattern</strong> (<em>regexp</em>) – regular expression to look for in the slashpaths to
+<dd class="field-odd"><p><strong>pattern</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">regexp</span></code>) – regular expression to look for in the slashpaths to
 datablocks and header information in this mkh5 format
 file. Default ‘.+’ matches all header info.</p>
 </dd>
@@ -1001,10 +1001,10 @@ float-like (float, np.float32, np.float64)</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>epochs_table_name</strong> (<em>string</em>) – name of the epochs table to store</p></li>
-<li><p><strong>event_table</strong> (<em>pandas.DataFrame</em>) – as returned by mkh5.get_event_table()</p></li>
-<li><p><strong>tmin_ms</strong> (<em>float</em>) – epoch start in millseconds relative to the event, e.g, -500</p></li>
-<li><p><strong>tmax_ms</strong> (<em>float</em>) – epoch end in millseconds relative to the event, e..g,
+<li><p><strong>epochs_table_name</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">string</span></code>) – name of the epochs table to store</p></li>
+<li><p><strong>event_table</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">pandas.DataFrame</span></code>) – as returned by mkh5.get_event_table()</p></li>
+<li><p><strong>tmin_ms</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code>) – epoch start in millseconds relative to the event, e.g, -500</p></li>
+<li><p><strong>tmax_ms</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code>) – epoch end in millseconds relative to the event, e..g,
 1500, strictly greater than tmin_ms</p></li>
 </ul>
 </dd>
@@ -1043,7 +1043,7 @@ is dangerous without a clear understanding of the mkh5 dataset
 and header attribute format and dpath.util behavior.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>slash_vals</strong> (<em>(str, value) 2-ple or list of them</em>) – str is a slash path to an mkh5 dblock and on into the header
+<dd class="field-odd"><p><strong>slash_vals</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">(str</span></code>, <code class="xref py py-class docutils literal notranslate"><span class="pre">value)</span> <span class="pre">2-ple</span></code> or <code class="xref py py-class docutils literal notranslate"><span class="pre">list</span></code> of <code class="xref py py-class docutils literal notranslate"><span class="pre">them</span></code>) – str is a slash path to an mkh5 dblock and on into the header
 value is JSON-ifiable scalar, dict, or sequence</p>
 </dd>
 </dl>

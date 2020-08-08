@@ -93,16 +93,16 @@
 <li class="toctree-l1"><a class="reference internal" href="../Installation.html">Installation</a></li>
 </ul>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="../Quick Start.html">Quick start</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Quick%20Start.html">Quick start</a></li>
 </ul>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../Pygarv.html">pygarv: EEG visualization dashboard</a></li>
 </ul>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="../User Files.html">User input files</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../User%20Files.html">User input files</a></li>
 </ul>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="../Output Files.html">EEG data files</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Output%20Files.html">EEG data files</a></li>
 </ul>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../Learning.html">Background reading</a></li>
@@ -315,20 +315,20 @@ of the new event data</p></li>
 to UI events.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>mkh5_f</strong> (<em>string</em>) – file path to current mkpy.mkh5 hdf5 format data file</p>
+<dd class="field-odd"><p><strong>mkh5_f</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">string</span></code>) – file path to current mkpy.mkh5 hdf5 format data file</p>
 </dd>
 <dt class="field-even">Variables</dt>
 <dd class="field-even"><ul class="simple">
-<li><p><strong>mkh5</strong> (<em>object</em>) – <a class="reference internal" href="mkpy.mkh5.html#mkpy.mkh5.mkh5" title="mkpy.mkh5.mkh5"><code class="xref py py-class docutils literal notranslate"><span class="pre">mkh5</span></code></a> instance that exposes the hdf5 data and methods</p></li>
-<li><p><strong>dblock_paths</strong> (<em>list of str</em>) – catalogue of all hdf5 slashpaths to mkh5 dblocks</p></li>
-<li><p><strong>epoch_tables</strong> (<em>list of str</em>) – each string is a slash path ‘_epoch_tables/*’ to an mkh5 epoch table dataset</p></li>
-<li><p><strong>dbp_idx</strong> (<em>uint</em>) – index of model’s current dblock_path</p></li>
-<li><p><strong>dblock_path</strong> (<em>string</em>) – slash path to the active mkpy.mkh5 data set, e.g.,
+<li><p><strong>mkh5</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code>) – <a class="reference internal" href="mkpy.mkh5.html#mkpy.mkh5.mkh5" title="mkpy.mkh5.mkh5"><code class="xref py py-class docutils literal notranslate"><span class="pre">mkh5</span></code></a> instance that exposes the hdf5 data and methods</p></li>
+<li><p><strong>dblock_paths</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">list</span></code> of <code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>) – catalogue of all hdf5 slashpaths to mkh5 dblocks</p></li>
+<li><p><strong>epoch_tables</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">list</span></code> of <code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>) – each string is a slash path ‘_epoch_tables/*’ to an mkh5 epoch table dataset</p></li>
+<li><p><strong>dbp_idx</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">uint</span></code>) – index of model’s current dblock_path</p></li>
+<li><p><strong>dblock_path</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">string</span></code>) – slash path to the active mkpy.mkh5 data set, e.g.,
 <cite>sub01/dblock_0</cite> or <cite>exp1/S07/dblock_7</cite>.</p></li>
-<li><p><strong>dblock</strong> (<em>np.ndarray</em>) – current dblock data streams</p></li>
-<li><p><strong>header</strong> (<em>dict</em>) – current dblock header</p></li>
-<li><p><strong>pg</strong> (<a class="reference internal" href="mkpy.pygarv.html#mkpy.pygarv.PyGarv" title="mkpy.pygarv.PyGarv"><em>PyGarv</em></a><em>(</em><em>)</em>) – </p></li>
-<li><p><strong>pg.yarf_docs</strong> (<em>list</em>) – item at pg.yarf_docs[idx] is a list of tests to run on dblock at dblock_paths[idx]</p></li>
+<li><p><strong>dblock</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">np.ndarray</span></code>) – current dblock data streams</p></li>
+<li><p><strong>header</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">dict</span></code>) – current dblock header</p></li>
+<li><p><strong>pg</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">PyGarv()</span></code>) – </p></li>
+<li><p><strong>pg.yarf_docs</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">list</span></code>) – item at pg.yarf_docs[idx] is a list of tests to run on dblock at dblock_paths[idx]</p></li>
 </ul>
 </dd>
 </dl>
@@ -354,11 +354,11 @@ to UI events.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>from_idx</strong> (<em>unint</em>) – index in current data block to start from</p></li>
-<li><p><strong>direction</strong> (<em>int</em>) – 1 looks right, -1 looks left</p></li>
-<li><p><strong>pygarv_type</strong> (<em>str (None, ‘good’  ‘bad’)</em>) – None (default) ignores pygarv column, ‘good’ searches for
+<li><p><strong>from_idx</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">unint</span></code>) – index in current data block to start from</p></li>
+<li><p><strong>direction</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code>) – 1 looks right, -1 looks left</p></li>
+<li><p><strong>pygarv_type</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">str</span> <span class="pre">(None</span></code>, <code class="docutils literal notranslate"><span class="pre">'good'</span></code>  <code class="docutils literal notranslate"><span class="pre">'bad'</span></code><code class="xref py py-class docutils literal notranslate"><span class="pre">)</span></code>) – None (default) ignores pygarv column, ‘good’ searches for
 pygarv == 0, bad searches pygarv &gt; 0</p></li>
-<li><p><strong>event_col</strong> (<em>str (‘log_evcodes’)</em>) – name dblock column to search for events. usually default,
+<li><p><strong>event_col</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">str</span> <span class="pre">(``</span></code>’log_evcodes’<a href="#id1"><span class="problematic" id="id2">``</span></a><code class="xref py py-class docutils literal notranslate"><span class="pre">)</span></code>) – name dblock column to search for events. usually default,
 perhaps ‘crw_evcodes’</p></li>
 </ul>
 </dd>
@@ -377,7 +377,7 @@ perhaps ‘crw_evcodes’</p></li>
 <dd><p>refresh index, path, and header, dblock data, and pygarv results</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>dbp</strong> (<em>str</em>) – slashpath to dblock dataset</p>
+<dd class="field-odd"><p><strong>dbp</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>) – slashpath to dblock dataset</p>
 </dd>
 </dl>
 </dd></dl>
@@ -473,10 +473,10 @@ a view._update() cascade</p></li>
 to parent.x_scale, parent.x_scale</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>parent</strong> (<em>TraceView object</em>) – Assumed to have parent.x_scale, parent.y_scale, parent.canvas</p>
+<dd class="field-odd"><p><strong>parent</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">TraceView</span> <span class="pre">object</span></code>) – Assumed to have parent.x_scale, parent.y_scale, parent.canvas</p>
 </dd>
 <dt class="field-even">Variables</dt>
-<dd class="field-even"><p><strong>canvas_id</strong> (<em>int</em><em> (</em><em>None</em><em>)</em>) – canvas item index if Trace is currently rendered, else None.</p>
+<dd class="field-even"><p><strong>canvas_id</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">int</span> <span class="pre">(None)</span></code>) – canvas item index if Trace is currently rendered, else None.</p>
 </dd>
 </dl>
 <ul>
@@ -558,14 +558,14 @@ master when no row/column has any weight.</p>
 settings.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>direction</strong> (<em>int</em>) – -1 searches left, 1 searches right</p>
+<dd class="field-odd"><p><strong>direction</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code>) – -1 searches left, 1 searches right</p>
 </dd>
 <dt class="field-even">Returns</dt>
 <dd class="field-even"><p><strong>new_vp_idx</strong> – viewport left-edge index to view the found event after
 taking the anchor offset into account.</p>
 </dd>
 <dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p>uint</p>
+<dd class="field-odd"><p><code class="xref py py-class docutils literal notranslate"><span class="pre">uint</span></code></p>
 </dd>
 </dl>
 </dd></dl>
@@ -623,7 +623,7 @@ taking the anchor offset into account.</p>
 <dd><p>refresh the status report text</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>units</strong> (<em>str (‘samples’, ‘seconds’)</em>)</p>
+<dd class="field-odd"><p><strong>units</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">str</span> <span class="pre">(``</span></code>’samples’<code class="docutils literal notranslate"><span class="pre">,</span> <span class="pre">``'seconds'</span></code><code class="xref py py-class docutils literal notranslate"><span class="pre">)</span></code>)</p>
 </dd>
 </dl>
 </dd></dl>
@@ -797,7 +797,7 @@ x scrollregion is canvas width … _update_vp() sets vp_len data points</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>vp_idx</strong> (<em>int</em>) – dblock index (samples) of left edge of TraceView viewport</p></li>
+<li><p><strong>vp_idx</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code>) – dblock index (samples) of left edge of TraceView viewport</p></li>
 <li><p><strong>viewport start index values may come from keyboard/mouse TraceView navigation or</strong></p></li>
 <li><p><strong>be derived from epoch data lookup during table navigation</strong></p></li>
 <li><p><strong>The viewport length in samples is derived from the canvas</strong></p></li>
@@ -845,8 +845,8 @@ x scrollregion is canvas width … _update_vp() sets vp_len data points</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>parent</strong> (<em>tk.object</em>)</p></li>
-<li><p><strong>model</strong> (<em>mkh5viewer.Model instance</em>) – see Model for details</p></li>
+<li><p><strong>parent</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">tk.object</span></code>)</p></li>
+<li><p><strong>model</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">mkh5viewer.Model</span> <span class="pre">instance</span></code>) – see Model for details</p></li>
 </ul>
 </dd>
 </dl>

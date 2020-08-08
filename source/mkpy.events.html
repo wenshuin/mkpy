@@ -93,16 +93,16 @@
 <li class="toctree-l1"><a class="reference internal" href="../Installation.html">Installation</a></li>
 </ul>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="../Quick Start.html">Quick start</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Quick%20Start.html">Quick start</a></li>
 </ul>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../Pygarv.html">pygarv: EEG visualization dashboard</a></li>
 </ul>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="../User Files.html">User input files</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../User%20Files.html">User input files</a></li>
 </ul>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="../Output Files.html">EEG data files</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Output%20Files.html">EEG data files</a></li>
 </ul>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../Learning.html">Background reading</a></li>
@@ -214,17 +214,17 @@
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>h5_fname</strong> (<em>str</em>) – HDF5 file name</p></li>
-<li><p><strong>code_map</strong> (<em>pandas DataFrame</em>) – DataFrame containing at least columns Index and regexp. The regexp
+<li><p><strong>h5_fname</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>) – HDF5 file name</p></li>
+<li><p><strong>code_map</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">pandas</span> <span class="pre">DataFrame</span></code>) – DataFrame containing at least columns Index and regexp. The regexp
 column specifies regular expressions describing event code patterns.</p></li>
-<li><p><strong>header_map_f</strong> (<em>str</em>) – header map file name, to be replaced by DataFrame</p></li>
+<li><p><strong>header_map_f</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>) – header map file name, to be replaced by DataFrame</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns</dt>
 <dd class="field-even"><p><strong>event_table</strong></p>
 </dd>
 <dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p>pandas DataFrame</p>
+<dd class="field-odd"><p><code class="xref py py-class docutils literal notranslate"><span class="pre">pandas</span> <span class="pre">DataFrame</span></code></p>
 </dd>
 </dl>
 </dd></dl>
@@ -248,9 +248,9 @@ column specifies regular expressions describing event code patterns.</p></li>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>pattern</strong> (<em>str</em>) – A regular expression pattern string containing exactly one anchor. For
+<li><p><strong>pattern</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>) – A regular expression pattern string containing exactly one anchor. For
 a detailed explanation of the format, see notes below.</p></li>
-<li><p><strong>ticks, evcodes</strong> (<em>NumPy arrays</em>) – Arrays of the same shape containing ticks and event codes of a single
+<li><p><strong>ticks, evcodes</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">NumPy</span> <span class="pre">arrays</span></code>) – Arrays of the same shape containing ticks and event codes of a single
 data block from positions with nonzero event codes. Although the last
 requirement is not mandatory, this is the intended use.</p></li>
 </ul>
@@ -259,7 +259,7 @@ requirement is not mandatory, this is the intended use.</p></li>
 <dd class="field-even"><p><strong>df</strong> – DataFrame describing matches for the pattern.</p>
 </dd>
 <dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p>pandas DataFrame</p>
+<dd class="field-odd"><p><code class="xref py py-class docutils literal notranslate"><span class="pre">pandas</span> <span class="pre">DataFrame</span></code></p>
 </dd>
 </dl>
 </dd></dl>

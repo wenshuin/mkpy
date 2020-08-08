@@ -93,16 +93,16 @@
 <li class="toctree-l1"><a class="reference internal" href="../Installation.html">Installation</a></li>
 </ul>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="../Quick Start.html">Quick start</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Quick%20Start.html">Quick start</a></li>
 </ul>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../Pygarv.html">pygarv: EEG visualization dashboard</a></li>
 </ul>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="../User Files.html">User input files</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../User%20Files.html">User input files</a></li>
 </ul>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="../Output Files.html">EEG data files</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Output%20Files.html">EEG data files</a></li>
 </ul>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../Learning.html">Background reading</a></li>
@@ -206,7 +206,7 @@
 PyGarv.tr_docs a list of tr_doc dicts, one dict per h5 datablock.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>tr_doc[‘tests’]</strong> (<em>list</em>) – each item is a dict</p>
+<dd class="field-odd"><p><strong>tr_doc[‘tests’]</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">list</span></code>) – each item is a dict</p>
 </dd>
 </dl>
 <p>Examples</p>
@@ -355,7 +355,7 @@ with data type dtype.</p>
 return with its test in a handy package.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>pg_test_result</strong> (<em>a (tr_doc, pygarv_mask) tuple</em>) – as returned by run_* functions</p>
+<dd class="field-odd"><p><strong>pg_test_result</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">a</span> <span class="pre">(tr_doc</span></code>, <code class="xref py py-class docutils literal notranslate"><span class="pre">pygarv_mask)</span> <span class="pre">tuple</span></code>) – as returned by run_* functions</p>
 </dd>
 </dl>
 </dd></dl>
@@ -387,8 +387,8 @@ return with its test in a handy package.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>dpb_idx</strong> (<em>uint</em>) – index of the ith dblock in self.dblock_paths</p></li>
-<li><p><strong>tr_doc</strong> (<em>dict</em>) – PyYarf format dict with tr_doc[‘tests’]</p></li>
+<li><p><strong>dpb_idx</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">uint</span></code>) – index of the ith dblock in self.dblock_paths</p></li>
+<li><p><strong>tr_doc</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">dict</span></code>) – PyYarf format dict with tr_doc[‘tests’]</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns</dt>
@@ -423,7 +423,7 @@ return with its test in a handy package.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Returns</dt>
 <dd class="field-odd"><p><ul class="simple">
-<li><p><strong>pg_test_results</strong> (<em>list of 2-ples (tr_doc, pygarv_mask), one</em>)</p></li>
+<li><p><strong>pg_test_results</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">list</span></code> of <code class="xref py py-class docutils literal notranslate"><span class="pre">2-ples</span> <span class="pre">(tr_doc</span></code>, <code class="xref py py-class docutils literal notranslate"><span class="pre">pygarv_mask)</span></code>, <code class="xref py py-class docutils literal notranslate"><span class="pre">one</span></code>)</p></li>
 <li><p><em>for each datablock in self.mkh5</em></p></li>
 </ul>
 </p>
@@ -446,7 +446,7 @@ populating test UI elements and reading writing YAML sequences
 without scrambling the key:value pairs the way a dict() might.</p>
 <dl class="field-list">
 <dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>param_specs</strong> (<em>[(key,type), …]</em>) –</p>
+<dd class="field-odd"><p><strong>param_specs</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">[(key,type)</span></code>, <code class="xref py py-class docutils literal notranslate"><span class="pre">]</span></code>) –</p>
 <dl class="simple">
 <dt>key<span class="classifier">str</span></dt><dd><p>parameter label</p>
 </dd>
@@ -499,19 +499,19 @@ setter/getter API wants and returns lists of dict, i.e.,
 </ul>
 <dl class="py method">
 <dt id="mkpy.pygarv.PyGarvTest.run">
-<code class="sig-name descname">run</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">hdr</span></em>, <em class="sig-param"><span class="n">dblock</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="headerlink" href="#mkpy.pygarv.PyGarvTest.run" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">run</code><span class="sig-paren">(</span><em class="sig-param">hdr</em>, <em class="sig-param">dblock</em>, <em class="sig-param">\*\*kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#mkpy.pygarv.PyGarvTest.run" title="Permalink to this definition">¶</a></dt>
 <dd><dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>hdr</strong> (<em>dict</em>) – metadata consulted in running the tests, e.g., sampling rate</p></li>
-<li><p><strong>dblock</strong> (<em>np.ndarray (named dtypes)</em>) – columns of data, typically accessed by dtype.name</p></li>
+<li><p><strong>hdr</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">dict</span></code>) – metadata consulted in running the tests, e.g., sampling rate</p></li>
+<li><p><strong>dblock</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">np.ndarray</span> <span class="pre">(named</span> <span class="pre">dtypes)</span></code>) – columns of data, typically accessed by dtype.name</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns</dt>
 <dd class="field-even"><p><strong>results</strong> – sample-wise data rejection mask, 1=bad, 0=good</p>
 </dd>
 <dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p>np.ndarray, dtype=bool, length = len(dblock)</p>
+<dd class="field-odd"><p><code class="xref py py-class docutils literal notranslate"><span class="pre">np.ndarray</span></code>, <code class="xref py py-class docutils literal notranslate"><span class="pre">dtype=bool</span></code>, <code class="xref py py-class docutils literal notranslate"><span class="pre">length</span> <span class="pre">=</span> <span class="pre">len(dblock)</span></code></p>
 </dd>
 </dl>
 </dd></dl>
@@ -585,10 +585,10 @@ setter/getter API wants and returns lists of dict, i.e.,
 <p>YAML test file I/O for PyGarv artifact test parameters</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>yarf_f</strong> (<em>str</em>) – file path to well-formed YAML with PyYarf test specification structure</p>
+<dd class="field-odd"><p><strong>yarf_f</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>) – file path to well-formed YAML with PyYarf test specification structure</p>
 </dd>
 <dt class="field-even">Variables</dt>
-<dd class="field-even"><p><strong>yarf_docs</strong> (<em>list</em>) – <p>each item is a yarf_doc dict that yamlizes in-out without modification
+<dd class="field-even"><p><strong>yarf_docs</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">list</span></code>) – <p>each item is a yarf_doc dict that yamlizes in-out without modification
 ..code-block:: python</p>
 <blockquote>
 <div><dl class="simple">
@@ -671,7 +671,7 @@ read yarf_docs from mkh5 headers</p>
 <dd class="field-odd"><p><strong>yarf_docs</strong> – dict is a PyYarf format dict see PyYarf doc string for details</p>
 </dd>
 <dt class="field-even">Return type</dt>
-<dd class="field-even"><p>list of list of dict where</p>
+<dd class="field-even"><p><code class="xref py py-class docutils literal notranslate"><span class="pre">list</span></code> of <code class="xref py py-class docutils literal notranslate"><span class="pre">list</span></code> of <code class="xref py py-class docutils literal notranslate"><span class="pre">dict</span> <span class="pre">where</span></code></p>
 </dd>
 </dl>
 </dd></dl>
